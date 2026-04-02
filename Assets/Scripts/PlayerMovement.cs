@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     public float runSpeed = 12f;
     public float jumpPower = 7f;
     public float gravity = 10f;
-    public float lookSpeed = 0.1f; // Adjusted for New Input System delta values
+    public float lookSpeed = 0.1f;
     public float lookXLimit = 45f;
     public float defaultHeight = 2f;
     public float crouchHeight = 1f;
@@ -37,15 +37,14 @@ public class PlayerMovement : MonoBehaviour
         // Reference the current devices
         var keyboard = Keyboard.current;
         var mouse = Mouse.current;
-
-        // Safety check in case devices aren't connected
+        
         if (keyboard == null || mouse == null) return;
 
-        #region Movement Logic
+        
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
 
-        // Movement Input (W,A,S,D)
+        // WASD Movement 
         float verticalInput = 0;
         if (keyboard.wKey.isPressed) verticalInput = 1;
         else if (keyboard.sKey.isPressed) verticalInput = -1;
@@ -54,16 +53,15 @@ public class PlayerMovement : MonoBehaviour
         if (keyboard.dKey.isPressed) horizontalInput = 1;
         else if (keyboard.aKey.isPressed) horizontalInput = -1;
 
-        // Running (Left Shift)
+        // Shift to Sprint
         bool isRunning = keyboard.leftShiftKey.isPressed;
 
         float curSpeedX = canMove ? (isRunning ? runSpeed : walkSpeed) * verticalInput : 0;
         float curSpeedY = canMove ? (isRunning ? runSpeed : walkSpeed) * horizontalInput : 0;
         float movementDirectionY = moveDirection.y;
         moveDirection = (forward * curSpeedX) + (right * curSpeedY);
-        #endregion
-
-        #region Jump Logic
+        
+        
         if (keyboard.spaceKey.wasPressedThisFrame && canMove && characterController.isGrounded)
         {
             moveDirection.y = jumpPower;
@@ -77,9 +75,8 @@ public class PlayerMovement : MonoBehaviour
         {
             moveDirection.y -= gravity * Time.deltaTime;
         }
-        #endregion
-
-        #region Crouch Logic
+        
+        
         if (keyboard.rKey.isPressed && canMove)
         {
             characterController.height = crouchHeight;
@@ -92,9 +89,7 @@ public class PlayerMovement : MonoBehaviour
             walkSpeed = 6f;
             runSpeed = 12f;
         }
-        #endregion
-
-        #region Final Movement & Rotation
+        
         characterController.Move(moveDirection * Time.deltaTime);
 
         if (canMove)
@@ -107,6 +102,5 @@ public class PlayerMovement : MonoBehaviour
             
             transform.rotation *= Quaternion.Euler(0, mouseDelta.x * lookSpeed, 0);
         }
-        #endregion
     }
 }
