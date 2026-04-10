@@ -7,6 +7,8 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float speed = 10f;
 
+    public CharacterStats stats;
+
     private PlayerControls playerControls;
 
     private CharacterController controller;

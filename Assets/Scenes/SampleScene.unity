@@ -496,7 +496,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   player: {fileID: 1565408302}
-  cameraAngle: 45
+  cameraAngle: 65
   cameraDistance: 20
 --- !u!1 &410087039
 GameObject:
@@ -1042,6 +1042,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   speed: 10
+  stats:
+    baseHealth:
+      _baseValue: 0
+    baseMoveSpeed:
+      _baseValue: 0
+    baseAttackSpeed:
+      _baseValue: 0
 --- !u!143 &1565408304
 CharacterController:
   m_ObjectHideFlags: 0
