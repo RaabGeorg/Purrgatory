@@ -3,16 +3,23 @@ using System.Collections.Generic;
 using UnityEditor.AnimatedValues;
 using UnityEngine;
 
+
 [Serializable]
 public class CharacterStats
 {
-    public CharacterStat baseHealth = new CharacterStat();
-    public CharacterStat baseMoveSpeed = new CharacterStat();
-    public CharacterStat baseAttackSpeed = new CharacterStat();
+    public Stat baseHealth = new Stat();
+    public Stat baseMoveSpeed = new Stat();
+    public Stat baseAttackSpeed = new Stat();
+    public Stat Damage = new Stat();
+}
+[Serializable]
+public class WeaponStats
+{
+    public Stat baseDamage = new Stat();
 }
 
 [Serializable]
-public class CharacterStat
+public class Stat
 {
     [SerializeField] private float _baseValue;
     
@@ -20,7 +27,7 @@ public class CharacterStat
     private float _value;
     private bool isDirty = true;
 
-    public CharacterStat()
+    public Stat()
     {
         statModifiers = new List<StatModifier>();
     }
@@ -106,7 +113,7 @@ public class StatModifier
     }
     public StatModifier(float value, StatModType type) : this (value, type, (int) type) {}
 }
-
+    
 public enum StatModType
 {
     Flat,
