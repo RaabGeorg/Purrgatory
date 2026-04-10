@@ -38,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         Vector2 move = playerControls.Player.Move.ReadValue<Vector2>();
-        Vector3 moveDirection = new Vector3(move.x, 0f, move.y);
+        Vector3 moveDirection = new Vector3(move.x, 0, move.y);
 
         controller.Move(moveDirection * speed * Time.deltaTime);
     }

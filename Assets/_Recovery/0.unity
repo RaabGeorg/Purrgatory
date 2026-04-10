@@ -384,8 +384,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   player: {fileID: 1565408302}
-  cameraAngle: 65
-  cameraDistance: 20
+  cameraAngle: 35
+  cameraDistance: 5
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -544,7 +544,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   player: {fileID: 1565408302}
   chunkPrefab: {fileID: 8209923594601774919, guid: f6dda3fea6e84584c864562c52ae0174, type: 3}
-  viewDistance: 2
+  viewDistance: 1
 --- !u!4 &556382225
 Transform:
   m_ObjectHideFlags: 0
@@ -751,18 +751,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73bf632bb04ae984bb4dc977b51c8645, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-<<<<<<< Updated upstream
-  speed: 10
-  stats:
-    baseHealth:
-      _baseValue: 0
-    baseMoveSpeed:
-      _baseValue: 0
-    baseAttackSpeed:
-      _baseValue: 0
-=======
   speed: 50
->>>>>>> Stashed changes
 --- !u!143 &1565408304
 CharacterController:
   m_ObjectHideFlags: 0
