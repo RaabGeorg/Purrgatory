@@ -751,8 +751,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73bf632bb04ae984bb4dc977b51c8645, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-<<<<<<< Updated upstream
-  speed: 10
+  speed: 50
   stats:
     baseHealth:
       _baseValue: 0
@@ -760,9 +759,6 @@ MonoBehaviour:
       _baseValue: 0
     baseAttackSpeed:
       _baseValue: 0
-=======
-  speed: 50
->>>>>>> Stashed changes
 --- !u!143 &1565408304
 CharacterController:
   m_ObjectHideFlags: 0
