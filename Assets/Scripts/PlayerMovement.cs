@@ -13,11 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isDashing;
 
     public CharacterStats stats;
-<<<<<<< Updated upstream
-=======
-    public WeaponStats Weapon;
->>>>>>> Stashed changes
-
+    
     private PlayerControls playerControls;
 
     private CharacterController controller;
