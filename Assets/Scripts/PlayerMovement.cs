@@ -1,13 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine; 
+using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float speed = 10f;
+    private float speed;
+    private float dashSpeed;
+    private float _dashTime = 0.25f;
+    private float startTime;
+    private float dashCooldown = 3;
+    private bool isDashing;
 
     public CharacterStats stats;
+<<<<<<< Updated upstream
+=======
+    public WeaponStats Weapon;
+>>>>>>> Stashed changes
 
     private PlayerControls playerControls;
 
@@ -20,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
         playerControls = new PlayerControls();
     }
 
-    private void OnEnable() 
+    private void OnEnable()
     {
         playerControls.Enable();
     }
@@ -33,6 +42,8 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        speed = stats.baseMoveSpeed.Value;
+        dashSpeed = speed * 5;
     }
 
     void Update()
@@ -40,6 +51,32 @@ public class PlayerMovement : MonoBehaviour
         Vector2 move = playerControls.Player.Move.ReadValue<Vector2>();
         Vector3 moveDirection = new Vector3(move.x, 0, move.y);
 
-        controller.Move(moveDirection * speed * Time.deltaTime);
+        controller.Move(moveDirection * (speed * Time.deltaTime));
+
+        
+
+        if (playerControls.Player.Dash.WasPressedThisFrame() && !isDashing)
+        {
+            StartCoroutine(DashCooldown(dashCooldown));
+            StartCoroutine(DashRoutine(moveDirection));
+        }
+
+    }
+
+    private IEnumerator DashRoutine(Vector3 dashDirection)
+    {
+        isDashing = true;
+        startTime = Time.time;
+        while (Time.time < startTime + _dashTime )
+        {
+            controller.Move(dashDirection * (dashSpeed * Time.deltaTime));
+            yield return null;
+        }
+    }
+
+    private IEnumerator DashCooldown(float dashCooldown)
+    {
+        yield return new WaitForSeconds(dashCooldown) ;
+        isDashing = false;
     }
 }
