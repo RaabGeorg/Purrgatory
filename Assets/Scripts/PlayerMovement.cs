@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isDashing;
 
     public CharacterStats stats;
+    public WeaponStats Weapon;
     
     private PlayerControls playerControls;
 
