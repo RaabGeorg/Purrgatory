@@ -8,7 +8,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float speed = 10f;
 
     public CharacterStats stats;
-
+    public WeaponStats Weapon;
+    
     private PlayerControls playerControls;
 
     private CharacterController controller;
