@@ -4,6 +4,7 @@ using Unity.Entities;
 public struct EnemyData : IComponentData
 {
     public float Speed;
+    public float PushForce;
 }
 
 public class EnemyAuthoring : MonoBehaviour
