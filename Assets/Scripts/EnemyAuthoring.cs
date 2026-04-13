@@ -8,7 +8,7 @@ public struct EnemyData : IComponentData
 
 public class EnemyAuthoring : MonoBehaviour
 {
-    public float moveSpeed = 3.0f;
+    public float moveSpeed;
 
     public class EnemyBaker : Baker<EnemyAuthoring>
     {

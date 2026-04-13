@@ -17,7 +17,6 @@ public partial struct EnemyMoveSystem : ISystem
         {
             float3 direction = math.normalize(playerPos - transform.ValueRO.Position);
             
-            // Move
             transform.ValueRW.Position += direction * enemy.ValueRO.Speed * deltaTime;
             
         }
