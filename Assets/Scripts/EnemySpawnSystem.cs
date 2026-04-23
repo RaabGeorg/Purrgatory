@@ -1,7 +1,9 @@
-﻿using Unity.Entities;
+﻿using Unity.Burst;
+using Unity.Entities;
 using Unity.Transforms;
 using Unity.Mathematics;
 
+[BurstCompile]
 public partial struct EnemySpawnSystem : ISystem
 {
     public void OnUpdate(ref SystemState state)
