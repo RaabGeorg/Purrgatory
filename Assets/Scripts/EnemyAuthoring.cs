@@ -4,7 +4,6 @@ using Unity.Entities;
 public struct EnemyData : IComponentData
 {
     public float Speed;
-    public float PushForce;
 }
 
 public class EnemyAuthoring : MonoBehaviour
@@ -17,7 +16,7 @@ public class EnemyAuthoring : MonoBehaviour
         {
             Entity entity = GetEntity(TransformUsageFlags.Dynamic);
             AddComponent(entity, new EnemyData { 
-                Speed = authoring.moveSpeed 
+                Speed = authoring.moveSpeed
             });
         }
     }

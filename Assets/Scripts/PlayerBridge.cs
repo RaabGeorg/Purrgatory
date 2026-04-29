@@ -16,10 +16,6 @@ public class PlayerBridge : MonoBehaviour
         
         playerEntity = entityManager.CreateEntity(typeof(LocalTransform), typeof(PlayerTag));
         
-        
-#if UNITY_EDITOR
-        entityManager.SetName(playerEntity, "ECS_Player_Proxy");
-#endif
     }
 
     void Update()
