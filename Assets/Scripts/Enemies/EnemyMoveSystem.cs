@@ -3,6 +3,7 @@ using Unity.Entities;
 using Unity.Transforms;
 using Unity.Mathematics;
 using Unity.Physics;
+using Components;
 
 [BurstCompile]
 public partial struct EnemyMoveSystem : ISystem

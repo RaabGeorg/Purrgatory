@@ -1,26 +1,22 @@
 using UnityEngine;
 using Unity.Entities;
-using Unity.Mathematics;
 using Unity.Transforms;
-
-public struct PlayerTag : IComponentData { }
+using Components;
 
 public class PlayerBridge : MonoBehaviour
 {
-    private Entity playerEntity;
-    private EntityManager entityManager;
+    private Entity _playerEntity;
+    private EntityManager _em;
 
     void Start()
     {
-        entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
-        
-        playerEntity = entityManager.CreateEntity(typeof(LocalTransform), typeof(PlayerTag));
-        
+        _em = World.DefaultGameObjectInjectionWorld.EntityManager;
+        _playerEntity = _em.CreateEntity(typeof(LocalTransform), typeof(PlayerTag));
     }
 
     void Update()
     {
-        
-        entityManager.SetComponentData(playerEntity, LocalTransform.FromPosition(transform.position));
+        _em.SetComponentData(_playerEntity,
+            LocalTransform.FromPosition(transform.position));
     }
 }
