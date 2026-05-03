@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
  
-public class Weapon : MonoBehaviour
+public class oldWeapon : MonoBehaviour
 {
     [SerializeField] private GameObject projectilePrefab;  
     [SerializeField] private Transform firePoint;          
