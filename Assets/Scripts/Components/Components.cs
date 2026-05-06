@@ -30,4 +30,17 @@ namespace Components
     {
         public float3 Value;
     }
+
+    public struct MagicField : IComponentData
+    {
+        public float Damage;
+        public float Radius;
+        public float Lifetime;
+        public float TickTimer;
+        public float TickRate;
+    }
+    public struct MagicFieldPrefabRef : IComponentData
+    {
+        public Entity Value;
+    }
 }
