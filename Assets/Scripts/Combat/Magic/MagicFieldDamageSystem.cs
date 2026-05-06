@@ -1,13 +1,13 @@
-﻿using Components;
-using Unity.Collections;
+using Unity.Burst;
 using Unity.Entities;
+using Unity.Mathematics;
+using Unity.Transforms;
+using Components;
 using Unity.Physics;
-using Unity.Physics.Systems;
 using UnityEngine;
 
-[UpdateInGroup(typeof(PhysicsSystemGroup))]
-[UpdateAfter(typeof(PhysicsSimulationGroup))]
-public partial struct BulletCollisionSystem : ISystem
+[BurstCompile]
+public partial struct MagicFieldDamageSystem : ISystem
 {
     public void OnUpdate(ref SystemState state)
     {
@@ -15,41 +15,42 @@ public partial struct BulletCollisionSystem : ISystem
 
         var simulation = SystemAPI.GetSingleton<SimulationSingleton>();
         var ecb = new EntityCommandBuffer(Unity.Collections.Allocator.Temp);
-        var bulletLookup = SystemAPI.GetComponentLookup<Bullet>(true);
+        var magicFieldLookup = SystemAPI.GetComponentLookup<MagicField>(true);
         var enemyLookup  = SystemAPI.GetComponentLookup<Enemy>(true);
         var healthLookup = SystemAPI.GetComponentLookup<Health>(false);
 
         foreach (var triggerEvent in simulation.AsSimulation().TriggerEvents)
         {
-            Entity bullet = Entity.Null;
+           
+            Entity magicField = Entity.Null;
             Entity enemy  = Entity.Null;
-
-            if (bulletLookup.HasComponent(triggerEvent.EntityA) && enemyLookup.HasComponent(triggerEvent.EntityB))
+            
+            if (magicFieldLookup.HasComponent(triggerEvent.EntityA) && enemyLookup.HasComponent(triggerEvent.EntityB))
             {
-                bullet = triggerEvent.EntityA;
+                magicField = triggerEvent.EntityA;
                 enemy  = triggerEvent.EntityB;
             }
-            else if (bulletLookup.HasComponent(triggerEvent.EntityB) && enemyLookup.HasComponent(triggerEvent.EntityA))
+            else if (magicFieldLookup.HasComponent(triggerEvent.EntityB) && enemyLookup.HasComponent(triggerEvent.EntityA))
             {
-                bullet = triggerEvent.EntityB;
-                enemy  = triggerEvent.EntityA;
+                magicField = triggerEvent.EntityB;
+                enemy = triggerEvent.EntityA;
             }
 
-            if (bullet == Entity.Null) continue;
-
+            if (magicField == Entity.Null) continue;
+           
             if (healthLookup.HasComponent(enemy))
             {
                 var health = healthLookup[enemy];
-                health.Value -= bulletLookup[bullet].Damage;
-                healthLookup[enemy] = health;
+                health.Value -= magicFieldLookup[magicField].Damage;
                 if (health.Value <= 0f)
                     ecb.DestroyEntity(enemy);
+                    
             }
-
-            ecb.DestroyEntity(bullet);
+            
         }
 
         ecb.Playback(state.EntityManager);
         ecb.Dispose();
     }
 }
+
