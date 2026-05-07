@@ -13,10 +13,7 @@ public class MagicFieldSpawner : MonoBehaviour
     void Start()
     {
         _em = World.DefaultGameObjectInjectionWorld.EntityManager;
-
-        var query = _em.CreateEntityQuery(typeof(MagicFieldPrefabRef));
-        _prefab = query.GetSingleton<MagicFieldPrefabRef>().Value;
-
+        
         _controls = new PlayerControls();
         _controls.Enable();
     }
@@ -25,6 +22,15 @@ public class MagicFieldSpawner : MonoBehaviour
 
     void Update()
     {
+        if (_prefab == Entity.Null)
+        {
+            var query = _em.CreateEntityQuery(typeof(MagicFieldPrefabRef));
+
+            if (query.IsEmpty) return;
+
+            _prefab = query.GetSingleton<MagicFieldPrefabRef>().Value;
+        }
+
         if (!_controls.Player.Spell.WasPressedThisFrame()) return;
 
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());

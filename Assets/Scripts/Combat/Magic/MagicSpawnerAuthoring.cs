@@ -10,6 +10,11 @@ public class MagicSpawnerAuthoring : MonoBehaviour
     {
         public override void Bake(MagicSpawnerAuthoring authoring)
         {
+            if (authoring.MagicFieldPrefab == null)
+            {
+                Debug.LogError("We fucked" + authoring.gameObject.name);
+                return;
+            }
             var entity = GetEntity(TransformUsageFlags.None);
             
             AddComponent(entity, new MagicFieldPrefabRef
