@@ -12,7 +12,7 @@ public partial struct MagicFieldDamageSystem : ISystem
     public void OnUpdate(ref SystemState state)
     {
         state.Dependency.Complete();
-
+        float dt = SystemAPI.Time.DeltaTime;
         var simulation = SystemAPI.GetSingleton<SimulationSingleton>();
         var ecb = new EntityCommandBuffer(Unity.Collections.Allocator.Temp);
         var magicFieldLookup = SystemAPI.GetComponentLookup<MagicField>(true);
@@ -41,7 +41,9 @@ public partial struct MagicFieldDamageSystem : ISystem
             if (healthLookup.HasComponent(enemy))
             {
                 var health = healthLookup[enemy];
-                health.Value -= magicFieldLookup[magicField].Damage;
+                health.Value -= magicFieldLookup[magicField].Damage * dt;
+                Debug.Log(health.Value);
+                healthLookup[enemy] = health;
                 if (health.Value <= 0f)
                     ecb.DestroyEntity(enemy);
                     

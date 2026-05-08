@@ -129,9 +129,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""ScrollWheel"",
+                    ""name"": ""Spell2"",
                     ""type"": ""Button"",
-                    ""id"": ""b51bbf23-2472-4d7b-9ad0-7cc47697187d"",
+                    ""id"": ""3f65b4dd-2869-4dd3-a510-5e585b035220"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -229,12 +229,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""733e7f9b-aa95-4939-b094-39b3d73a1e12"",
-                    ""path"": """",
+                    ""id"": ""f1856640-2ac1-4c5a-9f11-28ec262cd832"",
+                    ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ScrollWheel"",
+                    ""action"": ""Spell2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -249,7 +249,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_Spell = m_Player.FindAction("Spell", throwIfNotFound: true);
-        m_Player_ScrollWheel = m_Player.FindAction("ScrollWheel", throwIfNotFound: true);
+        m_Player_Spell2 = m_Player.FindAction("Spell2", throwIfNotFound: true);
     }
 
     ~@PlayerControls()
@@ -334,7 +334,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_Spell;
-    private readonly InputAction m_Player_ScrollWheel;
+    private readonly InputAction m_Player_Spell2;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -363,9 +363,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Spell => m_Wrapper.m_Player_Spell;
         /// <summary>
-        /// Provides access to the underlying input action "Player/ScrollWheel".
+        /// Provides access to the underlying input action "Player/Spell2".
         /// </summary>
-        public InputAction @ScrollWheel => m_Wrapper.m_Player_ScrollWheel;
+        public InputAction @Spell2 => m_Wrapper.m_Player_Spell2;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -404,9 +404,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Spell.started += instance.OnSpell;
             @Spell.performed += instance.OnSpell;
             @Spell.canceled += instance.OnSpell;
-            @ScrollWheel.started += instance.OnScrollWheel;
-            @ScrollWheel.performed += instance.OnScrollWheel;
-            @ScrollWheel.canceled += instance.OnScrollWheel;
+            @Spell2.started += instance.OnSpell2;
+            @Spell2.performed += instance.OnSpell2;
+            @Spell2.canceled += instance.OnSpell2;
         }
 
         /// <summary>
@@ -430,9 +430,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Spell.started -= instance.OnSpell;
             @Spell.performed -= instance.OnSpell;
             @Spell.canceled -= instance.OnSpell;
-            @ScrollWheel.started -= instance.OnScrollWheel;
-            @ScrollWheel.performed -= instance.OnScrollWheel;
-            @ScrollWheel.canceled -= instance.OnScrollWheel;
+            @Spell2.started -= instance.OnSpell2;
+            @Spell2.performed -= instance.OnSpell2;
+            @Spell2.canceled -= instance.OnSpell2;
         }
 
         /// <summary>
@@ -502,11 +502,11 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSpell(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "ScrollWheel" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Spell2" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnScrollWheel(InputAction.CallbackContext context);
+        void OnSpell2(InputAction.CallbackContext context);
     }
 }

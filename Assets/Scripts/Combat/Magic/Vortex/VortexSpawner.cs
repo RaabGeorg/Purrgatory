@@ -1,0 +1,55 @@
+﻿using Unity.Entities;
+using Unity.Mathematics;
+using Unity.Transforms;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using Components;
+public class VortexSpawner : MonoBehaviour
+{
+    private EntityManager _em;
+    private PlayerControls _controls;
+    private Entity _prefab;
+    
+    [SerializeField]
+    private float cooldown = 2f;
+    private float cooldownTimer = 0f;
+
+    void Start()
+    {
+        _em = World.DefaultGameObjectInjectionWorld.EntityManager;
+        
+        _controls = new PlayerControls();
+        _controls.Enable();
+    }
+
+    void OnDestroy() => _controls.Disable();
+
+    void Update()
+    {
+        if (_prefab == Entity.Null)
+        {
+            var query = _em.CreateEntityQuery(typeof(VortexPrefabRef));
+
+            if (query.IsEmpty) return;
+
+            _prefab = query.GetSingleton<VortexPrefabRef>().Value;
+        }
+        
+        
+        cooldownTimer -= Time.deltaTime;
+        if (!_controls.Player.Spell2.WasPressedThisFrame()) return;
+        if (cooldownTimer > 0f) return;
+        
+        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+        Plane ground = new Plane(Vector3.up, Vector3.zero);
+
+        if (!ground.Raycast(ray, out float dist)) return;
+
+        float3 spawnPos = ray.GetPoint(dist);
+        var Vortex = _em.Instantiate(_prefab);
+        _em.SetComponentData(Vortex, LocalTransform.FromPosition(spawnPos)); 
+        
+        
+        cooldownTimer = cooldown;
+    }
+}

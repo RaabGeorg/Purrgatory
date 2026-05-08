@@ -10,7 +10,6 @@ namespace Components
     public struct PlayerTag : IComponentData { }
     public struct Enemy     : IComponentData { }
     public struct WeaponTag  : IComponentData { } // ← neu
-    // Entity raus → eigene Component, sonst "must be valid unmanaged type" Error
     public struct BulletPrefabRef : IComponentData
     {
         public Entity Value;
@@ -34,12 +33,19 @@ namespace Components
     public struct MagicField : IComponentData
     {
         public float Damage;
-        public float Radius;
         public float Lifetime;
-        public float TickTimer;
-        public float TickRate;
+        
     }
     public struct MagicFieldPrefabRef : IComponentData
+    {
+        public Entity Value;
+    }
+    public struct Vortex : IComponentData
+    {
+        public float Radius;
+        public float PullStrength;
+    }
+    public struct VortexPrefabRef : IComponentData
     {
         public Entity Value;
     }

@@ -5,9 +5,7 @@ using Components;
 public class MagicFieldAuthoring : MonoBehaviour
 {
     public float damage = 5f;
-    public float radius = 3f;
     public float lifetime = 5f;
-    public float tickRate = 1f;
 
     class Baker : Baker<MagicFieldAuthoring>
     {
@@ -18,10 +16,8 @@ public class MagicFieldAuthoring : MonoBehaviour
             AddComponent(entity, new MagicField
             {
                 Damage = authoring.damage,
-                Radius = authoring.radius,
                 Lifetime = authoring.lifetime,
-                TickTimer = 1f,
-                TickRate = authoring.tickRate
+                
             });
             
         }

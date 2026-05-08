@@ -20,7 +20,7 @@ public partial struct EnemySpawnSystem : ISystem
             {
                 Entity newEnemy = ecb.Instantiate(spawner.ValueRO.Enemy);
                 
-                float3 randomOffset = new float3(UnityEngine.Random.Range(-10, 10), 2, UnityEngine.Random.Range(-10, 10));
+                float3 randomOffset = new float3(UnityEngine.Random.Range(20,40), 2, UnityEngine.Random.Range(20, 40));
                 ecb.SetComponent(newEnemy, LocalTransform.FromPosition(randomOffset));
                 
                 spawner.ValueRW.NextSpawnTime = currentTime + spawner.ValueRO.SpawnInterval;
