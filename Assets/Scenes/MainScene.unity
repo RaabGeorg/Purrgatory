@@ -195,7 +195,7 @@ Transform:
   m_GameObject: {fileID: 166316482}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.24253, y: -1.04, z: 1.22129}
+  m_LocalPosition: {x: 5.24253, y: -1.04, z: 1.2212901}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -269,6 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4324c37ed9f0d241868c85452057bc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MagicFieldSpawner
+  cooldown: 2
 --- !u!65 &171852645
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2313,7 +2314,7 @@ MonoBehaviour:
       y: 1214847507
       z: 3458184357
       w: 3510969747
---- !u!1 &1894710026
+--- !u!1 &1746587584
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2321,6 +2322,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+  - component: {fileID: 1746587586}
+  - component: {fileID: 1746587585}
+  m_Layer: 0
+  m_Name: CastingVortex
   - component: {fileID: 1894710027}
   - component: {fileID: 1894710029}
   - component: {fileID: 1894710028}
@@ -2609,6 +2614,22 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1746587584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45a335734b1572644a6a5d09d87adc65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Scenes::Unity.Scenes.SubScene
+  _SceneAsset: {fileID: 102900000, guid: 5a029bd833428114082305b4b1c0b1f7, type: 3}
+  _HierarchyColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  AutoLoadScene: 1
+  _SceneGUID:
+    Value:
+      x: 2377719973
+      y: 1092101171
+      z: 1263547008
+      w: 2132479003
+--- !u!4 &1746587586
   m_GameObject: {fileID: 2071682606}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -2624,7 +2645,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2071682606}
+  m_GameObject: {fileID: 1746587584}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -2755,6 +2776,7 @@ SceneRoots:
   - {fileID: 1341137036}
   - {fileID: 556382225}
   - {fileID: 1440611782}
+  - {fileID: 1746587586}
   - {fileID: 2071682609}
   - {fileID: 1056183137}
   - {fileID: 2055727682}
