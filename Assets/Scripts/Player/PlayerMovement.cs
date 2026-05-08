@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     private float dashSpeed;
     private float _dashTime = 0.25f;
     private float startTime;
-    private float dashCooldown = 3;
+    public float dashCooldown = 3;
     private bool isDashing;
 
     public CharacterStats stats;
@@ -38,6 +38,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        startTime = -dashCooldown;
         controller = GetComponent<CharacterController>();
         speed = stats.baseMoveSpeed.Value;
         dashSpeed = speed * 5;
@@ -76,4 +77,12 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(dashCooldown) ;
         isDashing = false;
     }
+
+    public float GetDashTimer()
+    {
+        float elapsedTime = Time.time - startTime;
+        float remainingTime = dashCooldown - elapsedTime;
+        return Mathf.Max(0, remainingTime);
+    }
+    
 }
