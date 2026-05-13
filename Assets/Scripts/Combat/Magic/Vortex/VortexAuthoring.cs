@@ -5,6 +5,8 @@ public class VortexAuthoring : MonoBehaviour
 {
     public float pullStrength;
     public float radius;
+    public float lifetime;
+    public float damage;
     
     class Baker : Baker<VortexAuthoring>
     {
@@ -17,6 +19,18 @@ public class VortexAuthoring : MonoBehaviour
                 PullStrength = authoring.pullStrength,
                 Radius = authoring.radius,
             });
+            AddComponent(entity, new Lifetime
+            {
+                Value = authoring.lifetime,
+            });
+            AddComponent(entity, new VortexMovement());
+            
+            AddComponent(entity, new Explosion
+            {
+                Radius = authoring.radius,
+                Damage = authoring.damage
+            });
+            
         }
     }
 }

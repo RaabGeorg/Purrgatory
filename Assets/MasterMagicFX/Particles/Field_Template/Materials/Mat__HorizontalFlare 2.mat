@@ -40,7 +40,7 @@ Material:
   - MOTIONVECTORS
   - SHADOWCASTER
   - DepthOnly
-  m_LockedProperties: 
+  m_LockedProperties: _AlphaClip
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:

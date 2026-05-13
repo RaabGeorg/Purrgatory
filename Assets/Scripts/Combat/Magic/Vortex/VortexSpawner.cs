@@ -48,7 +48,14 @@ public class VortexSpawner : MonoBehaviour
         float3 spawnPos = ray.GetPoint(dist);
         var Vortex = _em.Instantiate(_prefab);
         _em.SetComponentData(Vortex, LocalTransform.FromPosition(spawnPos)); 
-        
+        _em.SetComponentData(Vortex, new VortexMovement
+        {
+            Center = spawnPos,
+            RadiusX = UnityEngine.Random.Range(2f, 10f),
+            RadiusZ = UnityEngine.Random.Range(2f, 10f),
+            Speed = UnityEngine.Random.Range(0.5f, 1f),
+            Time = UnityEngine.Random.Range(0f, 100f)
+        });
         
         cooldownTimer = cooldown;
     }

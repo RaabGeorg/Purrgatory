@@ -16,10 +16,13 @@ public class MagicFieldAuthoring : MonoBehaviour
             AddComponent(entity, new MagicField
             {
                 Damage = authoring.damage,
-                Lifetime = authoring.lifetime,
                 
             });
-            
+            AddComponent(entity, new Lifetime
+            {
+                Value = authoring.lifetime
+            });
+
         }
     }
 }
