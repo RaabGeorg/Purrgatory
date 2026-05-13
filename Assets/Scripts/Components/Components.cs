@@ -33,8 +33,25 @@ namespace Components
     public struct MagicField : IComponentData
     {
         public float Damage;
-        public float Lifetime;
         
+    }
+    public struct VortexMovement : IComponentData
+    {
+        public float3 Center;
+        public float RadiusX;
+        public float RadiusZ;
+        public float Speed;
+        public float Time;
+    }
+
+    public struct Explosion : IComponentData
+    {
+        public float Radius;
+        public float Damage;
+    }
+    public struct Lifetime : IComponentData
+    {
+        public float Value;
     }
     public struct MagicFieldPrefabRef : IComponentData
     {

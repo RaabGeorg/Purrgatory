@@ -4914,6 +4914,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::VortexAuthoring
   pullStrength: 30
   radius: 10
+  lifetime: 10
+  damage: 50
 --- !u!1 &4470898815969926987
 GameObject:
   m_ObjectHideFlags: 0
