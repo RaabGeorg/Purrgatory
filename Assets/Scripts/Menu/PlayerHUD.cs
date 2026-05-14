@@ -6,15 +6,16 @@ public class PlayerHUD : MonoBehaviour
 {
     [Header("Refs")]
     public TextMeshProUGUI playerHealthText;
-    public Character targetCharacter;
+    public PlayerMovement player;
 
     private void Update()
     {
-        if (targetCharacter != null && playerHealthText != null)
+        if (player != null && playerHealthText != null)
         {
-            float currentHP = targetCharacter.playerStats.baseHealth.Value;
+            float currentHP = player.stats.baseHealth.Value;
             
             playerHealthText.text = $"Health: {currentHP}";
         }
+        //Debug.Log(player.stats.baseHealth.Value);
     }
 }

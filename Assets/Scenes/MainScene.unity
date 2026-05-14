@@ -1551,7 +1551,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 851936802}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ce9cda41d1e2254baa3ec823fc0b9bd, type: 3}
   m_Name: 
@@ -1559,12 +1559,20 @@ MonoBehaviour:
   playerStats:
     baseHealth:
       _baseValue: 100
+      _value: 0
+      isDirty: 1
     baseMoveSpeed:
       _baseValue: 0
+      _value: 0
+      isDirty: 1
     baseAttackSpeed:
       _baseValue: 0
+      _value: 0
+      isDirty: 1
     Damage:
       _baseValue: 0
+      _value: 0
+      isDirty: 1
 --- !u!114 &851936815 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 449291512116402991, guid: 65efa41c9251e41468efd36f53837c45, type: 3}
@@ -1605,8 +1613,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fbe535544a34b63918be78188c14ddc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Combat.Magic.ExplosionVFXSpawner
-  RedExplosionPrefab: {fileID: 0}
-  PurpleExplosionPrefab: {fileID: 0}
+  RedExplosionPrefab: {fileID: 8210520550165414391, guid: 9961a36d668ff3142a3e35e13e558862, type: 3}
+  PurpleExplosionPrefab: {fileID: 8210520550165414391, guid: ab559236a1b93ff4ab25e8f62482e17a, type: 3}
 --- !u!4 &953483435
 Transform:
   m_ObjectHideFlags: 0
@@ -1653,7 +1661,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHUD
   playerHealthText: {fileID: 1233641961}
-  targetCharacter: {fileID: 851936812}
+  player: {fileID: 851936815}
 --- !u!4 &1056183137
 Transform:
   m_ObjectHideFlags: 0
@@ -2107,6 +2115,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 449291512116402991, guid: 65efa41c9251e41468efd36f53837c45, type: 3}
+      propertyPath: dashCooldown
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 449291512116402991, guid: 65efa41c9251e41468efd36f53837c45, type: 3}
+      propertyPath: dashRecharge
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 449291512116402991, guid: 65efa41c9251e41468efd36f53837c45, type: 3}
+      propertyPath: stats.baseHealth._baseValue
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 2777569860711908029, guid: 65efa41c9251e41468efd36f53837c45, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.24253
