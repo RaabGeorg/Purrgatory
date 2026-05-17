@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
@@ -9,8 +10,11 @@ public class PlayerMovement : MonoBehaviour
     private float dashSpeed;
     private float _dashTime = 0.25f;
     private float startTime;
-    public float dashCooldown = 3;
+    public float dashRecharge = 5;
+    public float dashCooldown = 0.5f;
+    public float dashCount = 2f;
     private bool isDashing;
+    private bool isRecharging;
 
     public CharacterStats stats;
     public WeaponStats Weapon;
@@ -51,9 +55,13 @@ public class PlayerMovement : MonoBehaviour
 
         controller.Move(moveDirection * (speed * Time.deltaTime));
 
-        
+        if (dashCount < 2 && !isRecharging)
+        {
+            isRecharging = true;
+            StartCoroutine(DashRecharge(dashRecharge));
+        }
 
-        if (playerControls.Player.Dash.WasPressedThisFrame() && !isDashing)
+        if (playerControls.Player.Dash.WasPressedThisFrame() && !isDashing && dashCount > 0)
         {
             StartCoroutine(DashCooldown(dashCooldown));
             StartCoroutine(DashRoutine(moveDirection));
@@ -65,6 +73,7 @@ public class PlayerMovement : MonoBehaviour
     {
         isDashing = true;
         startTime = Time.time;
+        dashCount -= 1;
         while (Time.time < startTime + _dashTime )
         {
             controller.Move(dashDirection * (dashSpeed * Time.deltaTime));
@@ -72,6 +81,16 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private IEnumerator DashRecharge(float dashRecharge)
+    {
+        yield return new WaitForSeconds(dashRecharge) ;
+        isRecharging = false;
+        if (dashCount < 2)
+        {
+            dashCount += 1;
+        }
+    }
+    
     private IEnumerator DashCooldown(float dashCooldown)
     {
         yield return new WaitForSeconds(dashCooldown) ;
