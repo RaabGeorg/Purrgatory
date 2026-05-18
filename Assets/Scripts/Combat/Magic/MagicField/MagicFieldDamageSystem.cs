@@ -45,7 +45,7 @@ public partial struct MagicFieldDamageSystem : ISystem
                 Debug.Log(health.Value);
                 healthLookup[enemy] = health;
                 if (health.Value <= 0f)
-                    ecb.DestroyEntity(enemy);
+                    ecb.AddComponent<MarkedForExecution>(enemy);
                     
             }
             

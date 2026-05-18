@@ -39,7 +39,7 @@ public partial struct MagicFieldLifetimeSystem : ISystem
 
                         health.ValueRW.Value -= VortexLookup[entity].Damage;
                         if (health.ValueRW.Value <= 0f)
-                            ecb.DestroyEntity(enemy);
+                            ecb.AddComponent<MarkedForExecution>(entity);
                         Debug.Log(health.ValueRW.Value);
                     }
                 }

@@ -66,4 +66,16 @@ namespace Components
     {
         public Entity Value;
     }
+    public struct CurrencyRewardComponent : IComponentData
+    {
+        public int Souls;
+        public int Coins;
+    }
+    public struct MarkedForExecution : IComponentData {}
+    public struct Executed : IComponentData {}
+    
+    public struct EnemyMovementData : IComponentData
+    {
+        public float Speed;
+    }
 }
