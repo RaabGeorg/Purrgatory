@@ -71,7 +71,8 @@ namespace Components
         public int Souls;
         public int Coins;
     }
-    public struct DeadTag : IComponentData { }
+    public struct MarkedForExecution : IComponentData {}
+    public struct Executed : IComponentData {}
     
     public struct EnemyMovementData : IComponentData
     {

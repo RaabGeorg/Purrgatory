@@ -10,26 +10,23 @@ public partial struct CurrencySystem : ISystem
 
     public void OnUpdate(ref SystemState state)
     {
-        var ecbSingleton = SystemAPI.GetSingleton<EndSimulationEntityCommandBufferSystem.Singleton>();
-        var ecb = ecbSingleton.CreateCommandBuffer(state.WorldUnmanaged);
+        var ecb = SystemAPI.GetSingleton<EndSimulationEntityCommandBufferSystem.Singleton>()
+            .CreateCommandBuffer(state.WorldUnmanaged);
+        
+        int totalCoins = 0;
+        int totalSouls = 0;
 
-        int totalCoinsThisFrame = 0;
-        int totalSoulsThisFrame = 0;
-
-        foreach (var (reward, entity) in SystemAPI.Query<RefRO<CurrencyRewardComponent>>().WithAll<DeadTag>().WithEntityAccess())
+        foreach (var (reward, entity) in SystemAPI.Query<RefRO<CurrencyRewardComponent>>().WithAll<MarkedForExecution>().WithEntityAccess())
         {
-            totalCoinsThisFrame += reward.ValueRO.Coins;
-            totalSoulsThisFrame += reward.ValueRO.Souls;
+            totalCoins += reward.ValueRO.Coins;
+            totalSouls += reward.ValueRO.Souls;
 
-            ecb.DestroyEntity(entity);
+            ecb.AddComponent<Executed>(entity);
         }
 
-        if (totalCoinsThisFrame > 0 || totalSoulsThisFrame > 0)
+        if ((totalCoins > 0 || totalSouls > 0) && PlayerWallet.Instance != null)
         {
-            if (PlayerWallet.Instance != null)
-            {
-                PlayerWallet.Instance.AddRewards(totalCoinsThisFrame, totalSoulsThisFrame);
-            }
+            PlayerWallet.Instance.AddRewards(totalCoins, totalSouls);
         }
     }
 }

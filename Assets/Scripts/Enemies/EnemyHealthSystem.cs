@@ -14,14 +14,17 @@ public partial struct EnemyHealthSystem : ISystem
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
-        var ecbSingleton = SystemAPI.GetSingleton<EndSimulationEntityCommandBufferSystem.Singleton>();
-        var ecb = ecbSingleton.CreateCommandBuffer(state.WorldUnmanaged);
+        var ecb = SystemAPI.GetSingleton<EndSimulationEntityCommandBufferSystem.Singleton>()
+            .CreateCommandBuffer(state.WorldUnmanaged);
 
-        foreach (var (health, entity) in SystemAPI.Query<RefRO<Health>>().WithAll<Enemy>().WithNone<DeadTag>().WithEntityAccess())
+        foreach (var (health, entity) in SystemAPI.Query<RefRO<Health>>()
+                     .WithAll<Enemy>()
+                     .WithNone<MarkedForExecution>()
+                     .WithEntityAccess())
         {
             if (health.ValueRO.Value <= 0f)
             {
-                ecb.AddComponent<DeadTag>(entity);
+                ecb.AddComponent(entity, new MarkedForExecution()); //You shall be executed
             }
         }
     }
