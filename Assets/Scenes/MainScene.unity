@@ -1544,35 +1544,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2777569860711908029, guid: 65efa41c9251e41468efd36f53837c45, type: 3}
   m_PrefabInstance: {fileID: 1341137036}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &851936812
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 851936802}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ce9cda41d1e2254baa3ec823fc0b9bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Character
-  playerStats:
-    baseHealth:
-      _baseValue: 100
-      _value: 0
-      isDirty: 1
-    baseMoveSpeed:
-      _baseValue: 0
-      _value: 0
-      isDirty: 1
-    baseAttackSpeed:
-      _baseValue: 0
-      _value: 0
-      isDirty: 1
-    Damage:
-      _baseValue: 0
-      _value: 0
-      isDirty: 1
 --- !u!114 &851936815 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 449291512116402991, guid: 65efa41c9251e41468efd36f53837c45, type: 3}
@@ -1584,6 +1555,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73bf632bb04ae984bb4dc977b51c8645, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
+--- !u!114 &851936819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 851936802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ff79a395ea94ea89bf68a393dcb3496, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerWallet
+  coins: 0
+  souls: 0
 --- !u!1 &953483433
 GameObject:
   m_ObjectHideFlags: 0
@@ -2199,7 +2184,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3869360815814337313, guid: 65efa41c9251e41468efd36f53837c45, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 851936812}
+      addedObject: {fileID: 851936819}
   m_SourcePrefab: {fileID: 100100000, guid: 65efa41c9251e41468efd36f53837c45, type: 3}
 --- !u!1001 &1364237940
 PrefabInstance:
