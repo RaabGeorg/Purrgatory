@@ -14,9 +14,9 @@ public class VortexAuthoring : MonoBehaviour
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
 
-            AddComponent(entity, new Vortex
+            AddComponent(entity, new PullEffect
             {
-                PullStrength = authoring.pullStrength,
+                Strength = authoring.pullStrength,
                 Radius = authoring.radius,
             });
             AddComponent(entity, new Lifetime
