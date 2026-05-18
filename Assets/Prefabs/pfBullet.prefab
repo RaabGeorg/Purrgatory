@@ -106,7 +106,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletAuthoring
   damage: 10
-  speed: 15
+  speed: 5
+  pullEffect: 1
 --- !u!114 &5765728325039608001
 MonoBehaviour:
   m_ObjectHideFlags: 0

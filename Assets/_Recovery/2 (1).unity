@@ -155,11 +155,8 @@ MonoBehaviour:
   bulletSpeed: 20
   damage: 10
   fireRate: 2
+  isPlayer: 1
   spawnPoint: {fileID: 1717824111}
-  vortexMode: 1
-  pullRadius: 20
-  pullStrength: 30
-  explosiveDamage: 50
 --- !u!136 &977129793
 CapsuleCollider:
   m_ObjectHideFlags: 0

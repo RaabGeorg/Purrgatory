@@ -8,8 +8,13 @@ public class WeaponAuthoring : MonoBehaviour
     public float bulletSpeed = 15f;
     public float damage      = 10f;
     public float fireRate    = 2f;
-    public bool  isPlayer;
     public Transform spawnPoint;
+    
+    [Header("Vortex")]
+    public bool vortexMode;
+    public float pullRadius;
+    public float pullStrength;
+    public float explosiveDamage;
 
     class Baker : Baker<WeaponAuthoring>
     {
@@ -36,6 +41,13 @@ public class WeaponAuthoring : MonoBehaviour
             AddComponent(entity, new WeaponTarget());
 
             AddComponent(entity, new WeaponTag());
+            AddComponent(entity, new VortexMod
+            {
+                Radius = authoring.vortexMode ? authoring.pullRadius : 0,
+                Strength = authoring.pullStrength,
+                Damage = authoring.explosiveDamage,
+            });
+            
         }
     }
 }

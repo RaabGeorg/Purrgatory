@@ -25,6 +25,13 @@ namespace Components
         public float3 SpawnOffset;
     }
 
+    public struct VortexMod : IComponentData
+    {
+        public float Radius;
+        public float Strength;
+        public float Damage;
+    }
+
     public struct WeaponTarget : IComponentData
     {
         public float3 Value;
@@ -57,10 +64,10 @@ namespace Components
     {
         public Entity Value;
     }
-    public struct Vortex : IComponentData
+    public struct PullEffect : IComponentData
     {
         public float Radius;
-        public float PullStrength;
+        public float Strength;
     }
     public struct VortexPrefabRef : IComponentData
     {
