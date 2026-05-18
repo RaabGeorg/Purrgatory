@@ -159,7 +159,7 @@ MonoBehaviour:
   vortexMode: 1
   pullRadius: 20
   pullStrength: 30
-  explosiveDamage: 50
+  explosiveDamage: 10
 --- !u!136 &977129793
 CapsuleCollider:
   m_ObjectHideFlags: 0
