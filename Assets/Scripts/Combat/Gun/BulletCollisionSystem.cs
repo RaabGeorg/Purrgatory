@@ -42,9 +42,6 @@ public partial struct BulletCollisionSystem : ISystem
                 var health = healthLookup[enemy];
                 health.Value -= bulletLookup[bullet].Damage;
                 healthLookup[enemy] = health;
-                if (health.Value <= 0f)
-                    ecb.DestroyEntity(enemy);
-                    
             }
 
             ecb.DestroyEntity(bullet);

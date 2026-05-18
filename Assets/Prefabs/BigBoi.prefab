@@ -1544,7 +1544,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAuthoring
   health: 50
-  moveSpeed: 5
+  moveSpeed: 15
+  soulsReward: 5
+  coinsReward: 10
 --- !u!1 &7539931635880731992
 GameObject:
   m_ObjectHideFlags: 0
