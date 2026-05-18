@@ -15,14 +15,14 @@ public partial struct EnemyMoveSystem : ISystem
         float3 playerPos = SystemAPI.GetComponent<LocalTransform>(playerEntity).Position;
         float dt = SystemAPI.Time.DeltaTime;
 
-        foreach (var (velocity, transform, enemy) in 
-                 SystemAPI.Query<RefRW<PhysicsVelocity>, RefRO<LocalTransform>, RefRO<EnemyData>>())
+        foreach (var (velocity, transform, movement) in 
+                 SystemAPI.Query<RefRW<PhysicsVelocity>, RefRO<LocalTransform>, RefRO<EnemyMovementData>>().WithNone<MarkedForExecution>())
         {
             float3 direction = math.normalize(playerPos - transform.ValueRO.Position);
-            float3 targetVelocity = direction * enemy.ValueRO.Speed;
+            
+            float3 targetVelocity = direction * movement.ValueRO.Speed;
 
-            // Vortex Velocity beibehalten — nur überschreiben wenn kein Vortex zieht
-            float3 current = velocity.ValueRW.Linear;
+            float3 current = velocity.ValueRO.Linear;
             velocity.ValueRW.Linear = math.lerp(current, targetVelocity, dt * 5f);
         }
     }

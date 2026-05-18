@@ -12,8 +12,20 @@ public class DashCooldownDisplay : MonoBehaviour
     {
         if (player == null || dashText == null) return;
 
-        float timer = player.GetDashTimer();
+        float count = player.dashCount;
         
+        if (count == 0f){
+            dashText.text = $"Dash: {count}";
+            dashText.color = Color.white;
+        }
+        else
+        {
+            dashText.text = $"Dash: {count}";
+            dashText.color = Color.green;
+        }
+        /*
+        float timer = player.GetDashTimer();
+
         if (timer > 0f){
             dashText.text = $"Dash: {timer:F1}";
             dashText.color = Color.white;
@@ -23,5 +35,6 @@ public class DashCooldownDisplay : MonoBehaviour
             dashText.text = "Dash: READY";
             dashText.color = Color.green;
         }
+        */
     }
 }
