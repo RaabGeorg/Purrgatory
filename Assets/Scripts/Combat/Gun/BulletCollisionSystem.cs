@@ -18,7 +18,7 @@ public partial struct BulletCollisionSystem : ISystem
         var bulletLookup = SystemAPI.GetComponentLookup<Bullet>(true);
         var enemyLookup  = SystemAPI.GetComponentLookup<Enemy>(true);
         var healthLookup = SystemAPI.GetComponentLookup<Health>(false);
-
+        var explosionLookup = SystemAPI.GetComponentLookup<Explosion>(true);
         foreach (var triggerEvent in simulation.AsSimulation().TriggerEvents)
         {
             Entity bullet = Entity.Null;
@@ -44,7 +44,11 @@ public partial struct BulletCollisionSystem : ISystem
                 healthLookup[enemy] = health;
             }
 
-            ecb.DestroyEntity(bullet);
+            ecb.AddComponent<MarkedForExecution>(bullet);
+            if (!explosionLookup.HasComponent(bullet))
+            {
+                ecb.AddComponent<Executed>(bullet);
+            }
         }
 
         ecb.Playback(state.EntityManager);

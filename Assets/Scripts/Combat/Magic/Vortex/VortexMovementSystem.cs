@@ -12,7 +12,7 @@ public partial struct VortexMovementSystem : ISystem
 
         foreach (var (movement, transform) in
                  SystemAPI.Query<RefRW<VortexMovement>,
-                     RefRW<LocalTransform>>())
+                     RefRW<LocalTransform>>().WithNone<MarkedForExecution,Executed>())
         {
             movement.ValueRW.Time += dt * movement.ValueRO.Speed;
 

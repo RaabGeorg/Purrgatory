@@ -19,7 +19,7 @@ public partial struct VortexSystem : ISystem
         float3 playerPos = SystemAPI.GetComponent<LocalTransform>(playerEntity).Position;
         var bulletLookup = SystemAPI.GetComponentLookup<Bullet>(true);
         foreach (var (vortex, vortexTransform, entity) in
-                 SystemAPI.Query<RefRO<PullEffect>, RefRO<LocalTransform>>().WithEntityAccess())
+                 SystemAPI.Query<RefRO<PullEffect>, RefRO<LocalTransform>>().WithEntityAccess().WithNone<MarkedForExecution,Executed>())
         {
             float3 vortexPos = vortexTransform.ValueRO.Position;
             float radiusSq = vortex.ValueRO.Radius * vortex.ValueRO.Radius;

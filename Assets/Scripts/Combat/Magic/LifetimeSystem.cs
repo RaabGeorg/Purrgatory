@@ -11,10 +11,11 @@ public partial struct MagicFieldLifetimeSystem : ISystem
 {
     public void OnUpdate(ref SystemState state)
     {
+        var ecb = new EntityCommandBuffer(Unity.Collections.Allocator.Temp);
         float dt = SystemAPI.Time.DeltaTime;
         var vortexLookup = SystemAPI.GetComponentLookup<Explosion>(true);
         foreach (var (field, transform,entity) in 
-                 SystemAPI.Query<RefRW<Lifetime>,RefRO<LocalTransform>>().WithEntityAccess())
+                 SystemAPI.Query<RefRW<Lifetime>,RefRO<LocalTransform>>().WithEntityAccess().WithNone<MarkedForExecution,Executed>())
         {
             float3 pos = transform.ValueRO.Position;
             field.ValueRW.Value -= dt;
@@ -23,13 +24,18 @@ public partial struct MagicFieldLifetimeSystem : ISystem
             
             if (vortexLookup.HasComponent(entity))
             {
-                ExplosionVFXSpawner.instance.Spawn(new float3(pos.x, pos.y + 0.1f, pos.z),1);
-                
+                ecb.AddComponent<MarkedForExecution>(entity);
             }
             else
             {
                 ExplosionVFXSpawner.instance.Spawn(new float3(pos.x, pos.y + 0.1f, pos.z), 0);
+                ecb.AddComponent<MarkedForExecution>(entity);
+                ecb.AddComponent<Executed>(entity);
             }
+            
         }
+        ecb.Playback(state.EntityManager);
+        ecb.Dispose();
     }
+    
 }

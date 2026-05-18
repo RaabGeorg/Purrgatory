@@ -30,11 +30,5 @@ namespace Combat.Magic
                     break;
             }
         }
-
-        public void Destroy()
-        {
-            Destroy(gameObject,0.7f);
-        }
-        
     }
 }
