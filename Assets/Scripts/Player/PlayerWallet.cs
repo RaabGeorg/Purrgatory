@@ -5,12 +5,12 @@ public class PlayerWallet : MonoBehaviour
     public static PlayerWallet Instance { get; private set; }
 
     [Header("Current Balances")]
-    [SerializeField] private int coins;
+    [SerializeField] private int condensedSouls;
     [SerializeField] private int souls;
 
-    public int Coins => coins;
+    public int CondensedSouls => condensedSouls;
     public int Souls => souls;
-
+    
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -21,18 +21,18 @@ public class PlayerWallet : MonoBehaviour
         Instance = this;
     }
 
-    public void AddRewards(int coinsEarned, int soulsEarned)
+    public void AddRewards(int condensedSoulsEarned, int soulsEarned)
     {
-        coins += coinsEarned;
+        condensedSouls += condensedSoulsEarned;
         souls += soulsEarned;
 
-        Debug.Log($"Wallet Updated -> Coins: {coins} (+{coinsEarned}), Souls: {souls} (+{soulsEarned})");
+        Debug.Log($"Wallet Updated -> CondensedSouls: {condensedSouls} (+{condensedSoulsEarned}), Souls: {souls} (+{soulsEarned})");
     }
 
     public bool SpendCoins(int amount)
     {
-        if (coins < amount) return false;
-        coins -= amount;
+        if (condensedSouls < amount) return false;
+        condensedSouls -= amount;
         return true;
     }
 

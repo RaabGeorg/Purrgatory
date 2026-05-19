@@ -16,9 +16,10 @@ public class PlayerMovement : MonoBehaviour
     private bool isDashing;
     private bool isRecharging;
 
+    /*
     public CharacterStats stats;
     public WeaponStats Weapon;
-    
+    */
     private PlayerControls playerControls;
 
     private CharacterController controller;
@@ -44,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
     {
         startTime = -dashCooldown;
         controller = GetComponent<CharacterController>();
-        speed = stats.baseMoveSpeed.Value;
+        speed = PlayerStatsManager.Instance.stats.baseMoveSpeed.Value;
         dashSpeed = speed * 5;
     }
 

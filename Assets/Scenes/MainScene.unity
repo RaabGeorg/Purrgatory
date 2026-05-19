@@ -1383,8 +1383,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1502007439}
+  m_Children: []
   m_Father: {fileID: 193035682}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1705,8 +1704,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ff79a395ea94ea89bf68a393dcb3496, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerWallet
-  coins: 0
+  condensedSouls: 0
   souls: 0
+--- !u!114 &851936823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 851936802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec8f45c640da2b5418667ac07fd72b0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStatsManager
+  stats:
+    baseHealth:
+      _baseValue: 80
+    baseMoveSpeed:
+      _baseValue: 10
+    baseAttackSpeed:
+      _baseValue: 10
+    Damage:
+      _baseValue: 10
 --- !u!1 &953483433
 GameObject:
   m_ObjectHideFlags: 0
@@ -1784,8 +1804,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHUD
   playerHealthText: {fileID: 1233641961}
-  player: {fileID: 851936815}
-  coinsText: {fileID: 178019483}
+  condensedSoulsText: {fileID: 178019483}
   soulsText: {fileID: 1507056084}
 --- !u!4 &1056183137
 Transform:
@@ -2325,6 +2344,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3869360815814337313, guid: 65efa41c9251e41468efd36f53837c45, type: 3}
       insertIndex: -1
       addedObject: {fileID: 851936819}
+    - targetCorrespondingSourceObject: {fileID: 3869360815814337313, guid: 65efa41c9251e41468efd36f53837c45, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 851936823}
   m_SourcePrefab: {fileID: 100100000, guid: 65efa41c9251e41468efd36f53837c45, type: 3}
 --- !u!1001 &1364237940
 PrefabInstance:
