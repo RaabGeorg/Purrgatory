@@ -34,11 +34,13 @@ public class PlayerMovement : MonoBehaviour
     private void OnEnable()
     {
         playerControls.Enable();
+        GameEvents.OnStatsChanged += UpdateStats;
     }
 
     private void OnDisable()
     {
         playerControls.Disable();
+        GameEvents.OnStatsChanged -= UpdateStats;
     }
 
     void Start()
@@ -104,5 +106,9 @@ public class PlayerMovement : MonoBehaviour
         float remainingTime = dashCooldown - elapsedTime;
         return Mathf.Max(0, remainingTime);
     }
-    
+
+    public void UpdateStats()
+    {
+        speed = PlayerStatsManager.Instance.stats.baseMoveSpeed.Value;
+    }
 }

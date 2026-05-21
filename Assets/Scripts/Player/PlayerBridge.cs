@@ -39,4 +39,12 @@ public class PlayerBridge : MonoBehaviour
     }
     public void ApplyStats(PlayerStatsComponent stats) =>
         _em.SetComponentData(_playerEntity, stats);
+
+    public void ApplyHealth(float maxHealth) 
+    {
+        var hp = _em.GetComponentData<Health>(_playerEntity);
+        hp.Value = maxHealth;
+        _em.SetComponentData(_playerEntity, hp);
+    }
+        
 }

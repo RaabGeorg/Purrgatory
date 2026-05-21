@@ -41,10 +41,13 @@ public class PlayerStatsManager : MonoBehaviour
 
     public void PushToBridge()
     {
+        GameEvents.OnStatsChanged.Invoke();
+        var newHealth = Instance.stats.baseHealth.Value;
         PlayerBridge.Instance?.ApplyStats(new PlayerStatsComponent
         {
             AttackSpeed = stats.baseAttackSpeed.Value,
             Damage      = stats.Damage.Value,
         });
+        PlayerBridge.Instance?.ApplyHealth(newHealth);
     }
 }

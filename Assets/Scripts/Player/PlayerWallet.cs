@@ -26,7 +26,7 @@ public class PlayerWallet : MonoBehaviour
         condensedSouls += condensedSoulsEarned;
         souls += soulsEarned;
 
-        Debug.Log($"Wallet Updated -> CondensedSouls: {condensedSouls} (+{condensedSoulsEarned}), Souls: {souls} (+{soulsEarned})");
+        //Debug.Log($"Wallet Updated -> CondensedSouls: {condensedSouls} (+{condensedSoulsEarned}), Souls: {souls} (+{soulsEarned})");
     }
 
     public bool SpendCoins(int amount)

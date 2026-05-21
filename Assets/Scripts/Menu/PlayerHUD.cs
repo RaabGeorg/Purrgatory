@@ -7,10 +7,18 @@ public class PlayerHUD : MonoBehaviour
     public TextMeshProUGUI playerHealthText;
     public TextMeshProUGUI condensedSoulsText;
     public TextMeshProUGUI soulsText;
-    
-    private void OnEnable()  => GameEvents.OnHealthChanged += UpdateHealth;
-    private void OnDisable() => GameEvents.OnHealthChanged -= UpdateHealth;
+    public TextMeshProUGUI currentXpText;
+    public TextMeshProUGUI xpToNext;
 
+    private void OnEnable()
+    {
+        GameEvents.OnHealthChanged += UpdateHealth;
+    }
+
+    private void OnDisable()
+    {
+        GameEvents.OnHealthChanged -= UpdateHealth;
+    }
     private void UpdateHealth(float hp)
     {
         if (playerHealthText != null)
@@ -24,5 +32,9 @@ public class PlayerHUD : MonoBehaviour
 
         if (condensedSoulsText != null)
             condensedSoulsText.text = $"CondensedSouls: {PlayerWallet.Instance.CondensedSouls}";
+        if (currentXpText != null)
+            currentXpText.text = $"Level: {PlayerXP.Instance.CurrentLevel}";
+        if (xpToNext != null)
+            xpToNext.text = $"XP: {PlayerXP.Instance.CurrentXp }/{PlayerXP.Instance.XpToNextLevel}";
     }
 }

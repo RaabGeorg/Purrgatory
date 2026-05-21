@@ -8,8 +8,8 @@ public class EnemyAuthoring : MonoBehaviour
     public float moveSpeed = 5f;
 
     public int soulsReward = 5;
-    public int condensedSoulsReward = 10; //only from bosses?
-    public int XpReward = 10;
+    public int condensedSoulsReward = 1; //only from bosses?
+    public int xpReward = 10;
     
     public class EnemyBaker : Baker<EnemyAuthoring>
     {
@@ -23,7 +23,7 @@ public class EnemyAuthoring : MonoBehaviour
             { 
                 Souls = authoring.soulsReward, 
                 CondensedSouls = authoring.condensedSoulsReward,
-                Xp = authoring.XpReward
+                Xp = authoring.xpReward
             });
         }
     }
