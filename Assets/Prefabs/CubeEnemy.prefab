@@ -110,6 +110,12 @@ MonoBehaviour:
   moveSpeed: 6
   soulsReward: 5
   coinsReward: 10
+  isRanged: 1
+  attackRange: 10
+  fireRate: 1
+  bulletSpeed: 10
+  damage: 10
+  bulletPrefab: {fileID: 32527178692952100, guid: 98a71444cb5c35641a50db5decdec6c0, type: 3}
 --- !u!114 &4745199509603116743
 MonoBehaviour:
   m_ObjectHideFlags: 0

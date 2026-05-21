@@ -85,4 +85,9 @@ namespace Components
     {
         public float Speed;
     }
+
+    public struct EngagementRange : IComponentData
+    {
+        public float Value;
+    }
 }

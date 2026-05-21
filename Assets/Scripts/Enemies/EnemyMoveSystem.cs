@@ -16,7 +16,8 @@ public partial struct EnemyMoveSystem : ISystem
         float dt = SystemAPI.Time.DeltaTime;
 
         foreach (var (velocity, transform, movement) in 
-                 SystemAPI.Query<RefRW<PhysicsVelocity>, RefRO<LocalTransform>, RefRO<EnemyMovementData>>().WithNone<MarkedForExecution>())
+                 SystemAPI.Query<RefRW<PhysicsVelocity>, RefRO<LocalTransform>, RefRO<EnemyMovementData>>()
+                     .WithNone<MarkedForExecution, EngagementRange>().WithAll<Enemy>())
         {
             float3 direction = math.normalize(playerPos - transform.ValueRO.Position);
             
