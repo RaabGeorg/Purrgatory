@@ -8,7 +8,8 @@ public class EnemyAuthoring : MonoBehaviour
     public float moveSpeed = 5f;
 
     public int soulsReward = 5;
-    public int coinsReward = 10;
+    public int condensedSoulsReward = 1; //only from bosses?
+    public int xpReward = 10;
     
     public class EnemyBaker : Baker<EnemyAuthoring>
     {
@@ -21,7 +22,8 @@ public class EnemyAuthoring : MonoBehaviour
             AddComponent(entity, new CurrencyRewardComponent
             { 
                 Souls = authoring.soulsReward, 
-                Coins = authoring.coinsReward 
+                CondensedSouls = authoring.condensedSoulsReward,
+                Xp = authoring.xpReward
             });
         }
     }

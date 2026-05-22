@@ -76,7 +76,8 @@ namespace Components
     public struct CurrencyRewardComponent : IComponentData
     {
         public int Souls;
-        public int Coins;
+        public int CondensedSouls;
+        public int Xp;
     }
     public struct MarkedForExecution : IComponentData {}
     public struct Executed : IComponentData {}
@@ -86,6 +87,10 @@ namespace Components
         public float Speed;
     }
 
+    public struct PlayerStatsComponent : IComponentData
+    {
+        public float AttackSpeed;
+        public float Damage;
     public struct EnemySpawner : IComponentData
     {
         public Entity Enemy;
