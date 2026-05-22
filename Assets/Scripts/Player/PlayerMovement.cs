@@ -16,9 +16,10 @@ public class PlayerMovement : MonoBehaviour
     private bool isDashing;
     private bool isRecharging;
 
+    /*
     public CharacterStats stats;
     public WeaponStats Weapon;
-    
+    */
     private PlayerControls playerControls;
 
     private CharacterController controller;
@@ -33,18 +34,20 @@ public class PlayerMovement : MonoBehaviour
     private void OnEnable()
     {
         playerControls.Enable();
+        GameEvents.OnStatsChanged += UpdateStats;
     }
 
     private void OnDisable()
     {
         playerControls.Disable();
+        GameEvents.OnStatsChanged -= UpdateStats;
     }
 
     void Start()
     {
         startTime = -dashCooldown;
         controller = GetComponent<CharacterController>();
-        speed = stats.baseMoveSpeed.Value;
+        speed = PlayerStatsManager.Instance.stats.baseMoveSpeed.Value;
         dashSpeed = speed * 5;
     }
 
@@ -103,5 +106,9 @@ public class PlayerMovement : MonoBehaviour
         float remainingTime = dashCooldown - elapsedTime;
         return Mathf.Max(0, remainingTime);
     }
-    
+
+    public void UpdateStats()
+    {
+        speed = PlayerStatsManager.Instance.stats.baseMoveSpeed.Value;
+    }
 }

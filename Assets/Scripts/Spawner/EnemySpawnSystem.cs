@@ -2,6 +2,7 @@
 using Unity.Entities;
 using Unity.Transforms;
 using Unity.Mathematics;
+using Components;
 
 [BurstCompile]
 public partial struct EnemySpawnSystem : ISystem

@@ -8,7 +8,8 @@ public class EnemyAuthoring : MonoBehaviour
     public float health = 50f;
     public float moveSpeed = 5f;
     public int soulsReward = 5;
-    public int coinsReward = 10;
+    public int condensedSoulsReward = 1; //only from bosses?
+    public int xpReward = 10;
     
     [Header("Combat Config")]
     public bool isRanged = false;
@@ -30,9 +31,10 @@ public class EnemyAuthoring : MonoBehaviour
             AddComponent(entity, new Health { Value = authoring.health });
             AddComponent(entity, new Enemy());
             AddComponent(entity, new CurrencyRewardComponent
-            {
-                Souls = authoring.soulsReward,
-                Coins = authoring.coinsReward
+            { 
+                Souls = authoring.soulsReward, 
+                CondensedSouls = authoring.condensedSoulsReward,
+                Xp = authoring.xpReward
             });
 
             if (authoring.isRanged)
