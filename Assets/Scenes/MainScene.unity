@@ -1198,7 +1198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a2db5a589506ba4daa9b3558be9aaa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  player: {fileID: 851936802}
+  player: {fileID: 0}
   chunkPrefab: {fileID: 8209923594601774919, guid: f6dda3fea6e84584c864562c52ae0174, type: 3}
   viewDistance: 2
 --- !u!4 &556382225
@@ -3154,8 +3154,8 @@ SceneRoots:
   - {fileID: 832575519}
   - {fileID: 330585546}
   - {fileID: 1341137036}
-  - {fileID: 556382225}
   - {fileID: 1440611782}
   - {fileID: 1056183137}
   - {fileID: 2055727682}
   - {fileID: 953483435}
+  - {fileID: 556382225}

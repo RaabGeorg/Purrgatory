@@ -1,4 +1,11 @@
 ﻿<Solution>
-  <Project Path="Assembly-CSharp-Editor.csproj" />
+  <Project Path="Unity.ShaderGraph.Editor.csproj" />
+  <Project Path="Unity.RenderPipelines.Universal.Editor.csproj" />
   <Project Path="Assembly-CSharp.csproj" />
+  <Project Path="Unity.Physics.Custom.csproj" />
+  <Project Path="Unity.Physics.Custom.Editor.csproj" />
+  <Project Path="UnityEditor.UI.csproj" />
+  <Project Path="Chroma.Facade.csproj" />
+  <Project Path="Assembly-CSharp-Editor.csproj" />
+  <Project Path="Chroma.Readme.Editor.csproj" />
 </Solution>

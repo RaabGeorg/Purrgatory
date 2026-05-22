@@ -85,4 +85,12 @@ namespace Components
     {
         public float Speed;
     }
+
+    public struct EnemySpawner : IComponentData
+    {
+        public Entity Enemy;
+        public float SpawnInterval;
+        public float NextSpawnTime;
+        public Unity.Mathematics.Random Random;
+    }
 }
