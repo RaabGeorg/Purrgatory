@@ -1,5 +1,6 @@
-﻿using UnityEngine;
+﻿using Components;
 using Unity.Entities;
+using UnityEngine;
 
 public class SpawnerAuthoring : MonoBehaviour
 {
