@@ -46,8 +46,6 @@ public partial struct RangedEnemySystem : ISystem
                 //player is in range
                 velocity.ValueRW.Linear = math.lerp(velocity.ValueRO.Linear, float3.zero, deltaTime * 5f);
                 weapon.ValueRW.IsFiring = true;
-                Debug.Log("Im shoonting");
-
             }
         }
         

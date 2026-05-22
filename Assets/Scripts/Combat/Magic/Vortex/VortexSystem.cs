@@ -9,6 +9,12 @@ using UnityEngine;
 [BurstCompile]
 public partial struct VortexSystem : ISystem
 {
+    
+    public void OnCreate(ref SystemState state)
+    {
+        // System will skip OnUpdate entirely if 0 or >1 of these entities exist.
+        state.RequireForUpdate<PlayerTag>(); 
+    }
     public void OnUpdate(ref SystemState state)
     {
         float dt = SystemAPI.Time.DeltaTime;
@@ -17,7 +23,7 @@ public partial struct VortexSystem : ISystem
         // SystemAPI.GetSingleton<PlayerTag>() is the standard ECS way if only 1 player exists.
         var playerEntity = SystemAPI.GetSingletonEntity<PlayerTag>(); 
         float3 playerPos = SystemAPI.GetComponent<LocalTransform>(playerEntity).Position;
-        var bulletLookup = SystemAPI.GetComponentLookup<Bullet>(true);
+        var bulletLookup = SystemAPI.GetComponentLookup<BulletTag>(true);
         foreach (var (vortex, vortexTransform, entity) in
                  SystemAPI.Query<RefRO<PullEffect>, RefRO<LocalTransform>>().WithEntityAccess().WithNone<MarkedForExecution,Executed>())
         {
