@@ -4,13 +4,17 @@ using Unity.Mathematics;
 namespace Components
 {
     public struct Health : IComponentData { public float Value; }
-    public struct Bullet : IComponentData { public float Damage; }
     public struct Speed  : IComponentData { public float3 Value; }
-
+    
+    public struct MagicFieldTag : IComponentData { }
     public struct PlayerTag : IComponentData { }
     public struct Enemy     : IComponentData { }
     public struct WeaponTag  : IComponentData { } // ← neu
+    public struct BulletTag : IComponentData { }
+
+    
     public struct BulletPrefabRef : IComponentData
+    
     {
         public Entity Value;
     }
@@ -37,11 +41,7 @@ namespace Components
         public float3 Value;
     }
 
-    public struct MagicField : IComponentData
-    {
-        public float Damage;
-        
-    }
+    
     public struct VortexMovement : IComponentData
     {
         public float3 Center;
@@ -104,5 +104,10 @@ namespace Components
         public float SpawnInterval;
         public float NextSpawnTime;
         public Unity.Mathematics.Random Random;
+    }
+
+    public struct Damage : IComponentData
+    {
+        public float Value;
     }
 }

@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnerAuthoring
   enemyPrefab: {fileID: 8182868941147411292, guid: 0d49853f6c23bc146a84ff1e0e370b17, type: 3}
-  spawnInterval: 1
+  spawnInterval: 30
   randomSeed: 1
 --- !u!4 &1440611782
 Transform:

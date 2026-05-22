@@ -15,8 +15,9 @@ public class BulletAuthoring : MonoBehaviour
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
 
-            AddComponent(entity, new Bullet { Damage = authoring.damage });
+            AddComponent(entity, new Damage { Value = authoring.damage });
             AddComponent(entity, new Speed  { Value  = float3.zero }); // wird vom WeaponJob gesetzt
+            AddComponent(entity, new BulletTag());
             if (authoring.pullEffect)
                 AddComponent(entity, new PullEffect
                 {

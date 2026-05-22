@@ -13,15 +13,16 @@ public class MagicFieldAuthoring : MonoBehaviour
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
 
-            AddComponent(entity, new MagicField
+            AddComponent(entity, new Damage
             {
-                Damage = authoring.damage,
+                Value = authoring.damage,
                 
             });
             AddComponent(entity, new Lifetime
             {
                 Value = authoring.lifetime
             });
+            AddComponent(entity, new MagicFieldTag());
 
         }
     }

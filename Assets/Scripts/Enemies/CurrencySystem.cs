@@ -17,7 +17,7 @@ public partial struct CurrencySystem : ISystem
         int totalSouls = 0;
         int totalXp = 0;
 
-        foreach (var (reward, entity) in SystemAPI.Query<RefRO<CurrencyRewardComponent>>().WithAll<MarkedForExecution>().WithEntityAccess())
+        foreach (var (reward, entity) in SystemAPI.Query<RefRO<CurrencyRewardComponent>>().WithAll<MarkedForExecution>().WithEntityAccess().WithNone<Executed>())
         {
             totalCondensedSouls += reward.ValueRO.CondensedSouls;
             totalSouls += reward.ValueRO.Souls;

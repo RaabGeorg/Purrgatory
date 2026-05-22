@@ -77,6 +77,6 @@ public partial struct WeaponJob : IJobEntity
             scale
         ));
         ECB.SetComponent(chunkIndex, bullet, new Speed  { Value  = dir * weapon.BulletSpeed });
-        ECB.SetComponent(chunkIndex, bullet, new Bullet { Damage = weapon.Damage });
+        ECB.SetComponent(chunkIndex, bullet, new Damage { Value = weapon.Damage });
     }
 }
