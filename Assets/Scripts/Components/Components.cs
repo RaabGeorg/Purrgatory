@@ -90,6 +90,8 @@ namespace Components
     public struct EngagementRange : IComponentData
     {
         public float Value;
+    }
+
     public struct PlayerStatsComponent : IComponentData
     {
         public float AttackSpeed;
