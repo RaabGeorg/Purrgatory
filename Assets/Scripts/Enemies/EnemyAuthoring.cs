@@ -58,7 +58,8 @@ public class EnemyAuthoring : MonoBehaviour
                 {
                     Radius = 0f,    // Default to 0 so standard enemies don't spawn vortexes
                     Strength = 0f,
-                    Damage = 0f
+                    Damage = 0f,
+                    Scale = 1
                 });
             }
         }

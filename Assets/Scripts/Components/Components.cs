@@ -34,6 +34,7 @@ namespace Components
         public float Radius;
         public float Strength;
         public float Damage;
+        public float Scale;
     }
 
     public struct WeaponTarget : IComponentData

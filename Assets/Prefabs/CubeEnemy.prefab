@@ -110,7 +110,7 @@ MonoBehaviour:
   soulsReward: 5
   condensedSoulsReward: 1
   xpReward: 10
-  isRanged: 1
+  isRanged: 0
   attackRange: 10
   fireRate: 1
   bulletSpeed: 10

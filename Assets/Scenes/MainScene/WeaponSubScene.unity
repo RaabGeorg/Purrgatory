@@ -162,6 +162,7 @@ MonoBehaviour:
   pullRadius: 20
   pullStrength: 30
   explosiveDamage: 10
+  bulletScale: 2
 --- !u!23 &977129794
 MeshRenderer:
   m_ObjectHideFlags: 0

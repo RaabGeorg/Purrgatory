@@ -15,6 +15,7 @@ public class WeaponAuthoring : MonoBehaviour
     public float pullRadius;
     public float pullStrength;
     public float explosiveDamage;
+    public float bulletScale = 1f; 
 
     class Baker : Baker<WeaponAuthoring>
     {
@@ -46,6 +47,7 @@ public class WeaponAuthoring : MonoBehaviour
                 Radius = authoring.vortexMode ? authoring.pullRadius : 0,
                 Strength = authoring.pullStrength,
                 Damage = authoring.explosiveDamage,
+                Scale = authoring.bulletScale,
             });
             
         }

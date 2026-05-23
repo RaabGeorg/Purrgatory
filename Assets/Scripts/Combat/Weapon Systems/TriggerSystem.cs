@@ -6,8 +6,7 @@ using Unity.Physics.Systems;
 using Unity.Collections;
 using UnityEngine;
 
-[UpdateInGroup(typeof(PhysicsSimulationGroup))]
-[UpdateAfter(typeof(PhysicsSimulationGroup))]
+[UpdateInGroup(typeof(FixedStepSimulationSystemGroup), OrderLast = true)]
 public partial struct TriggerSystem : ISystem
 {
     [BurstCompile]
@@ -42,8 +41,6 @@ struct TriggerJob : ITriggerEventsJob
     {
         Entity damageEntity = Entity.Null;
         Entity healthEntity = Entity.Null;
-        Debug.Log($"A: {damageEntity.Index} hasHealth:{HealthLookup.HasComponent(damageEntity)} hasDamage:{DamageLookup.HasComponent(damageEntity)}");
-        Debug.Log($"B: {healthEntity.Index} hasHealth:{HealthLookup.HasComponent(healthEntity)} hasDamage:{DamageLookup.HasComponent(healthEntity)}");
 
         if (DamageLookup.HasComponent(triggerEvent.EntityA) && HealthLookup.HasComponent(triggerEvent.EntityB))
         {

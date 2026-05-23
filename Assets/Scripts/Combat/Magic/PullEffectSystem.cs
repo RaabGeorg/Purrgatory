@@ -7,7 +7,7 @@ using Unity.Physics;
 using UnityEngine;
 
 [BurstCompile]
-public partial struct VortexSystem : ISystem
+public partial struct PullEffectSystem : ISystem
 {
     
     public void OnCreate(ref SystemState state)

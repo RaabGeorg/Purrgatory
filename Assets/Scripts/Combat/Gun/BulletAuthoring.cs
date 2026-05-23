@@ -7,7 +7,6 @@ public class BulletAuthoring : MonoBehaviour
 {
     public float damage = 10f;
     public float speed  = 15f;
-    public bool pullEffect = true; 
 
     class Baker : Baker<BulletAuthoring>
     {
@@ -16,14 +15,8 @@ public class BulletAuthoring : MonoBehaviour
             var entity = GetEntity(TransformUsageFlags.Dynamic);
 
             AddComponent(entity, new Damage { Value = authoring.damage });
-            AddComponent(entity, new Speed  { Value  = float3.zero }); // wird vom WeaponJob gesetzt
+            AddComponent(entity, new Speed { Value = authoring.speed }); // wird vom WeaponJob gesetzt
             AddComponent(entity, new BulletTag());
-            if (authoring.pullEffect)
-                AddComponent(entity, new PullEffect
-                {
-                    Radius = 5,
-                    Strength = 50,
-                });
         }
     }
 }
