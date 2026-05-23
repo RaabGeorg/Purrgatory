@@ -40,7 +40,10 @@ public class EnemyAuthoring : MonoBehaviour
             if (authoring.isRanged)
             {
                 AddComponent(entity, new EngagementRange {Value = authoring.attackRange});
-                AddComponent(entity, new WeaponTarget());
+                AddComponent(entity, new WeaponTarget
+                {
+                    Player = false 
+                });
                 AddComponent(entity, new BulletPrefabRef
                 {
                     Value = GetEntity(authoring.bulletPrefab, TransformUsageFlags.Dynamic)

@@ -2,6 +2,7 @@
 using Unity.Burst;
 using Unity.Entities;
 using Unity.Mathematics;
+using Unity.Physics;
 using Unity.Transforms;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ public partial struct WeaponSystem : ISystem
         // ECBSystem statt Allocator.Temp → ParallelWriter funktioniert
         var ecbSingleton = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>();
         var ecb = ecbSingleton.CreateCommandBuffer(state.WorldUnmanaged);
+        
         new WeaponJob
         {
             DeltaTime = SystemAPI.Time.DeltaTime,
@@ -48,7 +50,7 @@ public partial struct WeaponJob : IJobEntity
         float3 rotatedOffset = math.mul(rotation, weapon.SpawnOffset);
         float3 spawnPos = transform.Position + rotatedOffset;
         
-        var bullet = ECB.Instantiate(chunkIndex, prefabRef.Value);
+        var bullet = ECB.Instantiate(chunkIndex,prefabRef.Value);
         
         
         if (vortexMod.Radius > 0)

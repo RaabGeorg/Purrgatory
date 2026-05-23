@@ -12,11 +12,14 @@ namespace Components
     public struct WeaponTag  : IComponentData { } // ← neu
     public struct BulletTag : IComponentData { }
 
+    public struct MarkedForExecution : IComponentData {}
+    public struct Executed : IComponentData {}
     
     public struct BulletPrefabRef : IComponentData
     
     {
         public Entity Value;
+        
     }
 
     public struct Weapon : IComponentData
@@ -39,6 +42,7 @@ namespace Components
 
     public struct WeaponTarget : IComponentData
     {
+        public bool Player; 
         public float3 Value;
     }
 
@@ -80,8 +84,7 @@ namespace Components
         public int CondensedSouls;
         public int Xp;
     }
-    public struct MarkedForExecution : IComponentData {}
-    public struct Executed : IComponentData {}
+    
     
     public struct EnemyMovementData : IComponentData
     {

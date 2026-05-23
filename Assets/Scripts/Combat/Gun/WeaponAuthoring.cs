@@ -9,6 +9,8 @@ public class WeaponAuthoring : MonoBehaviour
     public float damage      = 10f;
     public float fireRate    = 2f;
     public Transform spawnPoint;
+
+    public bool isPlayer = false; 
     
     [Header("Vortex")]
     public bool vortexMode;
@@ -39,7 +41,10 @@ public class WeaponAuthoring : MonoBehaviour
                 Value = GetEntity(authoring.bulletPrefab, TransformUsageFlags.Dynamic)
             });
 
-            AddComponent(entity, new WeaponTarget());
+            AddComponent(entity, new WeaponTarget
+            {
+                Player = authoring.isPlayer,
+            });
 
             AddComponent(entity, new WeaponTag());
             AddComponent(entity, new VortexMod
