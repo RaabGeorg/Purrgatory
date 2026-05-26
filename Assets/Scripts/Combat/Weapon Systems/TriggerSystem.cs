@@ -21,6 +21,7 @@ public partial struct TriggerSystem : ISystem
             DamageLookup = SystemAPI.GetComponentLookup<Damage>(true),
             HealthLookup = SystemAPI.GetComponentLookup<Health>(false),
             ExplosiveLookup = SystemAPI.GetComponentLookup<Explosion>(true),
+            EnemyLookup = SystemAPI.GetComponentLookup<Enemy>(true),
             ecb = ecbSingleton.CreateCommandBuffer(state.WorldUnmanaged),
         }.Schedule(SystemAPI.GetSingleton<SimulationSingleton>(), state.Dependency);
     }
@@ -32,6 +33,7 @@ struct TriggerJob : ITriggerEventsJob
     [ReadOnly] public ComponentLookup<Damage> DamageLookup;
     [ReadOnly] public ComponentLookup<MagicFieldTag> MagicFieldLookup;
     [ReadOnly] public ComponentLookup<Explosion>  ExplosiveLookup;
+    [ReadOnly] public ComponentLookup<Enemy> EnemyLookup;
     public ComponentLookup<Health> HealthLookup;
     public EntityCommandBuffer ecb;
     public float dt;
@@ -55,6 +57,7 @@ struct TriggerJob : ITriggerEventsJob
         
         if (damageEntity == Entity.Null) return;
 
+        bool isEnemy = EnemyLookup.HasComponent(damageEntity);
         bool isMagicField = MagicFieldLookup.HasComponent(damageEntity);
         float damage = DamageLookup[damageEntity].Value;
         var health = HealthLookup[healthEntity];
@@ -65,12 +68,19 @@ struct TriggerJob : ITriggerEventsJob
 
         if (!isMagicField)
         {
-            ecb.AddComponent<MarkedForExecution>(damageEntity);
-            
-            if (!ExplosiveLookup.HasComponent(damageEntity))
+            if (isEnemy)
             {
-                ecb.AddComponent<Executed>(damageEntity);
+               ecb.AddComponent(damageEntity, new ApplyKnockback());
+            }
+            else
+            {
+                ecb.AddComponent<MarkedForExecution>(damageEntity);
+            
+                if (!ExplosiveLookup.HasComponent(damageEntity))
+                {
+                    ecb.AddComponent<Executed>(damageEntity);
 
+                }
             }
         }
     }
