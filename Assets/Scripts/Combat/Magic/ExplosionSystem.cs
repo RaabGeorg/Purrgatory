@@ -27,8 +27,6 @@ partial struct ExplosionSystem : ISystem
                 if (dist > field.ValueRO.Radius)
                     continue;
                 health.ValueRW.Value -= field.ValueRW.Damage;
-                if (health.ValueRW.Value <= 0f)
-                    ecb.AddComponent<MarkedForExecution>(enemy);
             }
             ExplosionVFXSpawner.instance.Spawn(new float3(pos.x, pos.y + 0.1f, pos.z),1);
             ecb.AddComponent<Executed>(entity);

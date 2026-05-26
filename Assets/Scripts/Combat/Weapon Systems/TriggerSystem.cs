@@ -61,9 +61,7 @@ struct TriggerJob : ITriggerEventsJob
 
         health.Value -= isMagicField ? damage * dt : damage;
         HealthLookup[healthEntity] = health;
-
-        if (health.Value <= 0f)
-            ecb.AddComponent<MarkedForExecution>(healthEntity);
+        
 
         if (!isMagicField)
         {
