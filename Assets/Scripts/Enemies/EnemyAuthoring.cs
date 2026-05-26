@@ -29,6 +29,7 @@ public class EnemyAuthoring : MonoBehaviour
             Entity entity = GetEntity(TransformUsageFlags.Dynamic);
             AddComponent(entity, new EnemyMovementData { Speed = authoring.moveSpeed });
             AddComponent(entity, new Health { Value = authoring.health });
+            AddComponent(entity, new Damage { Value = authoring.damage  });
             AddComponent(entity, new Enemy());
             AddComponent(entity, new CurrencyRewardComponent
             { 
@@ -59,7 +60,7 @@ public class EnemyAuthoring : MonoBehaviour
                 });
                 AddComponent(entity, new VortexMod
                 {
-                    Radius = 0f,    // Default to 0 so standard enemies don't spawn vortexes
+                    Radius = 0f,    // Default to 0 so standard enemies don't vortexes
                     Strength = 0f,
                     Damage = 0f,
                     Scale = 1
