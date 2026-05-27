@@ -12,6 +12,7 @@ public class LookAt : MonoBehaviour
 
     void Update()
     {
+        if (PauseMenu.isPaused) return;
         Vector2 mousePosition = Mouse.current.position.ReadValue();
         Ray ray = mainCamera.ScreenPointToRay(mousePosition);
 

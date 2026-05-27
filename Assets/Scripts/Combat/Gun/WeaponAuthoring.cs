@@ -9,12 +9,15 @@ public class WeaponAuthoring : MonoBehaviour
     public float damage      = 10f;
     public float fireRate    = 2f;
     public Transform spawnPoint;
+
+    public bool isPlayer = false; 
     
     [Header("Vortex")]
     public bool vortexMode;
     public float pullRadius;
     public float pullStrength;
     public float explosiveDamage;
+    public float bulletScale = 1f; 
 
     class Baker : Baker<WeaponAuthoring>
     {
@@ -38,7 +41,10 @@ public class WeaponAuthoring : MonoBehaviour
                 Value = GetEntity(authoring.bulletPrefab, TransformUsageFlags.Dynamic)
             });
 
-            AddComponent(entity, new WeaponTarget());
+            AddComponent(entity, new WeaponTarget
+            {
+                Player = authoring.isPlayer,
+            });
 
             AddComponent(entity, new WeaponTag());
             AddComponent(entity, new VortexMod
@@ -46,6 +52,7 @@ public class WeaponAuthoring : MonoBehaviour
                 Radius = authoring.vortexMode ? authoring.pullRadius : 0,
                 Strength = authoring.pullStrength,
                 Damage = authoring.explosiveDamage,
+                Scale = authoring.bulletScale,
             });
             
         }
