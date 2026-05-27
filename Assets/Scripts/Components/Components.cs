@@ -109,6 +109,17 @@ namespace Components
         public float NextSpawnTime;
         public Unity.Mathematics.Random Random;
     }
+    public struct ChunkTag : IComponentData { public int2 Coordinate; } // ← neuer
+    public struct ChunkConfigData : IComponentData // ← neuer
+    {
+        public int ChunkSize;
+        public int ViewDistance;
+    }
+    public struct ChunkPrefabData : IComponentData
+    {
+        public Entity Prefab;
+    }
+}
 
     public struct Damage : IComponentData
     {
