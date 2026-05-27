@@ -2451,6 +2451,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Combat.Magic.ExplosionVFXSpawner
   RedExplosionPrefab: {fileID: 8210520550165414391, guid: 9961a36d668ff3142a3e35e13e558862, type: 3}
   PurpleExplosionPrefab: {fileID: 8210520550165414391, guid: ab559236a1b93ff4ab25e8f62482e17a, type: 3}
+  LightExplosionPrefab: {fileID: 8210520550165414391, guid: 762df867a2b2efc4c815bdb9e9e33718, type: 3}
 --- !u!4 &953483435
 Transform:
   m_ObjectHideFlags: 0
