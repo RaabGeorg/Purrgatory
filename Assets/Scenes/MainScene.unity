@@ -1739,9 +1739,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   player: {fileID: 851936802}
-  chunkPrefab: {fileID: 8496309185725429602, guid: 6bc791688b6871b419e9032be4afa66b, type: 3}
-  chunkSize: 40
-  viewDistance: 1
+  chunkPrefab: {fileID: 8209923594601774919, guid: f6dda3fea6e84584c864562c52ae0174, type: 3}
+  viewDistance: 2
 --- !u!4 &556382225
 Transform:
   m_ObjectHideFlags: 0
@@ -1750,13 +1749,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 556382223}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.000022175886, y: -0.0029987579, z: 0.001385268, w: 0.9999946}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0.003, y: -0.344, z: 0.159}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &615100567
 GameObject:
   m_ObjectHideFlags: 0
@@ -2449,12 +2448,6 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3fbe535544a34b63918be78188c14ddc, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerHUD
-  playerHealthText: {fileID: 1233641961}
-  player: {fileID: 851936815}
-  coinsText: {fileID: 0}
-  soulsText: {fileID: 1507056084}
---- !u!4 &1056183137
   m_EditorClassIdentifier: Assembly-CSharp::Combat.Magic.ExplosionVFXSpawner
   RedExplosionPrefab: {fileID: 8210520550165414391, guid: 9961a36d668ff3142a3e35e13e558862, type: 3}
   PurpleExplosionPrefab: {fileID: 8210520550165414391, guid: ab559236a1b93ff4ab25e8f62482e17a, type: 3}
@@ -3829,7 +3822,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7541647a8e2e9424e90d3c9978b3a10f, type: 3}
---- !u!1 &1399972348
+--- !u!1 &1440611780
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3837,43 +3830,43 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1399972350}
-  - component: {fileID: 1399972349}
+  - component: {fileID: 1440611782}
+  - component: {fileID: 1440611781}
   m_Layer: 0
-  m_Name: ChunkSpawner
+  m_Name: Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1399972349
+--- !u!114 &1440611781
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1399972348}
+  m_GameObject: {fileID: 1440611780}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 45a335734b1572644a6a5d09d87adc65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Scenes::Unity.Scenes.SubScene
-  _SceneAsset: {fileID: 102900000, guid: f4675d74ad5d70845a36bf7bd1a50e30, type: 3}
+  _SceneAsset: {fileID: 102900000, guid: 3ac1056f5f56fc645986072b1ecfe438, type: 3}
   _HierarchyColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   AutoLoadScene: 1
   _SceneGUID:
     Value:
-      x: 1205171791
-      y: 1208473050
-      z: 3086705573
-      w: 65034781
---- !u!4 &1399972350
+      x: 4132445347
+      y: 1187997173
+      z: 2993711253
+      w: 2202991841
+--- !u!4 &1440611782
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1399972348}
+  m_GameObject: {fileID: 1440611780}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -4672,6 +4665,7 @@ RectTransform:
   - {fileID: 1212366237}
   - {fileID: 1048860857}
   - {fileID: 1507056083}
+  - {fileID: 178019482}
   - {fileID: 1233641960}
   - {fileID: 737824390}
   - {fileID: 17079033}
@@ -4909,4 +4903,3 @@ SceneRoots:
   - {fileID: 2055727682}
   - {fileID: 953483435}
   - {fileID: 556382225}
-  - {fileID: 1399972350}
