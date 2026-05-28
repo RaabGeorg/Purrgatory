@@ -160,8 +160,8 @@ MonoBehaviour:
   spawnPoint: {fileID: 1717824111}
   isPlayer: 0
   vortexMode: 1
-  pullRadius: 20
-  pullStrength: 30
+  pullRadius: 5
+  pullStrength: 25
   explosiveDamage: 10
   bulletScale: 2
 --- !u!23 &977129794

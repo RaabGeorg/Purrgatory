@@ -342,7 +342,7 @@ MonoBehaviour:
   moveSpeed: 5
   soulsReward: 5
   condensedSoulsReward: 1
-  xpReward: 0
+  xpReward: 10
   isRanged: 0
   attackRange: 10
   fireRate: 1

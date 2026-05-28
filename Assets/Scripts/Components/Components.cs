@@ -5,12 +5,14 @@ namespace Components
 {
     public struct Health : IComponentData { public float Value; }
     public struct Speed  : IComponentData { public float3 Value; }
-    
+    public struct Bullet : IComponentData {}
     public struct MagicFieldTag : IComponentData { }
     public struct PlayerTag : IComponentData { }
     public struct Enemy     : IComponentData { }
     public struct WeaponTag  : IComponentData { } // ← neu
     public struct BulletTag : IComponentData { }
+    
+    public struct WeaponFromPlayerTag : IComponentData { }
 
     public struct MarkedForExecution : IComponentData {}
     public struct Executed : IComponentData {}
@@ -42,7 +44,6 @@ namespace Components
 
     public struct WeaponTarget : IComponentData
     {
-        public bool Player; 
         public float3 Value;
     }
 
@@ -109,6 +110,8 @@ namespace Components
         public float NextSpawnTime;
         public Unity.Mathematics.Random Random;
     }
+
+    
     public struct ChunkTag : IComponentData { public int2 Coordinate; } // ← neuer
     public struct ChunkConfigData : IComponentData // ← neuer
     {
