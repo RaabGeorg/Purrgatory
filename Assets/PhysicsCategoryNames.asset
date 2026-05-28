@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Physics.Custom::Unity.Physics.Authoring.PhysicsCategoryNames
   m_CategoryNames:
   - 
-  - Player
-  - Enemy
   - 
   - 
-  - Stationary Object
+  - 
+  - 
+  - 
   - 
   - 
   - 

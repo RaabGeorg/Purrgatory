@@ -4,7 +4,6 @@ using UnityEngine.InputSystem;
 public class PauseMenu : MonoBehaviour
 {
     public GameObject container;
-    public static bool isPaused { get; private set; }
 
     private void Update()
     {
@@ -16,24 +15,19 @@ public class PauseMenu : MonoBehaviour
 
     public void Pause()
     {
-        SetPaused(true);
         container.SetActive(true);
+        Time.timeScale = 0;
     }
 
     public void ResumeButton()
     {
-        SetPaused(false);
         container.SetActive(false);
+        Time.timeScale = 1;
     }
     
     public void MainMenuButton()
     {
-        SetPaused(false);
+        Time.timeScale = 1;
         UnityEngine.SceneManagement.SceneManager.LoadScene("Main Menu");        
-    }
-    public static void SetPaused(bool paused)
-    {
-        isPaused = paused;
-        Time.timeScale = paused ? 0 : 1;
     }
 }

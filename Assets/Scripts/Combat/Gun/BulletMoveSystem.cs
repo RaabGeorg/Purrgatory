@@ -11,7 +11,7 @@ public partial struct BulletMoveSystem : ISystem
     {
         foreach (var (physicsVelocity, speed) in
                  SystemAPI.Query<RefRW<PhysicsVelocity>, RefRO<Speed>>()
-                     .WithAll<BulletTag>())
+                     .WithAll<Bullet>())
         {
             physicsVelocity.ValueRW.Linear = speed.ValueRO.Value;
         }

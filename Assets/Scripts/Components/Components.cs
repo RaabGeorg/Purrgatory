@@ -4,22 +4,15 @@ using Unity.Mathematics;
 namespace Components
 {
     public struct Health : IComponentData { public float Value; }
+    public struct Bullet : IComponentData { public float Damage; }
     public struct Speed  : IComponentData { public float3 Value; }
-    
-    public struct MagicFieldTag : IComponentData { }
+
     public struct PlayerTag : IComponentData { }
     public struct Enemy     : IComponentData { }
     public struct WeaponTag  : IComponentData { } // ← neu
-    public struct BulletTag : IComponentData { }
-
-    public struct MarkedForExecution : IComponentData {}
-    public struct Executed : IComponentData {}
-    
     public struct BulletPrefabRef : IComponentData
-    
     {
         public Entity Value;
-        
     }
 
     public struct Weapon : IComponentData
@@ -37,16 +30,18 @@ namespace Components
         public float Radius;
         public float Strength;
         public float Damage;
-        public float Scale;
     }
 
     public struct WeaponTarget : IComponentData
     {
-        public bool Player; 
         public float3 Value;
     }
 
-    
+    public struct MagicField : IComponentData
+    {
+        public float Damage;
+        
+    }
     public struct VortexMovement : IComponentData
     {
         public float3 Center;
@@ -81,25 +76,14 @@ namespace Components
     public struct CurrencyRewardComponent : IComponentData
     {
         public int Souls;
-        public int CondensedSouls;
-        public int Xp;
+        public int Coins;
     }
-    
+    public struct MarkedForExecution : IComponentData {}
+    public struct Executed : IComponentData {}
     
     public struct EnemyMovementData : IComponentData
     {
         public float Speed;
-    }
-
-    public struct EngagementRange : IComponentData
-    {
-        public float Value;
-    }
-
-    public struct PlayerStatsComponent : IComponentData
-    {
-        public float AttackSpeed;
-        public float Damage;
     }
 
     public struct EnemySpawner : IComponentData
@@ -118,14 +102,5 @@ namespace Components
     public struct ChunkPrefabData : IComponentData
     {
         public Entity Prefab;
-    }
-}
-
-    public struct Damage : IComponentData
-    {
-        public float Value;
-    }
-    public struct ApplyKnockback : IComponentData
-    { 
     }
 }

@@ -16,17 +16,14 @@ public partial struct EnemyMoveSystem : ISystem
         float dt = SystemAPI.Time.DeltaTime;
 
         foreach (var (velocity, transform, movement) in 
-                 SystemAPI.Query<RefRW<PhysicsVelocity>, RefRW<LocalTransform>, RefRO<EnemyMovementData>>()
-                     .WithNone<MarkedForExecution, EngagementRange, ApplyKnockback>().WithAll<Enemy>()) // Added ApplyKnockback here
+                 SystemAPI.Query<RefRW<PhysicsVelocity>, RefRO<LocalTransform>, RefRO<EnemyMovementData>>().WithNone<MarkedForExecution>())
         {
             float3 direction = math.normalize(playerPos - transform.ValueRO.Position);
+            
             float3 targetVelocity = direction * movement.ValueRO.Speed;
+
             float3 current = velocity.ValueRO.Linear;
-    
             velocity.ValueRW.Linear = math.lerp(current, targetVelocity, dt * 5f);
-    
-            float angle = math.atan2(direction.x, direction.z);
-            transform.ValueRW.Rotation = quaternion.RotateY(angle - math.radians(180));
         }
     }
 }

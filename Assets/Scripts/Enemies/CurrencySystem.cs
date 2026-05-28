@@ -13,24 +13,20 @@ public partial struct CurrencySystem : ISystem
         var ecb = SystemAPI.GetSingleton<EndSimulationEntityCommandBufferSystem.Singleton>()
             .CreateCommandBuffer(state.WorldUnmanaged);
         
-        int totalCondensedSouls = 0;
+        int totalCoins = 0;
         int totalSouls = 0;
-        int totalXp = 0;
 
-        foreach (var (reward, entity) in SystemAPI.Query<RefRO<CurrencyRewardComponent>>().WithAll<MarkedForExecution>().WithEntityAccess().WithNone<Executed>())
+        foreach (var (reward, entity) in SystemAPI.Query<RefRO<CurrencyRewardComponent>>().WithAll<MarkedForExecution>().WithEntityAccess())
         {
-            totalCondensedSouls += reward.ValueRO.CondensedSouls;
+            totalCoins += reward.ValueRO.Coins;
             totalSouls += reward.ValueRO.Souls;
-            totalXp += reward.ValueRO.Xp;
 
             ecb.AddComponent<Executed>(entity);
         }
 
-        if ((totalCondensedSouls > 0 || totalSouls > 0) && PlayerWallet.Instance != null)
+        if ((totalCoins > 0 || totalSouls > 0) && PlayerWallet.Instance != null)
         {
-            PlayerWallet.Instance.AddRewards(totalCondensedSouls, totalSouls);
+            PlayerWallet.Instance.AddRewards(totalCoins, totalSouls);
         }
-        if (totalXp > 0)
-            GameEvents.OnXPGained?.Invoke(totalXp);
     }
 }

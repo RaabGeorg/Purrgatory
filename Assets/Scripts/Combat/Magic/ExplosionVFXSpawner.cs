@@ -9,7 +9,6 @@ namespace Combat.Magic
 
         public GameObject RedExplosionPrefab;
         public GameObject PurpleExplosionPrefab;
-        public GameObject LightExplosionPrefab;
 
         void Awake()
         {
@@ -25,9 +24,6 @@ namespace Combat.Magic
                     break;
                 case 1:
                     Instantiate(RedExplosionPrefab, pos, Quaternion.identity);
-                    break;
-                case 2:
-                    Instantiate(LightExplosionPrefab, pos, Quaternion.identity);
                     break;
                 default:
                     Instantiate(PurpleExplosionPrefab, pos, Quaternion.identity);

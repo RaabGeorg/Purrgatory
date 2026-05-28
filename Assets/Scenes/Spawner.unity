@@ -148,8 +148,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbe614aff331471592d11ec594cf9e58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnerAuthoring
-  enemyPrefab: {fileID: 6076962999034639181, guid: 82aaebdbe31c77246aa810fc54bd38e1, type: 3}
-  spawnInterval: 0.5
+  enemyPrefab: {fileID: 8182868941147411292, guid: 0d49853f6c23bc146a84ff1e0e370b17, type: 3}
+  spawnInterval: 1
   randomSeed: 1
 --- !u!4 &1440611782
 Transform:
