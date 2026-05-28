@@ -3884,6 +3884,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+  - component: {fileID: 1440611782}
   - component: {fileID: 1440611781}
   m_Layer: 0
   m_Name: Spawner
