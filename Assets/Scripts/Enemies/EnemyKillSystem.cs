@@ -1,9 +1,7 @@
 ﻿using Components;
 using Unity.Entities;
 
-
-[UpdateInGroup(typeof(SimulationSystemGroup))]
-[UpdateAfter(typeof(EndSimulationEntityCommandBufferSystem))]
+[UpdateInGroup(typeof(SimulationSystemGroup), OrderLast = true)]
 public partial struct EnemyKillSystem : ISystem
 {
     public void OnCreate(ref SystemState state)

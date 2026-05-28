@@ -119,3 +119,10 @@ public enum StatModType
     Flat,
     Percent
 }
+public enum StatType
+{
+    MoveSpeed,
+    AttackSpeed,
+    Damage,
+    MaxHealth
+}
