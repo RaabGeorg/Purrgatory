@@ -103,4 +103,13 @@ namespace Components
     {
         public Entity Prefab;
     }
+
+
+    public struct Damage : IComponentData
+    {
+        public float Value;
+    }
+    public struct ApplyKnockback : IComponentData
+    { 
+    }
 }
