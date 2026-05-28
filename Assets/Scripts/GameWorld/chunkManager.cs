@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Mathematics;
 
 public class chunkManager : MonoBehaviour
 {
@@ -10,13 +11,13 @@ public class chunkManager : MonoBehaviour
     private Dictionary<Vector2Int, GameObject> activeChunks = new Dictionary<Vector2Int, GameObject>();
     private Queue<GameObject> chunkPool = new Queue<GameObject>();
 
-    private int chunkSize = 80;
+    [SerializeField] private int chunkSize = 80;
     [SerializeField] private int viewDistance = 1;
 
     void Update()
     {
-        int currentX = Mathf.RoundToInt(player.transform.position.x / 80);
-        int currentZ = Mathf.RoundToInt(player.transform.position.z / 80);
+        int currentX = Mathf.RoundToInt(player.transform.position.x / chunkSize);
+        int currentZ = Mathf.RoundToInt(player.transform.position.z / chunkSize);
 
         for (int x = -viewDistance; x <= viewDistance; x++)
         {
@@ -37,17 +38,19 @@ public class chunkManager : MonoBehaviour
     private void RecycleOrCreate(Vector2Int target)
     {
         GameObject chunk;
-        Vector3Int coordinates = new Vector3Int(target.x * chunkSize, 0, target.y * chunkSize);
+        float yOffset = ChunkRandom.GetYOffset(target.x, target.y);
+        Vector3 coordinates = new Vector3(target.x * chunkSize, yOffset, target.y * chunkSize);
 
         if (chunkPool.Count > 0)
         {
             chunk = chunkPool.Dequeue();
             chunk.transform.position = coordinates;
+            chunk.transform.rotation = Quaternion.Euler(0, ChunkRandom.GetRotation(target.x, target.y), 0);
             chunk.SetActive(true);
         }
         else
         {
-            chunk = Instantiate(chunkPrefab, coordinates, Quaternion.Euler(0, UnityEngine.Random.Range(0, 4) * 90f, 0));
+            chunk = Instantiate(chunkPrefab, coordinates, Quaternion.Euler(0, ChunkRandom.GetRotation(target.x, target.y), 0));
             chunk.transform.parent = this.transform;
         }
 
