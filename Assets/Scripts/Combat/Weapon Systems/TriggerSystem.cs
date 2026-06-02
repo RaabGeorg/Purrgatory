@@ -57,20 +57,24 @@ struct TriggerJob : ITriggerEventsJob
         
         if (damageEntity == Entity.Null) return;
 
-        bool isEnemy = EnemyLookup.HasComponent(damageEntity);
+        bool damageIsEnemy = EnemyLookup.HasComponent(damageEntity);
+        bool healthIsEnemy = EnemyLookup.HasComponent(healthEntity);
+
+        //if both are enemies, ignore the trigger
+        if (damageIsEnemy && healthIsEnemy) return;
+
         bool isMagicField = MagicFieldLookup.HasComponent(damageEntity);
         float damage = DamageLookup[damageEntity].Value;
         var health = HealthLookup[healthEntity];
 
         health.Value -= isMagicField ? damage * dt : damage;
         HealthLookup[healthEntity] = health;
-        
 
         if (!isMagicField)
         {
-            if (isEnemy)
+            if (damageIsEnemy)
             {
-               ecb.AddComponent(damageEntity, new ApplyKnockback());
+                ecb.AddComponent(damageEntity, new ApplyKnockback());
             }
             else
             {
@@ -79,7 +83,6 @@ struct TriggerJob : ITriggerEventsJob
                 if (!ExplosiveLookup.HasComponent(damageEntity))
                 {
                     ecb.AddComponent<Executed>(damageEntity);
-
                 }
             }
         }
