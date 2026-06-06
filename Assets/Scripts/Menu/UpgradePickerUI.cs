@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 using Random = UnityEngine.Random;
+using Unity.VisualScripting;
 
 public class UpgradePickerUI : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class UpgradePickerUI : MonoBehaviour
     public TextMeshProUGUI[] descriptionText;
 
     [Header("XP")] public GameObject xpBarContainer;
+
+    [Header("UI")] public UpdatePerkUI updatePerkUI;
 
     void OnEnable() => GameEvents.OnLevelUp += Show;
     void OnDisable() => GameEvents.OnLevelUp -= Show;
@@ -50,6 +53,9 @@ public class UpgradePickerUI : MonoBehaviour
     void Pick(int i)
     {
         var upgrade = upgradeOptions[i];
+
+        updatePerkUI.addPerkUI(upgrade);
+
         if (upgrade.category == UpgradeCategory.Stat)
             PlayerStatsManager.Instance.AddModifier(upgrade.statType, new StatModifier(upgrade.value, upgrade.modifierType));
         else if (upgrade.category == UpgradeCategory.Weapon)
