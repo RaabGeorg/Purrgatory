@@ -30,7 +30,7 @@ public partial struct CurrencySystem : ISystem
         {
             PlayerWallet.Instance.AddRewards(totalCondensedSouls, totalSouls);
         }
-        if (totalXp > 0)
+        if (totalXp >= 0)
             GameEvents.OnXPGained?.Invoke(totalXp);
     }
 }
