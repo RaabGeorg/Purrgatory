@@ -1,16 +1,16 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "UpgradeDefinition", menuName = "Scriptable Objects/UpgradeDefinition")]
 public class UpgradeDefinition : ScriptableObject
 {
-    public Sprite icon;
     public string displayName;
     [TextArea] public string description;
     public RarityTier rarity;
     public StatType statType;
     public StatModType modifierType;
     public float value;
+    public UpgradeCategory category;
+    public WeaponUpgradeType weaponUpgradeType;
 }
 
 public enum RarityTier
@@ -19,3 +19,6 @@ public enum RarityTier
     Uncommon,
     Rare,
 }
+
+public enum UpgradeCategory { Stat, Weapon }
+public enum WeaponUpgradeType { Damage, FireRate }
