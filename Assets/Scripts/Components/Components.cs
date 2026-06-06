@@ -129,6 +129,6 @@ namespace Components
         public float Value;
     }
     public struct ApplyKnockback : IComponentData
-    { 
+    {
     }
 }
