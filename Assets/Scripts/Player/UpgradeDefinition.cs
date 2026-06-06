@@ -9,6 +9,8 @@ public class UpgradeDefinition : ScriptableObject
     public StatType statType;
     public StatModType modifierType;
     public float value;
+    public UpgradeCategory category;
+    public WeaponUpgradeType weaponUpgradeType;
 }
 
 public enum RarityTier
@@ -17,3 +19,6 @@ public enum RarityTier
     Uncommon,
     Rare,
 }
+
+public enum UpgradeCategory { Stat, Weapon }
+public enum WeaponUpgradeType { Damage, FireRate }

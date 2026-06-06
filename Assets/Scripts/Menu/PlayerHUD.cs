@@ -9,7 +9,10 @@ public class PlayerHUD : MonoBehaviour
     public TextMeshProUGUI soulsText;
     public TextMeshProUGUI currentXpText;
     public TextMeshProUGUI xpToNext;
+    public RectTransform xpBarRect;
+    private float _maxWidth;
 
+    void Start() => _maxWidth = xpBarRect.sizeDelta.x;
     private void OnEnable()
     {
         GameEvents.OnHealthChanged += UpdateHealth;
@@ -27,6 +30,8 @@ public class PlayerHUD : MonoBehaviour
 
     private void Update()
     {
+        float fill = (float)PlayerXP.Instance.CurrentXp / PlayerXP.Instance.XpToNextLevel;
+        xpBarRect.sizeDelta = new Vector2(_maxWidth * fill, xpBarRect.sizeDelta.y);
         if (soulsText != null)
             soulsText.text = $"Souls: {PlayerWallet.Instance.Souls}";
 
