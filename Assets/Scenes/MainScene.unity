@@ -2558,8 +2558,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 625342800}
   m_CullTransparentMesh: 1
-<<<<<<< Updated upstream
-=======
 --- !u!1 &634101175
 GameObject:
   m_ObjectHideFlags: 0
@@ -2854,7 +2852,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
->>>>>>> Stashed changes
 --- !u!1 &737824389
 GameObject:
   m_ObjectHideFlags: 0
@@ -3187,8 +3184,6 @@ MonoBehaviour:
   currentXp: 0
   currentLevel: 1
   xpToNextLevel: 0
-<<<<<<< Updated upstream
-=======
 --- !u!1 &875472464
 GameObject:
   m_ObjectHideFlags: 0
@@ -3321,7 +3316,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 894596141}
   m_CullTransparentMesh: 1
->>>>>>> Stashed changes
 --- !u!1 &898599909
 GameObject:
   m_ObjectHideFlags: 0
@@ -3828,10 +3822,7 @@ MonoBehaviour:
   soulsText: {fileID: 1507056084}
   currentXpText: {fileID: 1212366238}
   xpToNext: {fileID: 1048860858}
-<<<<<<< Updated upstream
-=======
   xpBarRect: {fileID: 0}
->>>>>>> Stashed changes
 --- !u!4 &1056183137
 Transform:
   m_ObjectHideFlags: 0
@@ -6168,14 +6159,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66dfa5c0b74bc63408c295932e002b5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradePickerUI
-<<<<<<< Updated upstream
   upgradeOptions:
   - {fileID: 11400000, guid: 9b31cd2ce3f3a0845a3e6104e2113cfe, type: 2}
   - {fileID: 11400000, guid: d38fd729de6a34446846301a806da66d, type: 2}
   - {fileID: 11400000, guid: 9b31cd2ce3f3a0845a3e6104e2113cfe, type: 2}
-=======
-  upgradePool: []
->>>>>>> Stashed changes
   container: {fileID: 93514115}
   buttons:
   - {fileID: 483373710}
@@ -6183,10 +6170,7 @@ MonoBehaviour:
   - {fileID: 210564149}
   nameText: []
   descriptionText: []
-<<<<<<< Updated upstream
-=======
   xpBarContainer: {fileID: 0}
->>>>>>> Stashed changes
 --- !u!1 &1746587584
 GameObject:
   m_ObjectHideFlags: 0
@@ -6432,8 +6416,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1919433616}
   m_CullTransparentMesh: 1
-<<<<<<< Updated upstream
-=======
 --- !u!1 &1926213760
 GameObject:
   m_ObjectHideFlags: 0
@@ -6645,7 +6627,6 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: 1
   m_LayoutPriority: 1
->>>>>>> Stashed changes
 --- !u!1 &2005531938
 GameObject:
   m_ObjectHideFlags: 0
