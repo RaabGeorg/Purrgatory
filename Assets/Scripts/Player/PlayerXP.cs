@@ -24,7 +24,7 @@ public class PlayerXP : MonoBehaviour
 
     private void AddXP(int amount)
     {
-        Debug.Log($"Xp gained -> XP: {CurrentXp} (+{amount})");
+        //Debug.Log($"Xp gained -> XP: {CurrentXp} (+{amount})");
         currentXp += amount;
         while (currentXp >= xpToNextLevel)
         {

@@ -1,10 +1,15 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
+using Random = UnityEngine.Random;
 
 public class UpgradePickerUI : MonoBehaviour
 {
-    [Header("Options")] public UpgradeDefinition[] upgradeOptions;
+    [Header("Options")] 
+    private UpgradeDefinition[] upgradeOptions;
+    public UpgradeDefinition[] upgradePool;
     
     [Header("References")]
     public GameObject container;
@@ -12,14 +17,23 @@ public class UpgradePickerUI : MonoBehaviour
     public TextMeshProUGUI[] nameText;
     public TextMeshProUGUI[] descriptionText;
 
+    [Header("XP")] public GameObject xpBarContainer;
+
     void OnEnable() => GameEvents.OnLevelUp += Show;
     void OnDisable() => GameEvents.OnLevelUp -= Show;
 
+    public void Start()
+    {
+        xpBarContainer.SetActive(true);
+    }
+
     void Show(int level)
     {
+        upgradeOptions = upgradePool.OrderBy(x => Random.value).Take(3).ToArray();
         PauseMenu.SetPaused(true);
         container.SetActive(true);
-
+        xpBarContainer.SetActive(false);
+        
         for (int i = 0; i < buttons.Length; i++)
         {
             var upgrade = upgradeOptions[i];
@@ -36,11 +50,16 @@ public class UpgradePickerUI : MonoBehaviour
     void Pick(int i)
     {
         var upgrade = upgradeOptions[i];
-        PlayerStatsManager.Instance.AddModifier(
-            upgrade.statType,
-            new StatModifier(upgrade.value, upgrade.modifierType)
-            );
-        
+        if (upgrade.category == UpgradeCategory.Stat)
+            PlayerStatsManager.Instance.AddModifier(upgrade.statType, new StatModifier(upgrade.value, upgrade.modifierType));
+        else if (upgrade.category == UpgradeCategory.Weapon)
+        {
+            if (upgrade.weaponUpgradeType == WeaponUpgradeType.Damage)
+                WeaponUpgradeSystem.Instance.UpgradeDamage(upgrade.value);
+            else
+                WeaponUpgradeSystem.Instance.UpgradeFireRate(upgrade.value);
+        }
+        xpBarContainer.SetActive(true);
         container.SetActive(false);
         PauseMenu.SetPaused(false);
     }

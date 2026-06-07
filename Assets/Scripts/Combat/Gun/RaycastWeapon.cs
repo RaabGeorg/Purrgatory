@@ -5,8 +5,9 @@ using UnityEngine;
 using Unity.Physics;
 using Unity.Physics.Systems;
 using Unity.Mathematics;
+using UnityEngine.LowLevelPhysics2D;
 
- 
+
 public class RaycastWeapon : MonoBehaviour
 {
     [SerializeField] private LineRenderer laserRenderer;
@@ -51,7 +52,12 @@ public class RaycastWeapon : MonoBehaviour
         {
             Start = this.firePoint.position,
             End = this.firePoint.position + this.firePoint.forward * 100f,
-            Filter = CollisionFilter.Default
+            Filter = new CollisionFilter{
+                BelongsTo = 1 << 3,
+                CollidesWith = 1 << 2,
+                GroupIndex = 0
+                
+            }
         };
         Vector3 endPoint = this.firePoint.position + this.firePoint.forward * 100f;
         
