@@ -46,6 +46,8 @@ public class RaycastWeapon : MonoBehaviour
             .GetSingleton<PhysicsWorldSingleton>();
 
         var collisionWorld = physicsWorldSingleton.CollisionWorld;
+        
+        SFXManager.Instance.ShootLaser();
 
         var rayInput = new RaycastInput
         {

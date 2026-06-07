@@ -31,7 +31,7 @@ public class PlayerHUD : MonoBehaviour
     private void Update()
     {
         float fill = (float)PlayerXP.Instance.CurrentXp / PlayerXP.Instance.XpToNextLevel;
-        xpBarRect.sizeDelta = new Vector2(_maxWidth * fill, xpBarRect.sizeDelta.y);
+        xpBarRect.anchorMax = new Vector2(fill, xpBarRect.anchorMax.y);
         if (soulsText != null)
             soulsText.text = $"Souls: {PlayerWallet.Instance.Souls}";
 

@@ -4,6 +4,8 @@ using Unity.Transforms;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Components;
+using UnityEngine.Audio;
+
 public class VortexSpawner : MonoBehaviour
 {
     private EntityManager _em;
@@ -13,6 +15,10 @@ public class VortexSpawner : MonoBehaviour
     [SerializeField]
     private float cooldown = 2f;
     private float cooldownTimer = 0f;
+    
+    [Header("Audio")]
+    [SerializeField] private AudioClip vortexClip;
+    [SerializeField] private AudioMixerGroup sfxGroup;
 
     void Start()
     {
@@ -56,6 +62,18 @@ public class VortexSpawner : MonoBehaviour
             Speed = UnityEngine.Random.Range(0.5f, 1f),
             Time = UnityEngine.Random.Range(0f, 100f)
         });
+        
+        float lifetime = _em.GetComponentData<Lifetime>(Vortex).Value;
+        var go = new GameObject("VortexAudio");
+        go.transform.position = new Vector3(spawnPos.x, spawnPos.y, spawnPos.z);
+        var src = go.AddComponent<AudioSource>();
+        src.outputAudioMixerGroup = sfxGroup;
+        src.clip = vortexClip;
+        src.spatialBlend = 1f;
+        src.loop = true;
+        src.volume = 3f;
+        src.Play();
+        Destroy(go, lifetime);
         
         cooldownTimer = cooldown;
     }

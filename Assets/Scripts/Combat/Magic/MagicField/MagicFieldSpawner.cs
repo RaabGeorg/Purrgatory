@@ -4,6 +4,8 @@ using Unity.Transforms;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Components;
+using UnityEngine.Audio;
+
 public class MagicFieldSpawner : MonoBehaviour
 {
     private EntityManager _em;
@@ -14,6 +16,11 @@ public class MagicFieldSpawner : MonoBehaviour
     [SerializeField]
     private float cooldown = 2f;
     private float cooldownTimer = 0f;
+    
+    [Header("Audio")]
+    [SerializeField] private AudioClip fireSound;
+    [SerializeField] private AudioClip fireWooshSound;
+    [SerializeField] private AudioMixerGroup sfxGroup;
 
     void Start()
     {
@@ -50,6 +57,18 @@ public class MagicFieldSpawner : MonoBehaviour
         var field = _em.Instantiate(_prefab);
         _em.SetComponentData(field, LocalTransform.FromPosition(spawnPos)); 
         
+        float lifetime = _em.GetComponentData<Lifetime>(field).Value;
+        var go = new  GameObject("MagicFieldAudio");
+        go.transform.position = new Vector3(spawnPos.x, spawnPos.y, spawnPos.z);
+        var src = go.AddComponent<AudioSource>();
+        src.outputAudioMixerGroup = sfxGroup;
+        src.spatialBlend = 1f;
+        src.volume = 5f;
+        src.PlayOneShot(fireWooshSound);
+        src.clip = fireSound;
+        src.loop = true;
+        src.Play();
+        Destroy(go, lifetime);
         
         cooldownTimer = cooldown;
     }

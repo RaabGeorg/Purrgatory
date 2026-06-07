@@ -68,6 +68,7 @@ public class PlayerMovement : MonoBehaviour
         {
             StartCoroutine(DashCooldown(dashCooldown));
             StartCoroutine(DashRoutine(moveDirection));
+            SFXManager.Instance.PlayDash();
         }
 
     }

@@ -32,6 +32,7 @@ partial struct ExplosionSystem : ISystem
             if (field.ValueRW.Damage == 0)
             {
                 ExplosionVFXSpawner.instance.Spawn(new float3(pos.x, pos.y + 0.1f, pos.z),2);
+                SFXManager.Instance.PlayExplosion(pos);
             }
             ecb.AddComponent<Executed>(entity);
         }
