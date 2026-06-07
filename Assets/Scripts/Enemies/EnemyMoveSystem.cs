@@ -21,7 +21,7 @@ public partial struct EnemyMoveSystem : ISystem
 
         foreach (var (velocity, transform, movement) in 
                  SystemAPI.Query<RefRW<PhysicsVelocity>, RefRW<LocalTransform>, RefRO<EnemyMovementData>>()
-                     .WithNone<MarkedForExecution, EngagementRange, ApplyKnockback>().WithAll<Enemy>()) 
+                     .WithNone<MarkedForExecution, EngagementRange, ApplyKnockback>())
         {
             float3 vectorToPlayer = playerPos - transform.ValueRO.Position;
             vectorToPlayer.y = 0f; 
@@ -38,8 +38,7 @@ public partial struct EnemyMoveSystem : ISystem
             velocity.ValueRW.Linear = currentVel;
             velocity.ValueRW.Angular = float3.zero;
     
-            float angle = math.atan2(direction.x, direction.z);
-            transform.ValueRW.Rotation = quaternion.RotateY(angle - math.radians(180));
+            transform.ValueRW.Rotation = quaternion.LookRotationSafe(-direction, math.up());
         }
     }
 }
