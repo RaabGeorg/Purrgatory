@@ -1,34 +1,45 @@
 using UnityEngine;
-using UnityEngine.InputSystem; 
+using UnityEngine.SceneManagement;
 
 public class DeathScreen : MonoBehaviour
 {
-    public GameObject container;
-    public static bool isPaused { get; private set; }
+    [SerializeField] private GameObject container;
+    
+    public static bool IsDead { get; private set; }
 
-    private void Update()
+    private void OnEnable()
     {
-        if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
+        // Subscribe to the centralized event stream
+        GameEvents.OnHealthChanged += CheckDeathCondition;
+    }
+
+    private void OnDisable()
+    {
+        GameEvents.OnHealthChanged -= CheckDeathCondition;
+    }
+
+    private void CheckDeathCondition(float currentHealth)
+    {
+        if (currentHealth <= 0f && !IsDead)
         {
-            Pause();
+            TriggerDeath();
         }
     }
 
-    public void Pause()
+    private void TriggerDeath()
     {
-        SetPaused(true);
+        IsDead = true;
         container.SetActive(true);
+        
+        // Halt physics and frame-rate independent updates
+        Time.timeScale = 0f; 
     }
-    
-    
+
     public void MainMenuButton()
     {
-        SetPaused(false);
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Main Menu");        
-    }
-    public static void SetPaused(bool paused)
-    {
-        isPaused = paused;
-        Time.timeScale = paused ? 0 : 1;
+        // Reset time scale before changing scenes to avoid frozen state on reload
+        IsDead = false;
+        Time.timeScale = 1f; 
+        SceneManager.LoadScene("Main Menu");        
     }
 }
