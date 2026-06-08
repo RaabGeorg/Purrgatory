@@ -31,7 +31,7 @@ public partial struct EnemySpawnSystem : ISystem
 
                 float3 randomOffset = new float3(
                     rand.NextFloat(20f, 40f), 
-                    2f, 
+                    1f, 
                     rand.NextFloat(20f, 40f)
                 );
                 
