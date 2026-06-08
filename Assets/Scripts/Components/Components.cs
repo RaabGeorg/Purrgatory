@@ -5,7 +5,7 @@ namespace Components
 {
     public struct Health : IComponentData { public float Value; }
     public struct Speed  : IComponentData { public float3 Value; }
-    public struct Bullet : IComponentData {}
+    //public struct Bullet : IComponentData {}
     public struct MagicFieldTag : IComponentData { }
     public struct PlayerTag : IComponentData { }
     public struct Enemy     : IComponentData { }

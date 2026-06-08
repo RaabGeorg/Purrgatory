@@ -17,6 +17,7 @@ public class BulletAuthoring : MonoBehaviour
             AddComponent(entity, new Damage { Value = authoring.damage });
             AddComponent(entity, new Speed { Value = authoring.speed }); // wird vom WeaponJob gesetzt
             AddComponent(entity, new BulletTag());
+            AddComponent(entity, new Lifetime{Value = 5});
         }
     }
 }
