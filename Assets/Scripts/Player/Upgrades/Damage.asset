@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12e2fd8e27776e946aa7234d9b7e52a7, type: 3}
   m_Name: Damage
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeDefinition
+  icon: {fileID: 21300000, guid: d1a37c0da74d7455cbcb619e5d7f343c, type: 3}
   displayName: Damage
   description: + 20% Damage
-  rarity: 0
+  rarity: 2
   statType: 2
   modifierType: 1
   value: 0.2
