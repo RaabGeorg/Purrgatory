@@ -37,5 +37,5 @@ public class PlayerXP : MonoBehaviour
 
     private static int XpForLevel(int level) =>
         //(int)(100 * Mathf.Pow(level, 1.6f)) + (level * 17);
-        level * 1;
+        level * 200;
 }

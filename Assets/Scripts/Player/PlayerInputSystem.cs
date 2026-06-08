@@ -20,7 +20,7 @@ public partial class PlayerInputSystem : SystemBase
 
     protected override void OnUpdate()
     {
-        if (PauseMenu.isPaused) return;
+        if (PauseLogic.isPaused) return;
         bool firing = _playerControls.Player.Fire.IsPressed();
 
         foreach (var weapon in SystemAPI.Query<RefRW<Weapon>>().WithAll<WeaponTag>())

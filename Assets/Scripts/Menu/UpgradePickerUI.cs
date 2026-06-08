@@ -33,7 +33,7 @@ public class UpgradePickerUI : MonoBehaviour
     void Show(int level)
     {
         upgradeOptions = upgradePool.OrderBy(x => Random.value).Take(3).ToArray();
-        PauseMenu.SetPaused(true);
+        PauseLogic.PauseGame("Pick");
         container.SetActive(true);
         xpBarContainer.SetActive(false);
         
@@ -67,6 +67,6 @@ public class UpgradePickerUI : MonoBehaviour
         }
         xpBarContainer.SetActive(true);
         container.SetActive(false);
-        PauseMenu.SetPaused(false);
+        PauseLogic.PauseGame("Pick");
     }
 }
