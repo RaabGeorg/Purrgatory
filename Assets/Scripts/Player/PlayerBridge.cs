@@ -31,7 +31,7 @@ public class PlayerBridge : MonoBehaviour
         TryInitialize();
     }
 
-    void Update()
+    void LateUpdate()
     {
         if (!_initialized || !_em.Exists(_playerEntity))
         {
@@ -40,7 +40,12 @@ public class PlayerBridge : MonoBehaviour
             return;
         }
 
-        _em.SetComponentData(_playerEntity, LocalTransform.FromPosition(transform.position));
+        var eTransform = _em.GetComponentData<LocalTransform>(_playerEntity);
+        
+        // 2. Apply it TO the GameObject (The visual shell follows the physics body)
+        transform.position = eTransform.Position;
+
+        // Health Sync
         var hp = _em.GetComponentData<Health>(_playerEntity);
         GameEvents.OnHealthChanged?.Invoke(hp.Value);
     }
@@ -56,6 +61,7 @@ public class PlayerBridge : MonoBehaviour
 
         _em.SetComponentData(_playerEntity,
             new Health { Value = PlayerStatsManager.Instance.stats.baseHealth.Value });
+        
 
         PlayerStatsManager.Instance?.PushToBridge();
         _initialized = true;
@@ -74,4 +80,6 @@ public class PlayerBridge : MonoBehaviour
         hp.Value = maxHealth;
         _em.SetComponentData(_playerEntity, hp);
     }
+    public Entity GetPlayerEntity() => _playerEntity;
+    public EntityManager GetEntityManager() => _em;
 }

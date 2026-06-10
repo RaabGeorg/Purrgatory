@@ -1,9 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Net;
+using Unity.Mathematics;
+using Unity.Physics;
 using UnityEngine;
 
-[RequireComponent(typeof(CharacterController))]
+// CRUCIAL: Remove the [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
     private float speed;
@@ -16,15 +16,10 @@ public class PlayerMovement : MonoBehaviour
     private bool isDashing;
     private bool isRecharging;
 
-    /*
-    public CharacterStats stats;
-    public WeaponStats Weapon;
-    */
     private PlayerControls playerControls;
-
-    private CharacterController controller;
-    private Vector3 velocity;
-
+    
+    // Tracks the active dash velocity to combine with standard movement
+    private Vector3 dashVelocity = Vector3.zero; 
 
     private void Awake()
     {
@@ -46,7 +41,6 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         startTime = -dashCooldown;
-        controller = GetComponent<CharacterController>();
         speed = PlayerStatsManager.Instance.stats.baseMoveSpeed.Value;
         dashSpeed = speed * 5;
     }
@@ -56,7 +50,12 @@ public class PlayerMovement : MonoBehaviour
         Vector2 move = playerControls.Player.Move.ReadValue<Vector2>();
         Vector3 moveDirection = new Vector3(move.x, 0, move.y);
 
-        controller.Move(moveDirection * (speed * Time.deltaTime));
+        // Calculate standard movement velocity
+        // (Removed Time.deltaTime here because velocity is unit/sec, ECS physics handles the delta internally)
+        Vector3 standardVelocity = moveDirection * speed;
+
+        // Apply combined standard + dash velocity directly to the ECS Physics body
+        ApplyVelocityToECS(standardVelocity + dashVelocity);
 
         if (dashCount < 2 && !isRecharging)
         {
@@ -69,7 +68,25 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(DashCooldown(dashCooldown));
             StartCoroutine(DashRoutine(moveDirection));
         }
+    }
 
+    private void ApplyVelocityToECS(Vector3 targetVelocity)
+    {
+        // Guard against execution before the bridge initializes
+        if (PlayerBridge.Instance == null) return;
+        
+        var em = PlayerBridge.Instance.GetEntityManager();
+        var playerEnt = PlayerBridge.Instance.GetPlayerEntity();
+
+        if (em.Exists(playerEnt) && em.HasComponent<PhysicsVelocity>(playerEnt))
+        {
+            var physVel = em.GetComponentData<PhysicsVelocity>(playerEnt);
+            
+            // Override X and Z for horizontal movement, but preserve Y so gravity/jumping still works
+            physVel.Linear = new float3(targetVelocity.x, physVel.Linear.y, targetVelocity.z);
+            
+            em.SetComponentData(playerEnt, physVel);
+        }
     }
 
     private IEnumerator DashRoutine(Vector3 dashDirection)
@@ -77,16 +94,26 @@ public class PlayerMovement : MonoBehaviour
         isDashing = true;
         startTime = Time.time;
         dashCount -= 1;
-        while (Time.time < startTime + _dashTime )
+        
+        if (dashDirection == Vector3.zero) dashDirection = transform.forward;
+        
+        dashDirection.y = 0f;
+        
+        dashDirection = dashDirection.normalized;
+
+        while (Time.time < startTime + _dashTime)
         {
-            controller.Move(dashDirection * (dashSpeed * Time.deltaTime));
+            
+            dashVelocity = dashDirection * dashSpeed;
             yield return null;
         }
+    
+        dashVelocity = Vector3.zero;
     }
 
     private IEnumerator DashRecharge(float dashRecharge)
     {
-        yield return new WaitForSeconds(dashRecharge) ;
+        yield return new WaitForSeconds(dashRecharge);
         isRecharging = false;
         if (dashCount < 2)
         {
@@ -96,7 +123,7 @@ public class PlayerMovement : MonoBehaviour
     
     private IEnumerator DashCooldown(float dashCooldown)
     {
-        yield return new WaitForSeconds(dashCooldown) ;
+        yield return new WaitForSeconds(dashCooldown);
         isDashing = false;
     }
 
@@ -110,5 +137,6 @@ public class PlayerMovement : MonoBehaviour
     public void UpdateStats()
     {
         speed = PlayerStatsManager.Instance.stats.baseMoveSpeed.Value;
+        dashSpeed = speed * 5; // Ensure dash speed scales if base speed is upgraded
     }
 }
