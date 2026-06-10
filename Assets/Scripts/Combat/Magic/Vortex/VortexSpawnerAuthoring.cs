@@ -16,6 +16,8 @@ public class VortexSpawnerAuthoring : MonoBehaviour
             {
                 Value = GetEntity(authoring.VortexPrefab, TransformUsageFlags.Dynamic)
             });
+            AddComponent(entity, new LevelSceneTag());
+            AddComponent(entity, new ActiveSceneEntity());
         }
     }
 }

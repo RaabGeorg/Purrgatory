@@ -31,6 +31,8 @@ public class EnemyAuthoring : MonoBehaviour
             AddComponent(entity, new Health { Value = authoring.health });
             AddComponent(entity, new Enemy());
             AddComponent(entity, new Damage { Value = authoring.damage });
+            AddComponent(entity, new LevelSceneTag());
+            AddComponent(entity, new ActiveSceneEntity());
             AddComponent(entity, new CurrencyRewardComponent
             { 
                 Souls = authoring.soulsReward, 
