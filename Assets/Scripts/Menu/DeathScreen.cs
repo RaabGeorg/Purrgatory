@@ -5,12 +5,15 @@ public class DeathScreen : MonoBehaviour
 {
     [SerializeField] private GameObject container;
     
-    // Kept static if other scripts (like player input) need to check if the player is dead
-    public static bool IsDead { get; private set; }
+    public static bool IsDead { get; set; }
+
+    private void Awake()
+    {
+        IsDead = false; 
+    }
 
     private void OnEnable()
     {
-        // Subscribe to the centralized event stream
         GameEvents.OnHealthChanged += CheckDeathCondition;
     }
 
@@ -30,24 +33,27 @@ public class DeathScreen : MonoBehaviour
     private void TriggerDeath()
     {
         IsDead = true;
-
+        
         PauseLogic.PauseGame("DeathScreen"); 
         
         container.SetActive(true);
     }
 
-    // public void ResumeButton()
-    // {
-    //     IsDead = false;
-    //     PauseLogic.PauseGame("DeathScreen");
-    //     container.SetActive(false);
-    // }
-
     public void MainMenuButton()
     {
         IsDead = false;
-        PauseLogic.PauseGame("DeathScreen");
-        SceneManager.LoadScene("Main Menu");        
+        
+        PauseLogic.SetPaused(false);
+        PauseLogic.who = null;
+        
+        if (SceneSwitchManager.Instance != null)
+        {
+            SceneSwitchManager.Instance.LoadMainMenu("Main Menu");
+        }
+        else
+        {
+            Debug.LogError("[DeathScreen] SceneSwitchManager Instance is missing!");
+        }
     }
 
     public void QuitButton()

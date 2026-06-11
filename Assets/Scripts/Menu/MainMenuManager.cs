@@ -3,9 +3,15 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
-    public void LoadScene(string sceneName)
+    
+    public void OnStartButtonClicked()
     {
-        SceneManager.LoadScene(sceneName);
+        Time.timeScale = 1;
+        PauseLogic.isPaused = false;
+        if (SceneSwitchManager.Instance != null)
+        {
+            SceneSwitchManager.Instance.StartGame();
+        }
     }
     
     public void QuitGame()

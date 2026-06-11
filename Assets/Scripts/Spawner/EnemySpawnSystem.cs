@@ -2,6 +2,7 @@
 using Unity.Entities;
 using Unity.Transforms;
 using Unity.Mathematics;
+using Unity.Collections; // Required for Allocator
 using Components;
 
 public struct EnemyTag : IComponentData { }
@@ -11,16 +12,14 @@ public partial struct EnemySpawnSystem : ISystem
 {
     public void OnCreate(ref SystemState state)
     {
-        state.RequireForUpdate<BeginSimulationEntityCommandBufferSystem.Singleton>();
         state.RequireForUpdate<PlayerTag>();
     }
     
     public void OnUpdate(ref SystemState state)
     {
-        var ecbSingleton = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>();
-        var ecb = ecbSingleton.CreateCommandBuffer(state.WorldUnmanaged);
-        
         if (!SystemAPI.TryGetSingletonEntity<PlayerTag>(out Entity playerEntity)) return;
+
+        var ecb = new EntityCommandBuffer(Allocator.Temp);
 
         float3 playerPos = SystemAPI.GetComponent<LocalTransform>(playerEntity).Position;
         float currentTime = (float)SystemAPI.Time.ElapsedTime;
@@ -46,6 +45,7 @@ public partial struct EnemySpawnSystem : ISystem
         {
             if (currentTime >= spawner.ValueRO.NextSpawnTime)
             {
+                // Record to the local Temp ECB
                 Entity newEnemy = ecb.Instantiate(spawner.ValueRO.Enemy);
                 ecb.AddComponent<EnemyTag>(newEnemy);
                 
@@ -62,5 +62,7 @@ public partial struct EnemySpawnSystem : ISystem
                 spawner.ValueRW.NextSpawnTime = currentTime + spawner.ValueRO.SpawnInterval;
             }
         }
+        ecb.Playback(state.EntityManager);
+        ecb.Dispose();
     }
 }

@@ -33,10 +33,17 @@ public class PauseMenu : MonoBehaviour
         PauseLogic.PauseGame("PauseMenu");
         container.SetActive(false);
     }
-    
+
     public void MainMenuButton()
     {
+        Time.timeScale = 1f;
+        
         PauseLogic.PauseGame("PauseMenu");
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Main Menu");        
+
+        // 3. Delegate the scene transition to the Manager
+        if (SceneSwitchManager.Instance != null)
+        {
+            SceneSwitchManager.Instance.LoadMainMenu("Main Menu");
+        }
     }
 }

@@ -8,6 +8,11 @@ using UnityEngine.InputSystem;
 [UpdateInGroup(typeof(SimulationSystemGroup))]
 public partial class WeaponTargetUpdateSystem : SystemBase
 {
+
+    protected override void OnCreate()
+    {
+        RequireForUpdate<PlayerTag>();
+    }
     protected override void OnUpdate()
     {
         Vector2 mouseScreen = Mouse.current.position.ReadValue();

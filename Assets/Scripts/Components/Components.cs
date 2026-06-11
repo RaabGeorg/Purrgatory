@@ -131,4 +131,15 @@ namespace Components
     public struct ApplyKnockback : IComponentData
     {
     }
+    
+    public struct ActiveSceneEntity : IComponentData, IEnableableComponent {}
+
+    public struct LevelSceneTag : IComponentData
+    {
+        public Unity.Collections.FixedString64Bytes LevelName;
+    }
+    public struct PlayerInputState : IComponentData
+    {
+        public bool IsFiring;
+    }
 }

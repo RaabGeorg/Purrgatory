@@ -29,6 +29,30 @@ public partial struct DotsChunkBrain : ISystem
     public void OnUpdate(ref SystemState state)
     {
         var em = state.EntityManager;
+        
+        bool isStateStale = false;
+
+        if (pooledChunks.Length > 0 && !em.Exists(pooledChunks[0]))
+        {
+            isStateStale = true;
+        }
+        else if (!activeChunks.IsEmpty)
+        {
+            foreach (var kv in activeChunks)
+            {
+                if (!em.Exists(kv.Value))
+                {
+                    isStateStale = true;
+                }
+                break;
+            }
+        }
+        
+        if (isStateStale)
+        {
+            activeChunks.Clear();
+            pooledChunks.Clear();
+        }
 
         Entity playerEntity = SystemAPI.GetSingletonEntity<PlayerTag>();
         float3 playerPos = SystemAPI.GetComponent<LocalTransform>(playerEntity).Position;

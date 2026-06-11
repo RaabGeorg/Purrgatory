@@ -2,7 +2,7 @@
 
     public class PauseLogic : MonoBehaviour
     {
-        public static bool isPaused { get; private set; }
+        public static bool isPaused { get; set; }
         public static string who;
 
         public static bool PauseGame(string who2)
