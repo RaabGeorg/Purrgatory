@@ -21,7 +21,7 @@ public partial struct EnemyMoveSystem : ISystem
 
         foreach (var (velocity, transform, movement) in 
                  SystemAPI.Query<RefRW<PhysicsVelocity>, RefRW<LocalTransform>, RefRO<EnemyMovementData>>()
-                     .WithNone<MarkedForExecution, EngagementRange, ApplyKnockback>().WithAll<ActiveSceneEntity>())
+                     .WithNone<MarkedForExecution, EngagementRange, ApplyKnockback>())
         {
             float3 vectorToPlayer = playerPos - transform.ValueRO.Position;
             vectorToPlayer.y = 0f; 

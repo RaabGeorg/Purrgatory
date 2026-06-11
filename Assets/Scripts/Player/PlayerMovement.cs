@@ -3,7 +3,6 @@ using Unity.Mathematics;
 using Unity.Physics;
 using UnityEngine;
 
-// CRUCIAL: Remove the [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
     private float speed;
@@ -38,6 +37,11 @@ public class PlayerMovement : MonoBehaviour
         GameEvents.OnStatsChanged -= UpdateStats;
     }
 
+    private void OnDestroy()
+    {
+        playerControls?.Dispose();
+    }
+
     void Start()
     {
         startTime = -dashCooldown;
@@ -49,12 +53,9 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector2 move = playerControls.Player.Move.ReadValue<Vector2>();
         Vector3 moveDirection = new Vector3(move.x, 0, move.y);
-
-        // Calculate standard movement velocity
-        // (Removed Time.deltaTime here because velocity is unit/sec, ECS physics handles the delta internally)
+        
         Vector3 standardVelocity = moveDirection * speed;
 
-        // Apply combined standard + dash velocity directly to the ECS Physics body
         ApplyVelocityToECS(standardVelocity + dashVelocity);
 
         if (dashCount < 2 && !isRecharging)
@@ -72,7 +73,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void ApplyVelocityToECS(Vector3 targetVelocity)
     {
-        // Guard against execution before the bridge initializes
         if (PlayerBridge.Instance == null) return;
         
         var em = PlayerBridge.Instance.GetEntityManager();
@@ -82,8 +82,7 @@ public class PlayerMovement : MonoBehaviour
         {
             var physVel = em.GetComponentData<PhysicsVelocity>(playerEnt);
             
-            // Override X and Z for horizontal movement, but preserve Y so gravity/jumping still works
-            physVel.Linear = new float3(targetVelocity.x, physVel.Linear.y, targetVelocity.z);
+            physVel.Linear = new float3(targetVelocity.x, targetVelocity.y, targetVelocity.z);
             
             em.SetComponentData(playerEnt, physVel);
         }

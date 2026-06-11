@@ -48,6 +48,8 @@ public class SceneSwitchManager : MonoBehaviour
     
     public void StartGame()
     {
+        if (!gameObject.activeInHierarchy) return;
+
         if (!gameStarted && !isTransitioning)
         {
             StartCoroutine(StartGameRoutine());
@@ -60,6 +62,14 @@ public class SceneSwitchManager : MonoBehaviour
         if (gameStarted && !isTransitioning)
         {
             StartCoroutine(ToggleLevelRoutine());
+        }
+    }
+    
+    public void LoadMainMenu(string mainMenuSceneName = "Main Menu")
+    {
+        if (!isTransitioning)
+        {
+            StartCoroutine(LoadMainMenuRoutine(mainMenuSceneName));
         }
     }
 
@@ -75,7 +85,17 @@ public class SceneSwitchManager : MonoBehaviour
         
         yield return StartCoroutine(FinalizeSceneLoad(hellScene, "SpawnPoint_Hell"));
         
+        // --- ADD THIS HERE ---
+        // Ultimate safety net. Regardless of what UI components silently panicked 
+        // or locked during the async loading phase, we crush the locks right 
+        // before giving the player control.
+        PauseLogic.SetPaused(false);
+        PauseLogic.who = null;
+        DeathScreen.IsDead = false; // Add this if IsDead is still causing ghost UI issues
+        // ---------------------
+
         isTransitioning = false;
+        Debug.Log("<color=green>[SceneSwitchManager] Coroutine Step 5: Transition Complete! Locks cleared.</color>");
     }
 
     private IEnumerator ToggleLevelRoutine()
@@ -132,7 +152,7 @@ public class SceneSwitchManager : MonoBehaviour
             var query = em.CreateEntityQuery(typeof(Components.PlayerTag), typeof(Unity.Transforms.LocalTransform));
 
             
-            float timeout = 2.0f; // Give up after 2 seconds to prevent infinite loops
+            float timeout = 2.0f;
             float timer = 0f;
             
             while (!query.HasSingleton<Components.PlayerTag>())
@@ -140,10 +160,9 @@ public class SceneSwitchManager : MonoBehaviour
                 timer += Time.deltaTime;
                 if (timer > timeout)
                 {
-                    Debug.LogError("<color=red>[Spawn Debug] TIMEOUT: Player Entity never appeared in the ECS World!</color>");
                     yield break;
                 }
-                yield return null; // Wait for the next Unity frame
+                yield return null;
             }
             
             Unity.Entities.Entity playerEntity = query.GetSingletonEntity();
@@ -158,5 +177,23 @@ public class SceneSwitchManager : MonoBehaviour
                 em.SetComponentData(playerEntity, new Unity.Physics.PhysicsVelocity());
             }
         }
+    }
+    private IEnumerator LoadMainMenuRoutine(string mainMenuSceneName)
+    {
+        isTransitioning = true;
+        
+        PauseLogic.SetPaused(false);
+        PauseLogic.who = null;
+
+        if (!string.IsNullOrEmpty(currentLevel))
+        {
+            yield return SceneManager.UnloadSceneAsync(currentLevel);
+            currentLevel = "";
+        }
+        
+        yield return SceneManager.LoadSceneAsync(mainMenuSceneName, LoadSceneMode.Single);
+
+        gameStarted = false;
+        isTransitioning = false;
     }
 }

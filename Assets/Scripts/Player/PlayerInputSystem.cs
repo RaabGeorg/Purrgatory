@@ -10,20 +10,32 @@ public partial class PlayerInputSystem : SystemBase
     protected override void OnCreate()
     {
         _playerControls = new PlayerControls();
+    }
+
+    protected override void OnStartRunning()
+    {
         _playerControls.Enable();
+    }
+
+    protected override void OnStopRunning()
+    {
+        _playerControls.Disable();
     }
 
     protected override void OnDestroy()
     {
-        _playerControls.Disable();
+        _playerControls.Dispose();
     }
 
     protected override void OnUpdate()
     {
         if (PauseLogic.isPaused) return;
+
         bool firing = _playerControls.Player.Fire.IsPressed();
 
         foreach (var weapon in SystemAPI.Query<RefRW<Weapon>>().WithAll<WeaponTag>())
+        {
             weapon.ValueRW.IsFiring = firing;
+        }
     }
 }

@@ -21,7 +21,7 @@ public partial struct RangedEnemySystem : ISystem
         
         foreach (var (velocity, transform, movement, weapon, target, range) in
                  SystemAPI.Query<RefRW<PhysicsVelocity>, RefRW<LocalTransform>, RefRO<EnemyMovementData>, RefRW<Weapon>, RefRW<WeaponTarget>, RefRO<EngagementRange>>()
-                     .WithAll<Enemy, ActiveSceneEntity>()
+                     .WithAll<Enemy>()
                      .WithNone<MarkedForExecution, Executed>())
         {
             target.ValueRW.Value = playerPosition;

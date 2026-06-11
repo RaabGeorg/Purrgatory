@@ -12,7 +12,6 @@ public partial struct EnemySpawnSystem : ISystem
 {
     public void OnCreate(ref SystemState state)
     {
-        // Removed the requirement for BeginSimulationEntityCommandBufferSystem
         state.RequireForUpdate<PlayerTag>();
     }
     
@@ -20,7 +19,6 @@ public partial struct EnemySpawnSystem : ISystem
     {
         if (!SystemAPI.TryGetSingletonEntity<PlayerTag>(out Entity playerEntity)) return;
 
-        // 1. Create a local temporary ECB instead of fetching the global barrier
         var ecb = new EntityCommandBuffer(Allocator.Temp);
 
         float3 playerPos = SystemAPI.GetComponent<LocalTransform>(playerEntity).Position;
@@ -64,9 +62,6 @@ public partial struct EnemySpawnSystem : ISystem
                 spawner.ValueRW.NextSpawnTime = currentTime + spawner.ValueRO.SpawnInterval;
             }
         }
-
-        // 2. Playback and Dispose immediately
-        // This forces instantiation on the current frame before the scene can unload.
         ecb.Playback(state.EntityManager);
         ecb.Dispose();
     }

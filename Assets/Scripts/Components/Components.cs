@@ -138,4 +138,8 @@ namespace Components
     {
         public Unity.Collections.FixedString64Bytes LevelName;
     }
+    public struct PlayerInputState : IComponentData
+    {
+        public bool IsFiring;
+    }
 }

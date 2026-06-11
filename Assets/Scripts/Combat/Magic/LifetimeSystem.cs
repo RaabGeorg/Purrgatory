@@ -16,7 +16,7 @@ public partial struct MagicFieldLifetimeSystem : ISystem
         var vortexLookup = SystemAPI.GetComponentLookup<VortexMovement>(true);
         var bulletLookup = SystemAPI.GetComponentLookup<BulletTag>(true);
         foreach (var (field, transform,entity) in 
-                 SystemAPI.Query<RefRW<Lifetime>,RefRO<LocalTransform>>().WithEntityAccess().WithNone<MarkedForExecution,Executed>().WithAll<ActiveSceneEntity>())
+                 SystemAPI.Query<RefRW<Lifetime>,RefRO<LocalTransform>>().WithEntityAccess().WithNone<MarkedForExecution,Executed>())
         {
             float3 pos = transform.ValueRO.Position;
             field.ValueRW.Value -= dt;
@@ -31,16 +31,12 @@ public partial struct MagicFieldLifetimeSystem : ISystem
                 Debug.Log("Hallo bin im elif");
                 ecb.AddComponent<MarkedForExecution>(entity);
                 ecb.AddComponent<Executed>(entity);
-                ecb.AddComponent(entity, new LevelSceneTag());
-                ecb.AddComponent(entity, new ActiveSceneEntity());
             }
             else
             {
                 ExplosionVFXSpawner.instance.Spawn(new float3(pos.x, pos.y + 0.1f, pos.z), 0);
                 ecb.AddComponent<MarkedForExecution>(entity);
                 ecb.AddComponent<Executed>(entity);
-                ecb.AddComponent(entity, new LevelSceneTag());
-                ecb.AddComponent(entity, new ActiveSceneEntity());
             }
             
         }
