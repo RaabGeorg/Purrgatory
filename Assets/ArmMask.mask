@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ArmMask
+  m_Mask: 00000000000000000000000000000000000000000100000001000000010000000100000000000000000000000000000000000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: arm_npc_1
+    m_Weight: 1
+  - m_Path: arm_npc_1/base_bone
+    m_Weight: 0
+  - m_Path: arm_npc_1/base_bone/leg_l_manip
+    m_Weight: 0
+  - m_Path: arm_npc_1/base_bone/leg_r_manip
+    m_Weight: 0
+  - m_Path: arm_npc_1/base_bone/spine_1
+    m_Weight: 0
+  - m_Path: arm_npc_1/base_bone/spine_1/spine_2
+    m_Weight: 0
+  - m_Path: arm_npc_1/base_bone/spine_1/spine_2/spine_3
+    m_Weight: 0
+  - m_Path: arm_npc_1/base_bone/spine_1/spine_2/spine_3/hand_l_manip
+    m_Weight: 1
+  - m_Path: arm_npc_1/base_bone/spine_1/spine_2/spine_3/hand_l_manip/finger_l
+    m_Weight: 1
+  - m_Path: arm_npc_1/base_bone/spine_1/spine_2/spine_3/hand_l_manip/finger_l/finger_2_l
+    m_Weight: 1
+  - m_Path: arm_npc_1/base_bone/spine_1/spine_2/spine_3/hand_l_manip/hand_l
+    m_Weight: 1
+  - m_Path: arm_npc_1/base_bone/spine_1/spine_2/spine_3/hand_l_manip/hand_l/hand_2_l
+    m_Weight: 1
+  - m_Path: arm_npc_1/base_bone/spine_1/spine_2/spine_3/hand_r_manip
+    m_Weight: 1
+  - m_Path: arm_npc_1/base_bone/spine_1/spine_2/spine_3/hand_r_manip/finger_r
+    m_Weight: 1
+  - m_Path: arm_npc_1/base_bone/spine_1/spine_2/spine_3/hand_r_manip/finger_r/finger_2_r
+    m_Weight: 1
+  - m_Path: arm_npc_1/base_bone/spine_1/spine_2/spine_3/hand_r_manip/hand_r
+    m_Weight: 1
+  - m_Path: arm_npc_1/base_bone/spine_1/spine_2/spine_3/hand_r_manip/hand_r/hand_2_r
+    m_Weight: 1
+  - m_Path: arm_npc_1/base_bone/spine_1/spine_2/spine_3/head
+    m_Weight: 0
+  - m_Path: arm_npc_1/base_bone/spine_1/spine_2/spine_3/head/ear_l
+    m_Weight: 0
+  - m_Path: arm_npc_1/base_bone/spine_1/spine_2/spine_3/head/ear_r
+    m_Weight: 0
+  - m_Path: arm_npc_1/base_bone/spine_1/spine_2/spine_3/head/hat
+    m_Weight: 0
+  - m_Path: arm_npc_1/base_bone/spine_1/spine_2/spine_3/shoulder_l
+    m_Weight: 1
+  - m_Path: arm_npc_1/base_bone/spine_1/spine_2/spine_3/shoulder_l/forearm_l
+    m_Weight: 1
+  - m_Path: arm_npc_1/base_bone/spine_1/spine_2/spine_3/shoulder_r
+    m_Weight: 1
+  - m_Path: arm_npc_1/base_bone/spine_1/spine_2/spine_3/shoulder_r/forearm_r
+    m_Weight: 1
+  - m_Path: arm_npc_1/base_bone/spine_1/tail_1
+    m_Weight: 0
+  - m_Path: arm_npc_1/base_bone/spine_1/tail_1/tail_2
+    m_Weight: 0
+  - m_Path: arm_npc_1/base_bone/spine_1/tail_1/tail_2/tail_3
+    m_Weight: 0
+  - m_Path: arm_npc_1/base_bone/spine_1/tail_1/tail_2/tail_3/tail_4
+    m_Weight: 0
+  - m_Path: arm_npc_1/base_bone/spine_1/tail_1/tail_2/tail_3/tail_4/tail_5
+    m_Weight: 0
+  - m_Path: arm_npc_1/base_bone/spine_1/tail_1/tail_2/tail_3/tail_4/tail_5/tail_6
+    m_Weight: 0
+  - m_Path: arm_npc_1/base_bone/spine_1/tail_1/tail_2/tail_3/tail_4/tail_5/tail_6/tail_7
+    m_Weight: 0
+  - m_Path: arm_npc_1/base_bone/spine_1/thigh_l
+    m_Weight: 0
+  - m_Path: arm_npc_1/base_bone/spine_1/thigh_l/thigh_2_l
+    m_Weight: 0
+  - m_Path: arm_npc_1/base_bone/spine_1/thigh_l/thigh_2_l/heel_l
+    m_Weight: 0
+  - m_Path: arm_npc_1/base_bone/spine_1/thigh_l/thigh_2_l/heel_l/heel_2_l
+    m_Weight: 0
+  - m_Path: arm_npc_1/base_bone/spine_1/thigh_r
+    m_Weight: 0
+  - m_Path: arm_npc_1/base_bone/spine_1/thigh_r/thigh_2_r
+    m_Weight: 0
+  - m_Path: arm_npc_1/base_bone/spine_1/thigh_r/thigh_2_r/heel_r
+    m_Weight: 0
+  - m_Path: arm_npc_1/base_bone/spine_1/thigh_r/thigh_2_r/heel_r/heel_2_r
+    m_Weight: 0
+  - m_Path: arm_npc_1/base_bone/tl
+    m_Weight: 0
+  - m_Path: arm_npc_1/base_bone/tr
+    m_Weight: 0
+  - m_Path: full_unwrapped_fixed
+    m_Weight: 0

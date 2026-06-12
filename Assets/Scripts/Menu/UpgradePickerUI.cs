@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 using Random = UnityEngine.Random;
+using Unity.VisualScripting;
 
 public class UpgradePickerUI : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class UpgradePickerUI : MonoBehaviour
 
     [Header("XP")] public GameObject xpBarContainer;
 
+    [Header("UI")] public UpdatePerkUI updatePerkUI;
+
     void OnEnable() => GameEvents.OnLevelUp += Show;
     void OnDisable() => GameEvents.OnLevelUp -= Show;
 
@@ -30,7 +33,7 @@ public class UpgradePickerUI : MonoBehaviour
     void Show(int level)
     {
         upgradeOptions = upgradePool.OrderBy(x => Random.value).Take(3).ToArray();
-        PauseMenu.SetPaused(true);
+        PauseLogic.PauseGame("Pick");
         container.SetActive(true);
         xpBarContainer.SetActive(false);
         
@@ -50,6 +53,9 @@ public class UpgradePickerUI : MonoBehaviour
     void Pick(int i)
     {
         var upgrade = upgradeOptions[i];
+
+        updatePerkUI.addPerkUI(upgrade);
+
         if (upgrade.category == UpgradeCategory.Stat)
             PlayerStatsManager.Instance.AddModifier(upgrade.statType, new StatModifier(upgrade.value, upgrade.modifierType));
         else if (upgrade.category == UpgradeCategory.Weapon)
@@ -61,6 +67,6 @@ public class UpgradePickerUI : MonoBehaviour
         }
         xpBarContainer.SetActive(true);
         container.SetActive(false);
-        PauseMenu.SetPaused(false);
+        PauseLogic.PauseGame("Pick");
     }
 }

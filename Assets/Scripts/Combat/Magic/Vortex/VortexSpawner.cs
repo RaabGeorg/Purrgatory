@@ -28,7 +28,8 @@ public class VortexSpawner : MonoBehaviour
         _controls.Enable();
     }
 
-    void OnDestroy() => _controls.Disable();
+    void OnDisable() => _controls.Disable();
+    void OnDestroy() => _controls.Dispose();
 
     void Update()
     {

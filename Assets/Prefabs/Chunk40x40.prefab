@@ -2985,6 +2985,10 @@ PrefabInstance:
       value: Pedestal_001
       objectReference: {fileID: 0}
     - target: {fileID: 7866609476981066392, guid: cca7ca86afe5ebc418c53ca8f6a4713b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7866609476981066392, guid: cca7ca86afe5ebc418c53ca8f6a4713b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.2617354
       objectReference: {fileID: 0}

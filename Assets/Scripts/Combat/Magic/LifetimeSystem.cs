@@ -13,7 +13,8 @@ public partial struct MagicFieldLifetimeSystem : ISystem
     {
         var ecb = new EntityCommandBuffer(Unity.Collections.Allocator.Temp);
         float dt = SystemAPI.Time.DeltaTime;
-        var vortexLookup = SystemAPI.GetComponentLookup<Explosion>(true);
+        var vortexLookup = SystemAPI.GetComponentLookup<VortexMovement>(true);
+        var bulletLookup = SystemAPI.GetComponentLookup<BulletTag>(true);
         foreach (var (field, transform,entity) in 
                  SystemAPI.Query<RefRW<Lifetime>,RefRO<LocalTransform>>().WithEntityAccess().WithNone<MarkedForExecution,Executed>())
         {
@@ -25,6 +26,11 @@ public partial struct MagicFieldLifetimeSystem : ISystem
             if (vortexLookup.HasComponent(entity))
             {
                 ecb.AddComponent<MarkedForExecution>(entity);
+            }else if (bulletLookup.HasComponent(entity))
+            {
+                Debug.Log("Hallo bin im elif");
+                ecb.AddComponent<MarkedForExecution>(entity);
+                ecb.AddComponent<Executed>(entity);
             }
             else
             {
