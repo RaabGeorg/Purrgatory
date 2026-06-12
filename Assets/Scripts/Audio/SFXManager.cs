@@ -21,33 +21,44 @@ public class SFXManager : MonoBehaviour
     private AudioMixerGroup musicGroup;
 
     private AudioSource musicSource;
-    [SerializeField] private AudioClip hellBackground;
-    [SerializeField] private AudioClip heavenBackground;
+    [SerializeField] public AudioClip hellBackground;
+    [SerializeField] public AudioClip heavenBackground;
+    [SerializeField] public AudioClip menuBackground;
+    
     
     
     private void Awake()
     {
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
+        DontDestroyOnLoad(gameObject);
         
         sfxSource = gameObject.AddComponent<AudioSource>();
         sfxSource.outputAudioMixerGroup = sfxGroup;
+        sfxSource.volume = 0.1f;
         
         musicSource = gameObject.AddComponent<AudioSource>();
         musicSource.outputAudioMixerGroup = musicGroup;
-        musicSource.clip = hellBackground;
         musicSource.loop = true;
-        musicSource.Play();
+        Instance.PlayMusic(Instance.menuBackground);
     }
 
     private void Start()
     {
         
     }
-
-    public void PlayExplosion(float3 pos)
+    
+    public void PlayMusic(AudioClip clip)
     {
-        AudioSource.PlayClipAtPoint(explosionClip, new Vector3(pos.x, pos.y, pos.z));
+        if (musicSource.clip == clip && musicSource.isPlaying) return;
+        musicSource.clip = clip;
+        musicSource.loop = true;
+        musicSource.Play();
+    }
+
+    public void PlayExplosion()
+    {
+        sfxSource.PlayOneShot(explosionClip);
     }
 
     public void PlayDash()

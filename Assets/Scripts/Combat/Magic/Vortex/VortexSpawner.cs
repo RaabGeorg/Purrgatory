@@ -70,9 +70,8 @@ public class VortexSpawner : MonoBehaviour
         var src = go.AddComponent<AudioSource>();
         src.outputAudioMixerGroup = sfxGroup;
         src.clip = vortexClip;
-        src.spatialBlend = 1f;
         src.loop = true;
-        src.volume = 3f;
+        src.volume = 0.05f;
         src.Play();
         Destroy(go, lifetime);
         
