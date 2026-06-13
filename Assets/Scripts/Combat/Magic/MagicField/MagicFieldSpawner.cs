@@ -63,11 +63,12 @@ public class MagicFieldSpawner : MonoBehaviour
         go.transform.position = new Vector3(spawnPos.x, spawnPos.y, spawnPos.z);
         var src = go.AddComponent<AudioSource>();
         src.outputAudioMixerGroup = sfxGroup;
-        src.volume = 0.1f;
+        src.volume = 0.07f;
         src.PlayOneShot(fireWooshSound);
         src.clip = fireSound;
         src.loop = true;
         src.Play();
+        SFXManager.Instance.RegisterSource(src);
         Destroy(go, lifetime);
         
         cooldownTimer = cooldown;

@@ -12,7 +12,11 @@ public class PlayerHUD : MonoBehaviour
     public RectTransform xpBarRect;
     private float _maxWidth;
 
-    void Start() => _maxWidth = xpBarRect.sizeDelta.x;
+    void Start()
+    {
+        _maxWidth = xpBarRect.sizeDelta.x;
+        UpdateHealth(PlayerStatsManager.Instance.stats.baseHealth.Value);
+    } 
     private void OnEnable()
     {
         GameEvents.OnHealthChanged += UpdateHealth;

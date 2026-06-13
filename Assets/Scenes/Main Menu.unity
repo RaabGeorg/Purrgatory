@@ -153,10 +153,11 @@ MonoBehaviour:
   bulletClip: {fileID: 0}
   laserClip: {fileID: 0}
   dashClip: {fileID: 8300000, guid: c6276305fa7e7644d9553e28d0c13786, type: 3}
-  lvlUpClip: {fileID: 0}
+  lvlUpClip: {fileID: 8300000, guid: 5a96d749193985a4082b521a8dba9f2a, type: 3}
   musicGroup: {fileID: -6717623938325025231, guid: c3113d473302bd04aac6f491b787d0a1, type: 2}
   hellBackground: {fileID: 8300000, guid: bf6dab38602112d4790a1be62f2310df, type: 3}
-  heavenBackground: {fileID: 0}
+  heavenBackground: {fileID: 8300000, guid: 031130d198412ca4e9ffc64290d851a6, type: 3}
+  menuBackground: {fileID: 8300000, guid: 5bf99b15c35bd8b4eb4cd9c5fefc6585, type: 3}
 --- !u!4 &24758530
 Transform:
   m_ObjectHideFlags: 0

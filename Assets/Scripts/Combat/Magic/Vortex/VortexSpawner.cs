@@ -71,8 +71,9 @@ public class VortexSpawner : MonoBehaviour
         src.outputAudioMixerGroup = sfxGroup;
         src.clip = vortexClip;
         src.loop = true;
-        src.volume = 0.05f;
+        src.volume = 0.01f;
         src.Play();
+        SFXManager.Instance.RegisterSource(src);
         Destroy(go, lifetime);
         
         cooldownTimer = cooldown;

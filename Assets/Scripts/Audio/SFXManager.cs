@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using Unity.Mathematics;
@@ -19,6 +20,7 @@ public class SFXManager : MonoBehaviour
 
     [Header("Background Music")] [SerializeField]
     private AudioMixerGroup musicGroup;
+    private List<AudioSource> activeSources = new List<AudioSource>();
 
     private AudioSource musicSource;
     [SerializeField] public AudioClip hellBackground;
@@ -43,6 +45,20 @@ public class SFXManager : MonoBehaviour
         Instance.PlayMusic(Instance.menuBackground);
     }
 
+    private void OnEnable()
+    {
+        GameEvents.OnLevelUp += PlayLvlUp;
+        GameEvents.OnUpgradeShow += PauseAllSFX;
+        GameEvents.OnUpgradeHide += ResumeAllSFX;
+    }
+
+    private void OnDisable()
+    {
+        GameEvents.OnLevelUp -= PlayLvlUp;
+        GameEvents.OnUpgradeShow -= PauseAllSFX;
+        GameEvents.OnUpgradeHide -= ResumeAllSFX;
+    } 
+
     private void Start()
     {
         
@@ -58,12 +74,12 @@ public class SFXManager : MonoBehaviour
 
     public void PlayExplosion()
     {
-        sfxSource.PlayOneShot(explosionClip);
+        sfxSource.PlayOneShot(explosionClip, 0.1f);
     }
 
     public void PlayDash()
     {
-        sfxSource.PlayOneShot(dashClip, 0.05f);
+        sfxSource.PlayOneShot(dashClip, 0.2f);
     }
 
     public void ShootBullet()
@@ -75,8 +91,34 @@ public class SFXManager : MonoBehaviour
     {
         sfxSource.PlayOneShot(laserClip);
     }
-    public void PlayLvlUp()
+    public void PlayLvlUp(int x)
     {
-        sfxSource.PlayOneShot(lvlUpClip);
+        sfxSource.PlayOneShot(lvlUpClip, 0.8f);
+    }
+
+    public void RegisterSource(AudioSource source)
+    {
+        activeSources.Add(source);
+    }
+    
+    public void PauseAllSFX()
+    {
+        activeSources.RemoveAll(s => s == null);
+
+        foreach (var source in activeSources)
+        {
+            if (source.isPlaying)
+                source.Pause();
+        }
+    }
+
+    public void ResumeAllSFX()
+    {
+        activeSources.RemoveAll(s => s == null);
+
+        foreach (var source in activeSources)
+        {
+            source.UnPause();
+        }
     }
 }
