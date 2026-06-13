@@ -150,10 +150,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SFXManager
   sfxGroup: {fileID: -3444661319311129732, guid: c3113d473302bd04aac6f491b787d0a1, type: 2}
   explosionClip: {fileID: 8300000, guid: 6125e30c9d8b6dc4e9a3d0090c9d7c4f, type: 3}
-  bulletClip: {fileID: 0}
-  laserClip: {fileID: 0}
+  bulletClip: {fileID: 8300000, guid: 76c18a7859a8c2b41bb0178ae1eef76b, type: 3}
+  laserClip: {fileID: 8300000, guid: 76c18a7859a8c2b41bb0178ae1eef76b, type: 3}
   dashClip: {fileID: 8300000, guid: c6276305fa7e7644d9553e28d0c13786, type: 3}
   lvlUpClip: {fileID: 8300000, guid: 5a96d749193985a4082b521a8dba9f2a, type: 3}
+  hurtClip: {fileID: 8300000, guid: 282499f96641ef84e8e421f07941a05c, type: 3}
   musicGroup: {fileID: -6717623938325025231, guid: c3113d473302bd04aac6f491b787d0a1, type: 2}
   hellBackground: {fileID: 8300000, guid: bf6dab38602112d4790a1be62f2310df, type: 3}
   heavenBackground: {fileID: 8300000, guid: 031130d198412ca4e9ffc64290d851a6, type: 3}

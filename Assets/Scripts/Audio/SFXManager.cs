@@ -17,6 +17,7 @@ public class SFXManager : MonoBehaviour
     [SerializeField] private AudioClip laserClip;
     [SerializeField] private AudioClip dashClip;
     [SerializeField] private AudioClip lvlUpClip;
+    [SerializeField] private AudioClip hurtClip;
 
     [Header("Background Music")] [SerializeField]
     private AudioMixerGroup musicGroup;
@@ -94,6 +95,11 @@ public class SFXManager : MonoBehaviour
     public void PlayLvlUp(int x)
     {
         sfxSource.PlayOneShot(lvlUpClip, 0.8f);
+    }
+
+    public void PlayHurt()
+    {
+        sfxSource.PlayOneShot(hurtClip, 0.1f);
     }
 
     public void RegisterSource(AudioSource source)
