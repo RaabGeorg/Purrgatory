@@ -1,17 +1,10 @@
 using System.Collections;
+using Components;
+using Unity.Entities;
+using Unity.Physics;
 using UnityEngine;
+using RaycastHit = UnityEngine.RaycastHit;
 
-/// <summary>
-/// Laser with a lock-on tracking phase.
-///
-/// Flow:
-///   1. TRACKING  — thin beam follows the player (they can dodge out of range to cancel)
-///   2. LOCK      — beam turns solid/bright, position is frozen on where player was
-///   3. FIRE      — full damage beam fires at the locked position
-///   4. FADE      — beam fades out
-///
-/// If the player escapes range during TRACKING → attack is cancelled.
-/// </summary>
 public class EyeLaser : MonoBehaviour
 {
     [Header("References")]
@@ -57,14 +50,13 @@ public class EyeLaser : MonoBehaviour
     [Tooltip("Full damage beam.")]
     public Color fireColor = new Color(1f, 0.05f, 0.05f, 0.5f);
 
-    // ── Private ──────────────────────────────────────────────────
     private float shootTimer;
     private bool isShooting;
     private EyeMovement eyeMovement;
 
     public bool IsShooting => isShooting;
     
-    // ─────────────────────────────────────────────────────────────
+
     void Start()
     {
         if (player == null)
@@ -91,12 +83,10 @@ public class EyeLaser : MonoBehaviour
     void Update()
     {
         if (player == null || isShooting) return;
-
-        // Only start attack when player is in range
+        
         bool inRange = Vector3.Distance(transform.position, player.position) <= shootRange;
         if (!inRange) return;
-
-        // Also respect EyeMovement's stop-distance if present
+        
         if (eyeMovement != null && !eyeMovement.IsInShootRange) return;
 
         shootTimer -= Time.deltaTime;
@@ -107,16 +97,14 @@ public class EyeLaser : MonoBehaviour
         }
     }
 
-    // ─── Main Sequence ────────────────────────────────────────────
+ 
     IEnumerator LaserSequence()
     {
         if (laserLine == null) yield break;
 
         
         laserLine.enabled = true;
-
-        // ── Phase 1: TRACKING ─────────────────────────────────────
-        // Beam follows the player. If they run out of range → cancel.
+        
         float elapsed = 0f;
         bool escaped = false;
 
@@ -130,15 +118,13 @@ public class EyeLaser : MonoBehaviour
                 escaped = true;
                 break;
             }
-
-            // Beam tracks live player position, grows slightly over time
+            
             float t = elapsed / trackingTime;
             SetBeam(player.position, 0.7f, trackingColor);
 
             yield return null;
         }
-
-        // Player escaped → cancel with a quick fade
+        
         if (escaped)
         {
             yield return FadeOut(0.25f, trackingColor);
@@ -147,25 +133,20 @@ public class EyeLaser : MonoBehaviour
             shootTimer = shootCooldown * 0.5f; // shorter cooldown on cancel
             yield break;
         }
-
-        // ── Phase 2: LOCK-ON ──────────────────────────────────────
-        // Freeze the target position at where the player currently is.
+        
         Vector3 lockedTarget = player.position;
         isShooting = true;
         elapsed = 0f;
         while (elapsed < lockTime)
         {
             elapsed += Time.deltaTime;
-
-            // Flash between lockColor and fireColor for visual warning
+            
             Color flashColor = (Mathf.FloorToInt(elapsed / 0.08f) % 2 == 0) ? lockColor : fireColor;
             SetBeam(lockedTarget, 1f, flashColor);
 
             yield return null;
         }
 
-        // ── Phase 3: FIRE ─────────────────────────────────────────
-        // Full damage beam — position is LOCKED, no longer tracks player.
         elapsed = 0f;
         while (elapsed < fireDuration)
         {
@@ -176,19 +157,16 @@ public class EyeLaser : MonoBehaviour
 
             yield return null;
         }
-
-        // ── Phase 4: FADE OUT ─────────────────────────────────────
+        
         yield return FadeOut(1f, fireColor);
 
         laserLine.enabled = false;
         isShooting = false;
     }
-
-    // ─── Fade Coroutine ───────────────────────────────────────────
+    
     System.Collections.IEnumerator FadeOut(float duration, Color fromColor)
     {
         float elapsed = 0f;
-        // Cache the last beam end so it doesn't jump during fade
         Vector3 lastEnd = laserLine.GetPosition(1);
 
         while (elapsed < duration)
@@ -200,8 +178,7 @@ public class EyeLaser : MonoBehaviour
             yield return null;
         }
     }
-
-    // ─── Set Beam Visuals ─────────────────────────────────────────
+    
     void SetBeam(Vector3 targetPos, float widthMultiplier, Color color)
     {
         Vector3 dir = (targetPos - laserOrigin.position).normalized;
@@ -220,15 +197,43 @@ public class EyeLaser : MonoBehaviour
         laserLine.startColor = color;
         laserLine.endColor   = color;
     }
-
-    // ─── Damage ───────────────────────────────────────────────────
+    
     void DealDamage(Vector3 targetPos)
     {
         Vector3 dir = (targetPos - laserOrigin.position).normalized;
+        
+        var world = World.DefaultGameObjectInjectionWorld;
+        var entityManager = world.EntityManager;
 
-        if (Physics.Raycast(laserOrigin.position, dir, out RaycastHit hit, laserMaxLength, laserHitMask))
+        var physicsWorldSingleton = entityManager.CreateEntityQuery(
+                typeof(PhysicsWorldSingleton))
+            .GetSingleton<PhysicsWorldSingleton>();
+
+        var collisionWorld = physicsWorldSingleton.CollisionWorld;
+        
+        var rayInput = new RaycastInput
         {
-            
+            Start = laserOrigin.position,
+            End = laserOrigin.position + dir * laserMaxLength,
+            Filter = new CollisionFilter{
+                BelongsTo = 1 << 3,
+                CollidesWith = 1 << 1,
+                GroupIndex = 0
+                
+            }
+        };
+        if (collisionWorld.CastRay(rayInput,out Unity.Physics.RaycastHit hit))
+        {
+            if (entityManager.HasComponent<Health>(hit.Entity))
+            {
+                
+                var health = entityManager.GetComponentData<Health>(hit.Entity);
+                if (health.Value < 0) return;
+                
+                health.Value -= 1f;
+                
+                entityManager.SetComponentData(hit.Entity, health);
+            }
         }
     }
 

@@ -2,12 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-/// <summary>
-/// Attach to the Eye Boss prefab.
-/// Fog activates when the boss spawns, fades out when it dies.
-/// Waits for the correct active scene before applying RenderSettings.
-/// </summary>
-public class EyeFogController : MonoBehaviour
+public class EyeController : MonoBehaviour
 {
     [Header("Fog Settings")]
     public Color fogColor = new Color(0.1f, 0f, 0.15f, 1f);
@@ -17,17 +12,15 @@ public class EyeFogController : MonoBehaviour
     [Header("Fade")]
     public float fadeInDuration  = 2f;
     public float fadeOutDuration = 3f;
-
-    // ── Private ──────────────────────────────────────────────────
+    
     private bool isDying = false;
 
-    // ─────────────────────────────────────────────────────────────
+  
     void OnEnable()
     {
-        // Wait for the active scene to be fully set before touching RenderSettings
+       
         SceneManager.activeSceneChanged += OnSceneActivated;
-
-        // If the scene is already active (boss spawned mid-game), apply immediately
+        
         ApplyFog();
     }
 
@@ -36,15 +29,13 @@ public class EyeFogController : MonoBehaviour
         SceneManager.activeSceneChanged -= OnSceneActivated;
         RenderSettings.fog = false;
     }
-
-    // Called when Unity switches the active scene (e.g. after LoadSceneAsync + SetActiveScene)
+    
     void OnSceneActivated(Scene old, Scene next)
     {
         SceneManager.activeSceneChanged -= OnSceneActivated;
         ApplyFog();
     }
-
-    // ─── Apply Fog ────────────────────────────────────────────────
+    
     public void ApplyFog()
     {
         StopAllCoroutines();
@@ -56,16 +47,14 @@ public class EyeFogController : MonoBehaviour
 
         StartCoroutine(FadeFogDensity(0f, fogDensity, fadeInDuration));
     }
-
-    // ─── Call from your health script on death ────────────────────
+    
     public void Die()
     {
         if (isDying) return;
         isDying = true;
         StartCoroutine(FadeOutAndDestroy());
     }
-
-    // ─── Coroutines ───────────────────────────────────────────────
+    
     IEnumerator FadeFogDensity(float from, float to, float duration)
     {
         float elapsed = 0f;

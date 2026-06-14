@@ -11,6 +11,7 @@ namespace Components
     public struct Enemy     : IComponentData { }
     public struct WeaponTag  : IComponentData { } // ← neu
     public struct BulletTag : IComponentData { }
+    public struct EyeBossTag : IComponentData { }
     
     public struct WeaponFromPlayerTag : IComponentData { }
 
@@ -142,4 +143,6 @@ namespace Components
     {
         public bool IsFiring;
     }
+
+   
 }
