@@ -48,7 +48,6 @@ public class EyeMovement : MonoBehaviour
         
         if (dist > stopDistance)
         {
-            Debug.Log(dist);
            
             Vector3 dir = (player.position - transform.position).normalized;
             dir.y = 0f;
@@ -57,8 +56,7 @@ public class EyeMovement : MonoBehaviour
  
             
             target.y += bob * Time.deltaTime;
-          
-            Debug.Log(Vector3.Lerp(transform.position, target,  Time.deltaTime));
+            
             transform.position = Vector3.Lerp(transform.position, target,  Time.deltaTime);
         }
         else
