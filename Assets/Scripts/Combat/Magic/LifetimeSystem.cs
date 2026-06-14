@@ -28,7 +28,6 @@ public partial struct MagicFieldLifetimeSystem : ISystem
                 ecb.AddComponent<MarkedForExecution>(entity);
             }else if (bulletLookup.HasComponent(entity))
             {
-                Debug.Log("Hallo bin im elif");
                 ecb.AddComponent<MarkedForExecution>(entity);
                 ecb.AddComponent<Executed>(entity);
             }
