@@ -10,16 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 12e2fd8e27776e946aa7234d9b7e52a7, type: 3}
-  m_Name: AS
+  m_Name: MetaDamage
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeDefinition
-  icon: {fileID: 21300000, guid: f1bc7b9e25fd74f11b4144407c1c9d70, type: 3}
-  displayName: Attack Speed
-  description: + 20% Attack Speed
-  rarity: 1
-  statType: 1
-  modifierType: 1
-  value: 2
-  category: 1
-  weaponUpgradeType: 1
-  cost: 0
-  maxLevel: 0
+  icon: {fileID: 0}
+  displayName: Damage
+  description: 
+  rarity: 0
+  statType: 2
+  modifierType: 0
+  value: 5
+  category: 0
+  weaponUpgradeType: 0
+  cost: 300
+  maxLevel: 5
+  level: 0

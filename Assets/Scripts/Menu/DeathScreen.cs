@@ -33,7 +33,7 @@ public class DeathScreen : MonoBehaviour
     private void TriggerDeath()
     {
         IsDead = true;
-        
+
         PauseLogic.PauseGame("DeathScreen"); 
         
         container.SetActive(true);
@@ -41,6 +41,7 @@ public class DeathScreen : MonoBehaviour
 
     public void MainMenuButton()
     {
+        SaveSouls();
         IsDead = false;
         
         PauseLogic.SetPaused(false);
@@ -58,9 +59,18 @@ public class DeathScreen : MonoBehaviour
 
     public void QuitButton()
     {
+        SaveSouls();
+        PlayerPrefs.DeleteAll(); // here for testing so u can delete all the persistent data
         Application.Quit();
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
+    }
+
+    private void SaveSouls() 
+    {
+        GameData.Souls += PlayerWallet.Instance.Souls;
+        GameData.CondensedSouls += PlayerWallet.Instance.CondensedSouls;
+        GameData.Save();
     }
 }

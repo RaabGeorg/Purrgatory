@@ -12,6 +12,9 @@ public class UpgradeDefinition : ScriptableObject
     public float value;
     public UpgradeCategory category;
     public WeaponUpgradeType weaponUpgradeType;
+
+    public int cost;
+    public int maxLevel;
 }
 
 public enum RarityTier
