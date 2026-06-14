@@ -255,6 +255,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     ~@PlayerControls()
     {
         UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, PlayerControls.Player.Disable() has not been called.");
+        UnityEngine.Debug.Log("<color=yellow>PlayerControls created at:</color>\n" + new System.Diagnostics.StackTrace().ToString());
     }
 
     /// <summary>

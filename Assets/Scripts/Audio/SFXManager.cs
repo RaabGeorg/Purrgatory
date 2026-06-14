@@ -75,17 +75,17 @@ public class SFXManager : MonoBehaviour
 
     public void PlayExplosion()
     {
-        sfxSource.PlayOneShot(explosionClip, 0.1f);
+        sfxSource.PlayOneShot(explosionClip, 0.5f);
     }
 
     public void PlayDash()
     {
-        sfxSource.PlayOneShot(dashClip, 0.2f);
+        sfxSource.PlayOneShot(dashClip, 0.5f);
     }
 
     public void ShootBullet()
     {
-        sfxSource.PlayOneShot(bulletClip, 0.05f);
+        sfxSource.PlayOneShot(bulletClip, 0.5f);
     }
 
     public void ShootLaser()
@@ -94,12 +94,12 @@ public class SFXManager : MonoBehaviour
     }
     public void PlayLvlUp(int x)
     {
-        sfxSource.PlayOneShot(lvlUpClip, 0.8f);
+        sfxSource.PlayOneShot(lvlUpClip, 0.5f);
     }
 
     public void PlayHurt()
     {
-        sfxSource.PlayOneShot(hurtClip, 0.1f);
+        sfxSource.PlayOneShot(hurtClip, 0.5f);
     }
 
     public void RegisterSource(AudioSource source)

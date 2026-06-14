@@ -25,6 +25,8 @@ public class RaycastWeapon : MonoBehaviour
         playerControls = new PlayerControls();
         playerControls.Player.Enable();
     }
+    void OnDisable() => playerControls.Disable();
+    void OnDestroy() => playerControls.Disable();
 
     void Update()
     {

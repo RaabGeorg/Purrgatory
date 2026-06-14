@@ -149,12 +149,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SFXManager
   sfxGroup: {fileID: -3444661319311129732, guid: c3113d473302bd04aac6f491b787d0a1, type: 2}
-  explosionClip: {fileID: 8300000, guid: 6276a6d92667bbe44986d0e3128eb4a9, type: 3}
-  bulletClip: {fileID: 8300000, guid: 027862cef52d8564da44c7e9d3204f37, type: 3}
-  laserClip: {fileID: 8300000, guid: c6b76bedb81b157448578b9404f2e25f, type: 3}
-  dashClip: {fileID: 8300000, guid: e51d53e02c9f1364197af47b26e40f14, type: 3}
+  explosionClip: {fileID: 8300000, guid: 6125e30c9d8b6dc4e9a3d0090c9d7c4f, type: 3}
+  bulletClip: {fileID: 8300000, guid: b610d6e42f8113e4d893968f29ede1f6, type: 3}
+  laserClip: {fileID: 0}
+  dashClip: {fileID: 8300000, guid: c6276305fa7e7644d9553e28d0c13786, type: 3}
   lvlUpClip: {fileID: 8300000, guid: 5a96d749193985a4082b521a8dba9f2a, type: 3}
-  hurtClip: {fileID: 8300000, guid: f391cbff80470ef45a3bf50a2de6240d, type: 3}
+  hurtClip: {fileID: 8300000, guid: 282499f96641ef84e8e421f07941a05c, type: 3}
   musicGroup: {fileID: -6717623938325025231, guid: c3113d473302bd04aac6f491b787d0a1, type: 2}
   hellBackground: {fileID: 8300000, guid: bf6dab38602112d4790a1be62f2310df, type: 3}
   heavenBackground: {fileID: 8300000, guid: 031130d198412ca4e9ffc64290d851a6, type: 3}
@@ -6796,6 +6796,9 @@ SceneRoots:
   - {fileID: 2055103257}
   - {fileID: 1992689615}
   - {fileID: 32583781}
+<<<<<<< HEAD
+  - {fileID: 24758530}
+=======
   - {fileID: 895536130}
   - {fileID: 1896648972}
-  - {fileID: 24758530}
+>>>>>>> main
