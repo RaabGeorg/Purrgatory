@@ -610,7 +610,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VortexSpawner
   cooldown: 2
-  vortexClip: {fileID: 8300000, guid: 275ce46b165b0874c88c58c33c216cd6, type: 3}
+  vortexClip: {fileID: 8300000, guid: dbbb4e14d0f55d741a1796ad60e6877a, type: 3}
   sfxGroup: {fileID: -3444661319311129732, guid: c3113d473302bd04aac6f491b787d0a1, type: 2}
 --- !u!1 &178019481
 GameObject:
@@ -3549,9 +3549,9 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -3444661319311129732, guid: c3113d473302bd04aac6f491b787d0a1, type: 2}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: acd57f17bcb52e04fb247748504a2fcb, type: 3}
+  m_Resource: {fileID: 8300000, guid: 76c18a7859a8c2b41bb0178ae1eef76b, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.1
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -8902,6 +8902,10 @@ SceneRoots:
   - {fileID: 1056183137}
   - {fileID: 1403955273}
   - {fileID: 2055727682}
+<<<<<<< HEAD
+  - {fileID: 1403955273}
+=======
   - {fileID: 1437475015}
   - {fileID: 374135386}
   - {fileID: 426674610}
+>>>>>>> main
