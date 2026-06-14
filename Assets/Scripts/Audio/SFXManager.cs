@@ -85,7 +85,7 @@ public class SFXManager : MonoBehaviour
 
     public void ShootBullet()
     {
-        sfxSource.PlayOneShot(bulletClip);
+        sfxSource.PlayOneShot(bulletClip, 0.05f);
     }
 
     public void ShootLaser()
