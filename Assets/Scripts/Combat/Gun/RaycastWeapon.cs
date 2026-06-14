@@ -28,6 +28,7 @@ public class RaycastWeapon : MonoBehaviour
 
     void Update()
     {
+        if (!GameData.Weapon.Equals("Railgun")) return;
         if (playerControls.Player.Fire.IsPressed() &&
             Time.time >= this.nextFireTime)
         {
