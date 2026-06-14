@@ -48,13 +48,17 @@ public class RaycastWeapon : MonoBehaviour
             .GetSingleton<PhysicsWorldSingleton>();
 
         var collisionWorld = physicsWorldSingleton.CollisionWorld;
+        Vector3 direction = firePoint.forward;
+        direction.y = 0;
+        direction.Normalize();
+        
         
         SFXManager.Instance.ShootLaser();
 
         var rayInput = new RaycastInput
         {
             Start = this.firePoint.position,
-            End = this.firePoint.position + this.firePoint.forward * 100f,
+            End = this.firePoint.position + direction * 100f,
             Filter = new CollisionFilter{
                 BelongsTo = 1 << 3,
                 CollidesWith = 1 << 2,
@@ -62,7 +66,7 @@ public class RaycastWeapon : MonoBehaviour
                 
             }
         };
-        Vector3 endPoint = this.firePoint.position + this.firePoint.forward * 100f;
+        Vector3 endPoint = this.firePoint.position + direction * 100f;
         
         if (collisionWorld.CastRay(rayInput, out Unity.Physics.RaycastHit hit))
         {

@@ -1,9 +1,5 @@
 using UnityEngine;
 
-/// <summary>
-/// Rotates the eye (or a child pupil object) to always face the player.
-/// Works for both 2D and 3D top-down games.
-/// </summary>
 public class EyeLookAt : MonoBehaviour
 {
     [Header("References")]
@@ -22,7 +18,6 @@ public class EyeLookAt : MonoBehaviour
     [Tooltip("True = 3D top-down (Y-axis rotation). False = 2D top-down (Z-axis rotation).")]
     public bool is3D = false;
 
-    // ─────────────────────────────────────────────────────────────
     private EyeLaser eyeLaser;
 
     void Start()
@@ -36,8 +31,7 @@ public class EyeLookAt : MonoBehaviour
 
         if (eyeRotator == null)
             eyeRotator = transform;
-
-        // Grab laser script to check if currently firing
+        
         eyeLaser = GetComponent<EyeLaser>();
     }
 
@@ -45,14 +39,13 @@ public class EyeLookAt : MonoBehaviour
     {
         if (player == null) return;
 
-        // Freeze rotation while the laser is firing (lock-on or fire phase)
         if (eyeLaser != null && eyeLaser.IsShooting) return;
 
         Vector3 dir = player.position - eyeRotator.position;
 
         if (is3D)
         {
-            // 3D top-down: rotate on Y axis
+          
             dir.y = 0f;
             if (dir.sqrMagnitude < 0.001f) return;
 
@@ -62,7 +55,7 @@ public class EyeLookAt : MonoBehaviour
         }
         else
         {
-            // 2D top-down: rotate on Z axis
+          
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             Quaternion targetRot = Quaternion.Euler(0f, 0f, angle);
             eyeRotator.rotation = Quaternion.Slerp(
