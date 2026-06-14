@@ -82,6 +82,7 @@ public class SceneSwitchManager : MonoBehaviour
         
         yield return SceneManager.LoadSceneAsync(hellScene, LoadSceneMode.Additive);
         currentLevel = hellScene;
+        SFXManager.Instance.PlayMusic(SFXManager.Instance.hellBackground);
         
         yield return StartCoroutine(FinalizeSceneLoad(hellScene, "SpawnPoint_Hell"));
         
@@ -113,6 +114,7 @@ public class SceneSwitchManager : MonoBehaviour
         
         yield return SceneManager.LoadSceneAsync(levelToLoad, LoadSceneMode.Additive);
         currentLevel = levelToLoad;
+        SFXManager.Instance.PlayMusic(levelToLoad == hellScene ? SFXManager.Instance.hellBackground : SFXManager.Instance.heavenBackground);
         
         yield return StartCoroutine(RelocatePlayerRoutine(spawnPointName));
         
@@ -192,7 +194,8 @@ public class SceneSwitchManager : MonoBehaviour
         }
         
         yield return SceneManager.LoadSceneAsync(mainMenuSceneName, LoadSceneMode.Single);
-
+        SFXManager.Instance.PlayMusic(SFXManager.Instance.menuBackground);
+        
         gameStarted = false;
         isTransitioning = false;
     }

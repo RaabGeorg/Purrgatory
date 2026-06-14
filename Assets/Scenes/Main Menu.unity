@@ -119,6 +119,61 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &24758528
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 24758530}
+  - component: {fileID: 24758529}
+  m_Layer: 0
+  m_Name: SFX Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &24758529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 24758528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b389baef4c5a0fe4c84402baf04389d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SFXManager
+  sfxGroup: {fileID: -3444661319311129732, guid: c3113d473302bd04aac6f491b787d0a1, type: 2}
+  explosionClip: {fileID: 8300000, guid: 6125e30c9d8b6dc4e9a3d0090c9d7c4f, type: 3}
+  bulletClip: {fileID: 8300000, guid: b610d6e42f8113e4d893968f29ede1f6, type: 3}
+  laserClip: {fileID: 0}
+  dashClip: {fileID: 8300000, guid: c6276305fa7e7644d9553e28d0c13786, type: 3}
+  lvlUpClip: {fileID: 8300000, guid: 5a96d749193985a4082b521a8dba9f2a, type: 3}
+  hurtClip: {fileID: 8300000, guid: 282499f96641ef84e8e421f07941a05c, type: 3}
+  musicGroup: {fileID: -6717623938325025231, guid: c3113d473302bd04aac6f491b787d0a1, type: 2}
+  hellBackground: {fileID: 8300000, guid: bf6dab38602112d4790a1be62f2310df, type: 3}
+  heavenBackground: {fileID: 8300000, guid: 031130d198412ca4e9ffc64290d851a6, type: 3}
+  menuBackground: {fileID: 8300000, guid: 5bf99b15c35bd8b4eb4cd9c5fefc6585, type: 3}
+--- !u!4 &24758530
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 24758528}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2118.8943, y: -0.00001, z: 2359.6006}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &32583779
 GameObject:
   m_ObjectHideFlags: 0
@@ -6743,3 +6798,4 @@ SceneRoots:
   - {fileID: 32583781}
   - {fileID: 895536130}
   - {fileID: 1896648972}
+  - {fileID: 24758530}

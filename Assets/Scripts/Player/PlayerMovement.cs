@@ -14,6 +14,9 @@ public class PlayerMovement : MonoBehaviour
     public float dashCount = 2f;
     private bool isDashing;
     private bool isRecharging;
+    
+    [Header("Audio")]
+    [SerializeField] private AudioSource footstepSource;
 
     private PlayerControls playerControls;
     
@@ -54,6 +57,8 @@ public class PlayerMovement : MonoBehaviour
         Vector2 move = playerControls.Player.Move.ReadValue<Vector2>();
         Vector3 moveDirection = new Vector3(move.x, 0, move.y);
         
+        SoundState(moveDirection);
+        
         Vector3 standardVelocity = moveDirection * speed;
 
         ApplyVelocityToECS(standardVelocity + dashVelocity);
@@ -68,6 +73,7 @@ public class PlayerMovement : MonoBehaviour
         {
             StartCoroutine(DashCooldown(dashCooldown));
             StartCoroutine(DashRoutine(moveDirection));
+            SFXManager.Instance.PlayDash();
         }
     }
 
@@ -137,5 +143,19 @@ public class PlayerMovement : MonoBehaviour
     {
         speed = PlayerStatsManager.Instance.stats.baseMoveSpeed.Value;
         dashSpeed = speed * 5; // Ensure dash speed scales if base speed is upgraded
+    }
+
+    public void SoundState(Vector3 moveDirection)
+    {
+        bool isMoving = moveDirection.sqrMagnitude > 0.01f;
+
+        if (isMoving && !footstepSource.isPlaying)
+        {
+            footstepSource.Play();
+        }
+        else if (!isMoving && footstepSource.isPlaying)
+        {
+            footstepSource.Stop();
+        }
     }
 }

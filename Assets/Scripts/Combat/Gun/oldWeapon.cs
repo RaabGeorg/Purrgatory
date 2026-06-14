@@ -35,6 +35,7 @@ public class oldWeapon : MonoBehaviour
             return;
         }
         Instantiate(this.projectilePrefab, this.firePoint.position, this.firePoint.rotation);
+        SFXManager.Instance.ShootBullet();
     }
     
 }

@@ -516,6 +516,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MagicFieldSpawner
   cooldown: 2
+  fireSound: {fileID: 8300000, guid: 2cf33f0e52da2b44891564f4bfb2de0b, type: 3}
+  fireWooshSound: {fileID: 8300000, guid: 76c18a7859a8c2b41bb0178ae1eef76b, type: 3}
+  sfxGroup: {fileID: -3444661319311129732, guid: c3113d473302bd04aac6f491b787d0a1, type: 2}
 --- !u!65 &171852645
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -607,6 +610,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VortexSpawner
   cooldown: 2
+  vortexClip: {fileID: 8300000, guid: dbbb4e14d0f55d741a1796ad60e6877a, type: 3}
+  sfxGroup: {fileID: -3444661319311129732, guid: c3113d473302bd04aac6f491b787d0a1, type: 2}
 --- !u!1 &178019481
 GameObject:
   m_ObjectHideFlags: 0
@@ -1015,10 +1020,10 @@ RectTransform:
   - {fileID: 1930293321}
   m_Father: {fileID: 2055727682}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.011139, y: -42}
-  m_SizeDelta: {x: 2136.3, y: 62.9344}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: -35}
+  m_SizeDelta: {x: 0, y: 62.9344}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &231954643
 MonoBehaviour:
@@ -2826,10 +2831,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 231954642}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -1055.0333, y: -31.000006}
-  m_SizeDelta: {x: 2110.0667, y: 62.934402}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 13, y: -35}
+  m_SizeDelta: {x: -26, y: 62.9344}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &719420800
 MonoBehaviour:
@@ -3533,6 +3538,103 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78cdc3b91985c1740b017b8aff5b0a75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponUpgradeSystem
+--- !u!82 &851936834
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 851936802}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: -3444661319311129732, guid: c3113d473302bd04aac6f491b787d0a1, type: 2}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: 76c18a7859a8c2b41bb0178ae1eef76b, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &898599909
 GameObject:
   m_ObjectHideFlags: 0
@@ -5480,6 +5582,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 449291512116402991, guid: 65efa41c9251e41468efd36f53837c45, type: 3}
+      propertyPath: footstepSource
+      value: 
+      objectReference: {fileID: 851936834}
+    - target: {fileID: 449291512116402991, guid: 65efa41c9251e41468efd36f53837c45, type: 3}
       propertyPath: stats.baseHealth._baseValue
       value: 100
       objectReference: {fileID: 0}
@@ -5586,6 +5692,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3869360815814337313, guid: 65efa41c9251e41468efd36f53837c45, type: 3}
       insertIndex: -1
       addedObject: {fileID: 851936831}
+    - targetCorrespondingSourceObject: {fileID: 3869360815814337313, guid: 65efa41c9251e41468efd36f53837c45, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 851936834}
   m_SourcePrefab: {fileID: 100100000, guid: 65efa41c9251e41468efd36f53837c45, type: 3}
 --- !u!1001 &1364237940
 PrefabInstance:
@@ -5662,6 +5771,10 @@ PrefabInstance:
     - target: {fileID: 4790510253951305374, guid: 7541647a8e2e9424e90d3c9978b3a10f, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4900346835320568517, guid: 7541647a8e2e9424e90d3c9978b3a10f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5904310966444188624, guid: 7541647a8e2e9424e90d3c9978b3a10f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8133,10 +8246,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 231954642}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.000030601397, y: -31.4672}
-  m_SizeDelta: {x: 2136.3, y: 62.9344}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: -35}
+  m_SizeDelta: {x: 0, y: 62.9344}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1930293322
 MonoBehaviour:
