@@ -29,6 +29,7 @@ public partial class PlayerInputSystem : SystemBase
 
     protected override void OnUpdate()
     {
+        if (!GameData.Weapon.Equals("Rifle")) return;
         if (PauseLogic.isPaused) return;
 
         bool firing = _playerControls.Player.Fire.IsPressed();

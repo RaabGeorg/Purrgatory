@@ -1,13 +1,17 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class MainMenuManager : MonoBehaviour
 {
     public Canvas menu;
     public Canvas meta;
+    public TMP_Dropdown dropdown;
 
     public void OnStartButtonClicked()
     {
+        GameData.Weapon = dropdown.options[dropdown.value].text;
         Time.timeScale = 1;
         PauseLogic.isPaused = false;
         if (SceneSwitchManager.Instance != null)

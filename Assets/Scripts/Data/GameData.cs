@@ -16,6 +16,11 @@ public static class GameData
         set => PlayerPrefs.SetInt("condensedSouls", value);
     }
 
+    public static string Weapon
+    {
+        get => PlayerPrefs.GetString("weapon", "");
+        set => PlayerPrefs.SetString("weapon", value);
+    }
 
     [System.Serializable]
     private class Wrapper { public List<string> items; }
