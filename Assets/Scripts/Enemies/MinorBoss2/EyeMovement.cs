@@ -1,9 +1,5 @@
 using UnityEngine;
- 
-/// <summary>
-/// Moves the Eye boss towards the player and stops at a set distance.
-/// Includes idle hover bobbing.
-/// </summary>
+
 public class EyeMovement : MonoBehaviour
 {
     [Header("References")]
@@ -22,17 +18,15 @@ public class EyeMovement : MonoBehaviour
     [Tooltip("Set to 0 to disable bobbing.")]
     public float hoverAmplitude = 0.3f;
     public float hoverSpeed = 2f;
- 
-    // ── Private ──────────────────────────────────────────────────
+    
     private Vector3 startPosition;
     
     
  
-    // Expose for other scripts (e.g. laser needs to know if in range)
+    
     public bool IsInShootRange => player != null &&
         Vector3.Distance(transform.position, player.position) <= stopDistance * 1.5f;
- 
-    // ─────────────────────────────────────────────────────────────
+    
     void Start()
     {
         if (player == null)
@@ -54,23 +48,19 @@ public class EyeMovement : MonoBehaviour
         
         if (dist > stopDistance)
         {
-            Debug.Log(dist);
-            // Move towards player
+           
             Vector3 dir = (player.position - transform.position).normalized;
             dir.y = 0f;
  
             Vector3 target = transform.position + dir * moveSpeed * Time.deltaTime;
  
-            // Apply hover bob to the correct axis
+            
             target.y += bob * Time.deltaTime;
-          
-            Debug.Log(Vector3.Lerp(transform.position, target,  Time.deltaTime));
+            
             transform.position = Vector3.Lerp(transform.position, target,  Time.deltaTime);
         }
         else
         {
-            // Idle hover in place
-
             Vector3 idle = transform.position;
             idle.y = startPosition.y + bob;
             transform.position = Vector3.Lerp(transform.position, idle, Time.deltaTime);

@@ -133,13 +133,13 @@ GameObject:
   - component: {fileID: 4113980430818675130}
   - component: {fileID: 8069464408679380490}
   - component: {fileID: 3582137695391385108}
-  - component: {fileID: 5394877501359687286}
   - component: {fileID: 1154345481394773163}
   - component: {fileID: 6332016567620047422}
   - component: {fileID: 2892484123049706199}
   - component: {fileID: 657343815152261576}
   - component: {fileID: 2056441132744984684}
   - component: {fileID: 7024896758711831199}
+  - component: {fileID: -6589591421344741167}
   m_Layer: 0
   m_Name: MinorBoss2
   m_TagString: Untagged
@@ -364,29 +364,6 @@ MonoBehaviour:
     Tag05: 0
     Tag06: 0
     Tag07: 0
---- !u!114 &5394877501359687286
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5008192887833793545}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4891897768abfbd40b3a55ccf013d218, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyAuthoring
-  health: 50
-  moveSpeed: 5
-  soulsReward: 5
-  condensedSoulsReward: 1
-  xpReward: 0
-  isRanged: 1
-  attackRange: 10
-  fireRate: 1
-  bulletSpeed: 10
-  damage: 10
-  bulletPrefab: {fileID: 776656289791465420, guid: 442c0ba52a24e994a81bf712ffabaafc, type: 3}
 --- !u!114 &1154345481394773163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -736,3 +713,15 @@ MonoBehaviour:
   fogDensity: 0.08
   fadeInDuration: 2
   fadeOutDuration: 3
+--- !u!114 &-6589591421344741167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5008192887833793545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdd410a001897ba409dde302307cfe8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
