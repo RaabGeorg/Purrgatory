@@ -28,6 +28,7 @@ public class RaycastWeapon : MonoBehaviour
 
     void Update()
     {
+        if (!GameData.Weapon.Equals("Railgun")) return;
         if (playerControls.Player.Fire.IsPressed() &&
             Time.time >= this.nextFireTime)
         {
@@ -51,6 +52,9 @@ public class RaycastWeapon : MonoBehaviour
         direction.y = 0;
         direction.Normalize();
         
+        
+        SFXManager.Instance.ShootLaser();
+
         var rayInput = new RaycastInput
         {
             Start = this.firePoint.position,

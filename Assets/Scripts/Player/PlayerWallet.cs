@@ -23,6 +23,7 @@ public class PlayerWallet : MonoBehaviour
 
     public void AddRewards(int condensedSoulsEarned, int soulsEarned)
     {
+        
         condensedSouls += condensedSoulsEarned;
         souls += soulsEarned;
 

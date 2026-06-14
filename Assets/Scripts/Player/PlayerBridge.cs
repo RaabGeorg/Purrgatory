@@ -11,6 +11,7 @@ public class PlayerBridge : MonoBehaviour
     private EntityManager _em;
     private EntityQuery _playerQuery;
     private bool _initialized = false;
+    private float _lastHealth;
 
     private void Awake()
     {
@@ -47,6 +48,13 @@ public class PlayerBridge : MonoBehaviour
 
         // Health Sync
         var hp = _em.GetComponentData<Health>(_playerEntity);
+        
+        if (hp.Value < _lastHealth)
+        {
+            SFXManager.Instance.PlayHurt();
+        }
+        _lastHealth = hp.Value;
+        
         GameEvents.OnHealthChanged?.Invoke(hp.Value);
     }
 
@@ -62,6 +70,7 @@ public class PlayerBridge : MonoBehaviour
         _em.SetComponentData(_playerEntity,
             new Health { Value = PlayerStatsManager.Instance.stats.baseHealth.Value });
         
+        _lastHealth = PlayerStatsManager.Instance.stats.baseHealth.Value;
 
         PlayerStatsManager.Instance?.PushToBridge();
         _initialized = true;
@@ -79,6 +88,7 @@ public class PlayerBridge : MonoBehaviour
         var hp = _em.GetComponentData<Health>(_playerEntity);
         hp.Value = maxHealth;
         _em.SetComponentData(_playerEntity, hp);
+        _lastHealth = hp.Value;
     }
     public Entity GetPlayerEntity() => _playerEntity;
     public EntityManager GetEntityManager() => _em;

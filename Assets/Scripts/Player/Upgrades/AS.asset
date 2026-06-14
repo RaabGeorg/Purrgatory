@@ -21,3 +21,5 @@ MonoBehaviour:
   value: 2
   category: 1
   weaponUpgradeType: 1
+  cost: 0
+  maxLevel: 0

@@ -68,7 +68,6 @@ struct TriggerJob : ITriggerEventsJob
         var health = HealthLookup[healthEntity];
 
         health.Value -= isMagicField ? damage * dt : damage;
-        Debug.Log($"Dealt {damage} damage, HP remaining: {health.Value}");
         HealthLookup[healthEntity] = health;
 
         if (!isMagicField)
