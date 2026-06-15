@@ -12,7 +12,8 @@ namespace Components
     public struct WeaponTag  : IComponentData { } // ← neu
     public struct BulletTag : IComponentData { }
     public struct EyeBossTag : IComponentData { }
-    
+    public struct SlimeBossTag : IComponentData { }
+
     public struct WeaponFromPlayerTag : IComponentData { }
 
     public struct MarkedForExecution : IComponentData {}
