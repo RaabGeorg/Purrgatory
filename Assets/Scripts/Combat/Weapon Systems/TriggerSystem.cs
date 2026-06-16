@@ -23,6 +23,7 @@ public partial struct TriggerSystem : ISystem
             ExplosiveLookup = SystemAPI.GetComponentLookup<Explosion>(true),
             EnemyLookup = SystemAPI.GetComponentLookup<Enemy>(true),
             ecb = ecbSingleton.CreateCommandBuffer(state.WorldUnmanaged),
+            InvincibilityLookup = SystemAPI.GetComponentLookup<InvincibilityData>(false),
         }.Schedule(SystemAPI.GetSingleton<SimulationSingleton>(), state.Dependency);
     }
 }
@@ -34,6 +35,7 @@ struct TriggerJob : ITriggerEventsJob
     [ReadOnly] public ComponentLookup<MagicFieldTag> MagicFieldLookup;
     [ReadOnly] public ComponentLookup<Explosion>  ExplosiveLookup;
     [ReadOnly] public ComponentLookup<Enemy> EnemyLookup;
+    public ComponentLookup<InvincibilityData> InvincibilityLookup;
     public ComponentLookup<Health> HealthLookup;
     public EntityCommandBuffer ecb;
     public float dt;
@@ -64,6 +66,15 @@ struct TriggerJob : ITriggerEventsJob
         if (damageIsEnemy && healthIsEnemy) return;
 
         bool isMagicField = MagicFieldLookup.HasComponent(damageEntity);
+        
+        bool hasIframes = InvincibilityLookup.HasComponent(healthEntity);
+        if (hasIframes && !isMagicField)
+        {
+            if (InvincibilityLookup[healthEntity].CurrentTime > 0f) return;
+            
+        }
+        
+        
         float damage = DamageLookup[damageEntity].Value;
         var health = HealthLookup[healthEntity];
 
@@ -72,6 +83,12 @@ struct TriggerJob : ITriggerEventsJob
 
         if (!isMagicField)
         {
+            if (hasIframes)
+            {
+                var iFrameData = InvincibilityLookup[healthEntity];
+                iFrameData.CurrentTime = iFrameData.MaxTime;
+                InvincibilityLookup[healthEntity] = iFrameData;
+            }
             if (damageIsEnemy)
             {
                 ecb.AddComponent(damageEntity, new ApplyKnockback());
