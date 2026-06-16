@@ -58,9 +58,13 @@ public class SceneSwitchManager : MonoBehaviour
 
     private void OnToggleLevel(InputAction.CallbackContext context)
     {
-        // Only allow toggling if the core game is running and no load/unload is active
         if (gameStarted && !isTransitioning)
         {
+            if (GameObject.FindGameObjectWithTag("Boss") != null)
+            {
+                Debug.Log("Diggi kannst nicht switchen boss is da");
+                return;
+            }
             StartCoroutine(ToggleLevelRoutine());
         }
     }
@@ -86,17 +90,11 @@ public class SceneSwitchManager : MonoBehaviour
         
         yield return StartCoroutine(FinalizeSceneLoad(hellScene, "SpawnPoint_Hell"));
         
-        // --- ADD THIS HERE ---
-        // Ultimate safety net. Regardless of what UI components silently panicked 
-        // or locked during the async loading phase, we crush the locks right 
-        // before giving the player control.
         PauseLogic.SetPaused(false);
         PauseLogic.who = null;
-        DeathScreen.IsDead = false; // Add this if IsDead is still causing ghost UI issues
-        // ---------------------
+        DeathScreen.IsDead = false; 
 
         isTransitioning = false;
-        Debug.Log("<color=green>[SceneSwitchManager] Coroutine Step 5: Transition Complete! Locks cleared.</color>");
     }
 
     private IEnumerator ToggleLevelRoutine()
