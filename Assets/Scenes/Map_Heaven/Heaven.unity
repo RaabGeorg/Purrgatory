@@ -178,8 +178,66 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfb2207d3ec407647b9789ed6d6b4d76, type: 3}
+--- !u!1001 &7136473682124061389
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7407072150299787558, guid: 61add81cd7adf1e45abd9886a7f08f93, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 96.43005
+      objectReference: {fileID: 0}
+    - target: {fileID: 7407072150299787558, guid: 61add81cd7adf1e45abd9886a7f08f93, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.66309
+      objectReference: {fileID: 0}
+    - target: {fileID: 7407072150299787558, guid: 61add81cd7adf1e45abd9886a7f08f93, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.28617
+      objectReference: {fileID: 0}
+    - target: {fileID: 7407072150299787558, guid: 61add81cd7adf1e45abd9886a7f08f93, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7407072150299787558, guid: 61add81cd7adf1e45abd9886a7f08f93, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7407072150299787558, guid: 61add81cd7adf1e45abd9886a7f08f93, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7407072150299787558, guid: 61add81cd7adf1e45abd9886a7f08f93, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7407072150299787558, guid: 61add81cd7adf1e45abd9886a7f08f93, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7407072150299787558, guid: 61add81cd7adf1e45abd9886a7f08f93, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7407072150299787558, guid: 61add81cd7adf1e45abd9886a7f08f93, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7651718286885205341, guid: 61add81cd7adf1e45abd9886a7f08f93, type: 3}
+      propertyPath: m_Name
+      value: BakedBossArena
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 61add81cd7adf1e45abd9886a7f08f93, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 7136473682124061389}
   - {fileID: 208291329912991679}
