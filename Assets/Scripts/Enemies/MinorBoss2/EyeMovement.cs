@@ -22,7 +22,6 @@ public class EyeMovement : MonoBehaviour
     private Vector3 startPosition;
     
     
- 
     
     public bool IsInShootRange => player != null &&
         Vector3.Distance(transform.position, player.position) <= stopDistance * 1.5f;

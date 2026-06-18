@@ -154,16 +154,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponAuthoring
   bulletPrefab: {fileID: 32527178692952100, guid: 98a71444cb5c35641a50db5decdec6c0, type: 3}
-  bulletSpeed: 20
-  damage: 10
-  fireRate: 2
+  bulletSpeed: 10
+  damage: 25
+  fireRate: 1
   spawnPoint: {fileID: 1717824111}
   isPlayer: 0
-  vortexMode: 1
+  weaponType: 1
+  pelletCount: 8
+  spreadAngle: 25
+  vortexMode: 0
   pullRadius: 5
   pullStrength: 25
   explosiveDamage: 10
-  bulletScale: 2
+  bulletScale: 0.7
 --- !u!23 &977129794
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -449,6 +452,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c3af50e60ab7cd499dd1453195bf1ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  InvincibilityDuration: 0.5
 --- !u!1 &1717824110
 GameObject:
   m_ObjectHideFlags: 0
