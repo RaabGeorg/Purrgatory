@@ -4,7 +4,7 @@ using Components;
 
 [BurstCompile]
 [UpdateInGroup(typeof(SimulationSystemGroup))]
-[UpdateBefore(typeof(FixedStepSimulationSystemGroup))]
+[UpdateAfter(typeof(FixedStepSimulationSystemGroup))]
 public partial struct InvincibilitySystem : ISystem 
 {
     public void OnUpdate(ref SystemState state)
@@ -20,6 +20,7 @@ public partial struct InvincibilitySystem : ISystem
 
 
 
+    [BurstCompile]
     public partial struct TimerJob : IJobEntity
     {
         public float DeltaTime;
