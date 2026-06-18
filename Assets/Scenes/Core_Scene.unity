@@ -6473,7 +6473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8d59766ea0718b40b1aa217067023cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  icon: {fileID: 0}
+  icon: {fileID: 641370561}
   cooldown: 2
 --- !u!1 &1419261708
 GameObject:
