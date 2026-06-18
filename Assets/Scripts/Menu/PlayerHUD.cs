@@ -29,7 +29,7 @@ public class PlayerHUD : MonoBehaviour
     private void UpdateHealth(float hp)
     {
         if (playerHealthText != null)
-            playerHealthText.text = $"Health: {hp}";
+            playerHealthText.text = $"{hp}";
     }
 
     private void Update()

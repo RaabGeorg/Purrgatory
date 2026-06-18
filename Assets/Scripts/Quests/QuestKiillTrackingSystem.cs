@@ -3,7 +3,7 @@ using Unity.Collections;
 using Unity.Entities;
 
 [UpdateInGroup(typeof(SimulationSystemGroup))]
-public partial class QuestKillTrackingSystem : SystemBase
+public partial class QuestKiillTrackingSystem : SystemBase
 {
     private EntityQuery _query;
 
@@ -17,7 +17,7 @@ public partial class QuestKillTrackingSystem : SystemBase
 
     protected override void OnUpdate()
     {
-        if (!QuestManager.Instance.IsQuestActive) return;
+        if (QuestManager.Instance == null || !QuestManager.Instance.IsQuestActive) return;
 
         var entities = _query.ToEntityArray(Allocator.Temp);
         foreach (var entity in entities)

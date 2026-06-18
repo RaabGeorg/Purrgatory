@@ -159,7 +159,7 @@ MonoBehaviour:
   fireRate: 2
   spawnPoint: {fileID: 1717824111}
   isPlayer: 0
-  vortexMode: 1
+  vortexMode: 0
   pullRadius: 5
   pullStrength: 25
   explosiveDamage: 10
@@ -449,6 +449,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c3af50e60ab7cd499dd1453195bf1ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  InvincibilityDuration: 0.5
 --- !u!1 &1717824110
 GameObject:
   m_ObjectHideFlags: 0
