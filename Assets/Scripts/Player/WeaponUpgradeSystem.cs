@@ -20,7 +20,7 @@ public class WeaponUpgradeSystem : MonoBehaviour
     public void UpgradeDamage(float amount)
     {
         var query = _em.CreateEntityQuery(typeof(Weapon), typeof(WeaponFromPlayerTag));
-        if (!query.HasSingleton<Weapon>()) return;
+        if (!query.HasSingleton<WeaponFromPlayerTag>()) return;
 
         var entity = query.GetSingletonEntity();
         var weapon = _em.GetComponentData<Weapon>(entity);
@@ -32,12 +32,12 @@ public class WeaponUpgradeSystem : MonoBehaviour
     public void UpgradeFireRate(float amount)
     {
         var query = _em.CreateEntityQuery(typeof(Weapon), typeof(WeaponFromPlayerTag));
-        if (!query.HasSingleton<Weapon>()) return;
+        if (!query.HasSingleton<WeaponFromPlayerTag>()) return;
 
         var entity = query.GetSingletonEntity();
         var weapon = _em.GetComponentData<Weapon>(entity);
         weapon.FireRate *= 1 + amount;
         _em.SetComponentData(entity, weapon);
-        //Debug.Log($"AttackSpeed: {weapon.FireRate}");
+         //Debug.Log($"AttackSpeed: {weapon.FireRate}");
     }
 }
