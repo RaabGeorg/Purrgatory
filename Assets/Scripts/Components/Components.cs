@@ -145,5 +145,6 @@ namespace Components
         public float MaxTime;
     }
 
+    public struct KillCounted : IComponentData {}
    
 }
