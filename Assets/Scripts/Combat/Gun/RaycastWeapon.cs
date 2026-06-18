@@ -1,5 +1,6 @@
 
 using System.Collections;
+using Components;
 using Unity.Entities;
 using UnityEngine;
 using Unity.Physics;
@@ -72,10 +73,17 @@ public class RaycastWeapon : MonoBehaviour
         
         if (collisionWorld.CastRay(rayInput, out Unity.Physics.RaycastHit hit))
         {
-            Debug.LogWarning("hit");
-            Entity hitEntity = hit.Entity;
-            endPoint = hit.Position;
-            entityManager.DestroyEntity(hit.Entity);
+            
+            if (entityManager.HasComponent<Health>(hit.Entity))
+            {
+                var health = entityManager.GetComponentData<Health>(hit.Entity);
+                
+                if (health.Value < 0) return;
+                
+                health.Value -= 50f;
+                
+                entityManager.SetComponentData(hit.Entity, health); 
+            }
 
         }
         if (this.laserCoroutine != null)

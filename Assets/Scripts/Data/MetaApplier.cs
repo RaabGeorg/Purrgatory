@@ -10,7 +10,8 @@ public class MetaApplier : MonoBehaviour
         {
             UpgradeDefinition upgrade = allUpgrades.Find(u => u.displayName == name);
             if (upgrade != null)
-                PlayerStatsManager.Instance.AddModifier(upgrade.statType, new StatModifier(upgrade.value, upgrade.modifierType));
+                PlayerStatsManager.Instance.AddModifier(upgrade.statType,
+                    new StatModifier(upgrade.value, upgrade.modifierType));
         }
     }
 }
