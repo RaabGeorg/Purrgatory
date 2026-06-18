@@ -11,6 +11,7 @@ public class QuestUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI dialogText;
     [SerializeField] private Button acceptButton;
     [SerializeField] private Button declineButton;
+    [SerializeField] private Button closeButton;
     
     
 
@@ -29,6 +30,7 @@ public class QuestUI : MonoBehaviour
         
         acceptButton.onClick.AddListener(OnAccept);
         declineButton.onClick.AddListener(OnDecline);
+        closeButton.onClick.AddListener(OnClose);
     }
 
     private void OnEnable()
@@ -46,18 +48,20 @@ public class QuestUI : MonoBehaviour
     public void ShowDialog(QuestData quest)
     {
         dialogPanel.SetActive(true);
+        
+        acceptButton.gameObject.SetActive(false);
+        declineButton.gameObject.SetActive(false);
+        closeButton.gameObject.SetActive(false);
 
         if (QuestManager.Instance.IsQuestComplete)
         {
             dialogText.text = $"{quest.questName} complete!";
-            acceptButton.gameObject.SetActive(false);
-            declineButton.gameObject.SetActive(false);
+            closeButton.gameObject.SetActive(true);
         }
         else if (QuestManager.Instance.IsQuestActive)
         {
-            dialogText.text = QuestManager.Instance.GetProgressText();
-            acceptButton.gameObject.SetActive(false);
-            declineButton.gameObject.SetActive(false);
+            dialogText.text = $"You haven't completed the quest yet!\n{QuestManager.Instance.GetProgressText()}";
+            closeButton.gameObject.SetActive(true);
         }
         else
         {
@@ -87,6 +91,11 @@ public class QuestUI : MonoBehaviour
     }
 
     private void OnDecline()
+    {
+        HideDialog();
+    }
+
+    private void OnClose()
     {
         HideDialog();
     }
