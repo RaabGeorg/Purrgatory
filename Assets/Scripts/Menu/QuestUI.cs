@@ -110,7 +110,11 @@ public class QuestUI : MonoBehaviour
     {
         if (progressPanel != null)
             progressPanel.SetActive(false);
-        // give quest results needed
+        OnQuestRewardGranted(QuestManager.Instance.ActiveQuest);
     }
-
+    
+    private void OnQuestRewardGranted(QuestData quest)
+    {
+        // TODO: weapon mod reward
+    }
 }
