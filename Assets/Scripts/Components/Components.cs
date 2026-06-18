@@ -114,8 +114,8 @@ namespace Components
     }
 
     
-    public struct ChunkTag : IComponentData { public int2 Coordinate; } // ← neuer
-    public struct ChunkConfigData : IComponentData // ← neuer
+    public struct ChunkTag : IComponentData { public int2 Coordinate; } // ← Manuel neuer
+    public struct ChunkConfigData : IComponentData // ← Manuel neuer
     {
         public int ChunkSize;
         public int ViewDistance;
@@ -134,15 +134,15 @@ namespace Components
     {
     }
     
-    public struct ActiveSceneEntity : IComponentData, IEnableableComponent {}
-
-    public struct LevelSceneTag : IComponentData
-    {
-        public Unity.Collections.FixedString64Bytes LevelName;
-    }
     public struct PlayerInputState : IComponentData
     {
         public bool IsFiring;
+    }
+
+    public struct InvincibilityData : IComponentData
+    {
+        public float CurrentTime;
+        public float MaxTime;
     }
 
    

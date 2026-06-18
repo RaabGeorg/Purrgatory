@@ -18,7 +18,7 @@ MonoBehaviour:
   rarity: 0
   statType: 1
   modifierType: 1
-  value: 5
+  value: 0.2
   category: 1
   weaponUpgradeType: 1
   cost: 500

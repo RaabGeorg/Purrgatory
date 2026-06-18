@@ -44,11 +44,11 @@ public partial class PlayerInputSystem : SystemBase
         {
             weapon.ValueRW.IsFiring = firing;
             
-            if (firing && _sfxTimer <= 0f)
-            {
-                SFXManager.Instance.ShootBullet();
-                _sfxTimer = 1f / weapon.ValueRO.FireRate;
-            }
+             if (firing && _sfxTimer <= 0f)
+             {
+                 SFXManager.Instance.ShootBullet();
+                 _sfxTimer = 1f / weapon.ValueRO.FireRate;
+             }
         }
     }
 }

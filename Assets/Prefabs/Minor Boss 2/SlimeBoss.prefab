@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 3792930684519039145}
   m_Layer: 0
   m_Name: SlimeBoss
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -65,7 +65,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbda33e72e6303347b72ee101ef2d781, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SlimeBossHitboxLinker
-  hitboxAnchor: {fileID: 0}
   hitboxOffset: {x: 0, y: 0, z: 0}
   entitySearchGracePeriod: 2
 --- !u!114 &7977668935797313467
@@ -113,6 +112,8 @@ MonoBehaviour:
   jumpHeight: 30
   landingRadius: 3
   impactDamage: 50
+  rayBelongsTo: 8
+  rayCollidesWith: 2
 --- !u!114 &-3587259376479827940
 MonoBehaviour:
   m_ObjectHideFlags: 0

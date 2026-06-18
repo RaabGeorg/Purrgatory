@@ -66,6 +66,7 @@ public class UpgradePickerUI : MonoBehaviour
             else
                 WeaponUpgradeSystem.Instance.UpgradeFireRate(upgrade.value);
         }
+
         xpBarContainer.SetActive(true);
         container.SetActive(false);
         PauseLogic.PauseGame("Pick");

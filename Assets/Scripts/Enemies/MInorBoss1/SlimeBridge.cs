@@ -55,17 +55,23 @@ public class SlimeBossHitboxLinker : MonoBehaviour
             return;
         }
 
-        // Only track ground position while NOT in the jump attack,
-        // so the hitbox doesn't fly into the sky with the visual.
-        if (jumpAttack == null || !jumpAttack.IsAttacking)
-            lastGroundPos = transform.position;
+        // While attacking, move the hitbox off-map so the boss is invulnerable mid-jump.
+        // When grounded, track normally.
+        if (jumpAttack != null && jumpAttack.IsAttacking)
+        {
+            var localTransform = em.GetComponentData<LocalTransform>(hitboxEntity);
+            localTransform.Position = new float3(0f, -9999f, 0f);
+            em.SetComponentData(hitboxEntity, localTransform);
+            return;
+        }
 
+        lastGroundPos = transform.position;
         float3 targetPos = (float3)(lastGroundPos + hitboxOffset);
 
-        var localTransform = em.GetComponentData<LocalTransform>(hitboxEntity);
-        localTransform.Position = targetPos;
-        localTransform.Rotation = transform.rotation;
-        em.SetComponentData(hitboxEntity, localTransform);
+        var lt = em.GetComponentData<LocalTransform>(hitboxEntity);
+        lt.Position = targetPos;
+        lt.Rotation = transform.rotation;
+        em.SetComponentData(hitboxEntity, lt);
     }
 
     void TryFindEntity()

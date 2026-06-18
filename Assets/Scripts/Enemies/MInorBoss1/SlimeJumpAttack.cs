@@ -62,6 +62,11 @@ public class SlimeJumpAttack : MonoBehaviour
         if (slimeMovement != null) slimeMovement.CanMove = true;
     }
 
+    void OnDestroy()
+    {
+        if (activeCircle != null) Destroy(activeCircle);
+    }
+
     // ─────────────────────────────────────────────────────────────
     void Start()
     {
@@ -138,7 +143,7 @@ public class SlimeJumpAttack : MonoBehaviour
             // Drift the landing position toward the player during hang.
             Vector3 targetLanding = player.position;
             targetLanding.y = landingPos.y;
-            landingPos = Vector3.Lerp(landingPos, targetLanding, Time.deltaTime * 2f);
+            landingPos = Vector3.Lerp(landingPos, targetLanding, Time.deltaTime * 6f);
 
             // Keep the circle in sync with the updated landing pos.
             if (circle != null)
