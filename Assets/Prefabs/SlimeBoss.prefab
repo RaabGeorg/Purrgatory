@@ -81,10 +81,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SlimeMovement
   player: {fileID: 0}
   playerTag: Player
-  moveSpeed: 55
+  moveSpeed: 2
   stopDistance: 2
-  hopAmplitude: 0.6
-  hopSpeed: 2
   settleDuration: 0.5
   CanMove: 1
 --- !u!114 &2083214316858911720
