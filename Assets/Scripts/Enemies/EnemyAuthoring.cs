@@ -56,6 +56,7 @@ public class EnemyAuthoring : MonoBehaviour
                     FireRate = authoring.fireRate,
                     FireCooldown = 5f,
                     IsFiring = false,
+                    BulletScale = 1f,
                     SpawnOffset = new Unity.Mathematics.float3(0f, 0f, 1f)
                 });
                 AddComponent(entity, new VortexMod

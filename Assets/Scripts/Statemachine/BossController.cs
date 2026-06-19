@@ -5,6 +5,9 @@ public class BossController : MonoBehaviour
     private StateMachine _stateMachine;
 
     // Add shit here your states will need here
+    
+    public Transform[] waypoints;
+    public float moveSpeed = 5f;
 
     private void Awake()
     {
@@ -15,6 +18,7 @@ public class BossController : MonoBehaviour
     {
         // u set initialstate here u know the start state Ig
         // _stateMachine.SetState(new initialStateTypeShit(this));
+        _stateMachine.SetState(new RandomWaypointState(this));
     }
 
     private void Update()
