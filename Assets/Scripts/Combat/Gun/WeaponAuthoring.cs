@@ -31,7 +31,19 @@ public class WeaponAuthoring : MonoBehaviour
         public override void Bake(WeaponAuthoring authoring)
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
-            
+
+            string currentSelection = GameData.Weapon;
+
+            if (currentSelection == "Shotgun")
+            {
+                authoring.weaponType = WeaponType.Shotgun;
+                authoring.bulletSpeed = 15;
+                authoring.fireRate = 1;
+                authoring.damage = 25;
+                authoring.bulletScale = 0.7f;
+            }
+
+
             AddComponent(entity, new Weapon
             {
                 Type         = authoring.weaponType,

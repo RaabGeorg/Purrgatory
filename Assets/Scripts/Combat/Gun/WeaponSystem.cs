@@ -14,20 +14,20 @@ public partial struct WeaponSystem : ISystem
         var ecbSingleton = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>();
         var ecb = ecbSingleton.CreateCommandBuffer(state.WorldUnmanaged);
 
-        string currentSelection = GameData.Weapon;
+        //string currentSelection = GameData.Weapon;
         
-        WeaponType currentWeapon = WeaponType.Normal;
+        //WeaponType currentWeapon = WeaponType.Normal;
         
-        if (currentSelection == "Shotgun")
-        {
-            currentWeapon = WeaponType.Shotgun;
-        }
+        //if (currentSelection == "Shotgun")
+        //{
+        //    currentWeapon = WeaponType.Shotgun;
+        //}
 
         new WeaponJob
         {
             DeltaTime = SystemAPI.Time.DeltaTime,
             ECB       = ecb.AsParallelWriter(),
-            currentWeapon = currentWeapon
+            //currentWeapon = currentWeapon
 
         }.ScheduleParallel();
     }
@@ -39,13 +39,13 @@ public partial struct WeaponJob : IJobEntity
     public float DeltaTime;
     public EntityCommandBuffer.ParallelWriter ECB;
 
-    public WeaponType currentWeapon;
+    //public WeaponType currentWeapon;
     void Execute([ChunkIndexInQuery] int chunkIndex,
         ref Weapon weapon, ref LocalTransform transform,
         in WeaponTarget target, in BulletPrefabRef prefabRef,
         ref VortexMod vortexMod)
     {
-        weapon.Type = currentWeapon;
+        //weapon.Type = currentWeapon;
         weapon.FireCooldown -= DeltaTime;
         if (!weapon.IsFiring || weapon.FireCooldown > 0f) return;
 
@@ -63,10 +63,6 @@ public partial struct WeaponJob : IJobEntity
 
         if (weapon.Type == WeaponType.Shotgun)
         {
-            weapon.BulletSpeed = 15;
-            weapon.FireRate = 1;
-            weapon.Damage = 25;
-            weapon.BulletScale = 0.7f;
             FireShotgun(chunkIndex, ref weapon, ref vortexMod, prefabRef, spawnPos, rotation);
         }
         else

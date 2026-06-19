@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class InventoryMenu : MonoBehaviour
 {
     public GameObject container;
-
+    public StatsShown updaterStats;
 
     private void Update()
     {
@@ -12,6 +12,7 @@ public class InventoryMenu : MonoBehaviour
         {
             if (PauseLogic.PauseGame("Inventory")) 
             {
+                updaterStats.UpdateStatsUI();
                 ShowHide();
             }
         }
