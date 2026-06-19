@@ -6394,7 +6394,27 @@ PrefabInstance:
       value: SM_SciFi_Weapons_01
       objectReference: {fileID: 0}
     - target: {fileID: 4790510253951305374, guid: 7541647a8e2e9424e90d3c9978b3a10f, type: 3}
+      propertyPath: fireRate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4790510253951305374, guid: 7541647a8e2e9424e90d3c9978b3a10f, type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4790510253951305374, guid: 7541647a8e2e9424e90d3c9978b3a10f, type: 3}
+      propertyPath: laserDuration
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 4790510253951305374, guid: 7541647a8e2e9424e90d3c9978b3a10f, type: 3}
+      propertyPath: maxChargeTime
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4790510253951305374, guid: 7541647a8e2e9424e90d3c9978b3a10f, type: 3}
+      propertyPath: overchargeCooldown
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4790510253951305374, guid: 7541647a8e2e9424e90d3c9978b3a10f, type: 3}
+      propertyPath: overchargeUnlocked
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4900346835320568517, guid: 7541647a8e2e9424e90d3c9978b3a10f, type: 3}
