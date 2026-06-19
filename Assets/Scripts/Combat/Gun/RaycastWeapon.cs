@@ -11,7 +11,8 @@ public class RaycastWeapon : MonoBehaviour
     [SerializeField] private float laserDuration = 0.03f;
     private Coroutine laserCoroutine;
     [SerializeField] private Transform firePoint;
-    [SerializeField] private float fireRate = 0.2f;
+    [SerializeField] public float fireRate = 0.2f;
+    [SerializeField] public float damage = 20f;
     
     [Header("Overcharge")]
     [SerializeField] private bool overchargeUnlocked = false;
@@ -137,7 +138,7 @@ public class RaycastWeapon : MonoBehaviour
         var hits = new NativeList<Unity.Physics.RaycastHit>(Allocator.Temp);
         collisionWorld.CastRay(rayInput, ref hits);
 
-        float damage = Mathf.Lerp(20f, 80f, chargeProgress); 
+        float damage = Mathf.Lerp(this.damage, this.damage + 60, chargeProgress); 
         foreach (var hit in hits)
             DamageEntity(entityManager, hit.Entity, damage);
 
@@ -183,7 +184,7 @@ public class RaycastWeapon : MonoBehaviour
 
         if (collisionWorld.CastRay(rayInput, out Unity.Physics.RaycastHit hit))
         {
-            DamageEntity(entityManager, hit.Entity, 20f);
+            DamageEntity(entityManager, hit.Entity, damage);
             endPoint = hit.Position;
         }
 

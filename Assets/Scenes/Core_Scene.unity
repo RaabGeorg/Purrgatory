@@ -569,7 +569,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4324c37ed9f0d241868c85452057bc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MagicFieldSpawner
-  cooldown: 2
+  cooldown: 10
   fireSound: {fileID: 8300000, guid: 2cf33f0e52da2b44891564f4bfb2de0b, type: 3}
   fireWooshSound: {fileID: 8300000, guid: 76c18a7859a8c2b41bb0178ae1eef76b, type: 3}
   sfxGroup: {fileID: -3444661319311129732, guid: c3113d473302bd04aac6f491b787d0a1, type: 2}
@@ -663,7 +663,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c47ce0b3bfbd44dea5a58de3b0f8fa29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VortexSpawner
-  cooldown: 2
+  cooldown: 10
   vortexClip: {fileID: 8300000, guid: 275ce46b165b0874c88c58c33c216cd6, type: 3}
   sfxGroup: {fileID: -3444661319311129732, guid: c3113d473302bd04aac6f491b787d0a1, type: 2}
 --- !u!1 &178019481
@@ -4308,7 +4308,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   icon: {fileID: 1045590048}
-  cooldown: 2
+  cooldown: 10
 --- !u!1 &1036678133
 GameObject:
   m_ObjectHideFlags: 0
@@ -6395,7 +6395,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4790510253951305374, guid: 7541647a8e2e9424e90d3c9978b3a10f, type: 3}
       propertyPath: fireRate
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4790510253951305374, guid: 7541647a8e2e9424e90d3c9978b3a10f, type: 3}
       propertyPath: m_Enabled
@@ -6795,7 +6795,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   icon: {fileID: 641370561}
-  cooldown: 2
+  cooldown: 10
 --- !u!1 &1419261708
 GameObject:
   m_ObjectHideFlags: 0

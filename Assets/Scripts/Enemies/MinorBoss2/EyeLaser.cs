@@ -216,7 +216,7 @@ public class EyeLaser : MonoBehaviour
             Start = laserOrigin.position,
             End = laserOrigin.position + dir * laserMaxLength,
             Filter = new CollisionFilter{
-                BelongsTo = 1 << 3,
+                BelongsTo = 1 << 2,
                 CollidesWith = 1 << 1,
                 GroupIndex = 0
                 

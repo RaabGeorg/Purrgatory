@@ -13,7 +13,7 @@ public partial struct WeaponSystem : ISystem
     {
         var ecbSingleton = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>();
         var ecb = ecbSingleton.CreateCommandBuffer(state.WorldUnmanaged);
-
+        
         string currentSelection = GameData.Weapon;
         
         WeaponType currentWeapon = WeaponType.Normal;
