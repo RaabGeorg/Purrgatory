@@ -104,6 +104,7 @@ public class SFXManager : MonoBehaviour
 
     public void RegisterSource(AudioSource source)
     {
+        activeSources.RemoveAll(s => s == null);
         activeSources.Add(source);
     }
     

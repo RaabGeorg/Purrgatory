@@ -6,6 +6,7 @@ public class WeaponUpgradeSystem : MonoBehaviour
 {
     public static WeaponUpgradeSystem Instance { get; private set; }
     private EntityManager _em;
+    private RaycastWeapon _railgun;
 
     void Awake()
     {
@@ -15,10 +16,26 @@ public class WeaponUpgradeSystem : MonoBehaviour
     void Start()
     {
         _em = World.DefaultGameObjectInjectionWorld.EntityManager;
+        _railgun = FindObjectOfType<RaycastWeapon>();
     }
 
     public void UpgradeDamage(StatModifier statModifier)
     {
+        if (GameData.Weapon == "Railgun")
+        {
+            if (_railgun != null)
+            {
+                if (statModifier.Type == StatModType.Flat)
+                {
+                    _railgun.damage += statModifier.Value;
+                }
+                else
+                {
+                    _railgun.damage *= 1 + statModifier.Value;
+                }
+            }
+        }
+
         var query = _em.CreateEntityQuery(typeof(Weapon), typeof(WeaponFromPlayerTag));
         if (!query.HasSingleton<WeaponFromPlayerTag>()) return;
 
@@ -40,6 +57,21 @@ public class WeaponUpgradeSystem : MonoBehaviour
 
     public void UpgradeFireRate(StatModifier statModifier)
     {
+        if (GameData.Weapon == "Railgun")
+        {
+            if (_railgun != null)
+            {
+                if (statModifier.Type == StatModType.Flat)
+                {
+                    _railgun.fireRate -= statModifier.Value;
+                }
+                else
+                {
+                    _railgun.fireRate *= 1 - statModifier.Value;
+                }
+            }
+        }
+        
         var query = _em.CreateEntityQuery(typeof(Weapon), typeof(WeaponFromPlayerTag));
         if (!query.HasSingleton<WeaponFromPlayerTag>()) return;
 
