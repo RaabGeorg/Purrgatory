@@ -13,7 +13,7 @@ namespace Components
     public struct BulletTag : IComponentData { }
     public struct EyeBossTag : IComponentData { }
     public struct SlimeBossTag : IComponentData { }
-
+    public struct BossPortalPhaseActive : IComponentData { }
     public struct WeaponFromPlayerTag : IComponentData { }
 
     public struct MarkedForExecution : IComponentData {}
@@ -156,10 +156,11 @@ namespace Components
     
     public enum AttackPattern : byte
     {
-        Spiral,      
-        AimedBurst,  
-        Wall,         
-        CrossRotate  
+        TripleSpiral,    
+        FlowerPetal,    
+        ChaosStorm,      
+        ConcentricRings, 
+         
     }
 
     public struct BossPortal : IComponentData
@@ -169,9 +170,10 @@ namespace Components
         public float FireRate;
         public float BulletSpeed;
         public float Damage;
-        public float CurrentAngle;   
-        public float RotationSpeed;  
+        public float CurrentAngle;
+        public float RotationSpeed;
         public int   BulletsPerShot;
-        public float3 PlayerPos;     
+        public int RingIndex;
+        public uint RandomSeed;
     }
 }

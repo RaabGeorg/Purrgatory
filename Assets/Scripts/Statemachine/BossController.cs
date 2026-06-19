@@ -18,7 +18,7 @@ public class BossController : MonoBehaviour
     {
         // u set initialstate here u know the start state Ig
         // _stateMachine.SetState(new initialStateTypeShit(this));
-        _stateMachine.SetState(new RandomWaypointState(this));
+        _stateMachine.SetState(new BossPortalAttackState(this));
     }
 
     private void Update()

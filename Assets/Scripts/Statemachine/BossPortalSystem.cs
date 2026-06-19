@@ -1,29 +1,26 @@
-using Components;
 using Unity.Burst;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
+using Components;
 
 [UpdateInGroup(typeof(SimulationSystemGroup))]
 public partial struct BossPortalSystem : ISystem
 {
+    public void OnCreate(ref SystemState state)
+    {
+        state.RequireForUpdate<BossPortalPhaseActive>();
+    }
+
     public void OnUpdate(ref SystemState state)
     {
         var ecbSingleton = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>();
         var ecb = ecbSingleton.CreateCommandBuffer(state.WorldUnmanaged);
 
-        // Spielerposition holen
-        float3 playerPos = float3.zero;
-        foreach (var transform in SystemAPI.Query<RefRO<LocalTransform>>().WithAll<PlayerTag>())
-        {
-            playerPos = transform.ValueRO.Position;
-            break;
-        }
-
         new BossPortalJob
         {
             DeltaTime = SystemAPI.Time.DeltaTime,
-            PlayerPos = playerPos,
+            
             ECB       = ecb.AsParallelWriter()
         }.ScheduleParallel();
     }
@@ -33,7 +30,6 @@ public partial struct BossPortalSystem : ISystem
 public partial struct BossPortalJob : IJobEntity
 {
     public float DeltaTime;
-    public float3 PlayerPos;
     public EntityCommandBuffer.ParallelWriter ECB;
 
     void Execute([ChunkIndexInQuery] int chunkIndex,
@@ -47,89 +43,126 @@ public partial struct BossPortalJob : IJobEntity
 
         switch (portal.Pattern)
         {
-            case AttackPattern.Spiral:
-                FireSpiral(chunkIndex, ref portal, origin, prefabRef);
+            case AttackPattern.TripleSpiral:
+                FireTripleSpiral(chunkIndex, ref portal, origin, prefabRef);
                 break;
-            case AttackPattern.AimedBurst:
-                FireAimedBurst(chunkIndex, ref portal, origin, prefabRef);
+            case AttackPattern.FlowerPetal:
+                FireFlowerPetal(chunkIndex, ref portal, origin, prefabRef);
                 break;
-            case AttackPattern.Wall:
-                FireWall(chunkIndex, ref portal, origin, prefabRef);
+            case AttackPattern.ChaosStorm:
+                FireChaosStorm(chunkIndex, ref portal, origin, prefabRef);
                 break;
-            case AttackPattern.CrossRotate:
-                FireCross(chunkIndex, ref portal, origin, prefabRef);
+            case AttackPattern.ConcentricRings:
+                FireConcentricRings(chunkIndex, ref portal, origin, prefabRef);
                 break;
+           
         }
     }
-
-    // 🌀 Spiral – rotiert mit jedem Schuss weiter
-    void FireSpiral(int chunkIndex, ref BossPortal portal, float3 origin, in BulletPrefabRef prefabRef)
+    
+    void FireTripleSpiral(int chunkIndex, ref BossPortal portal, float3 origin, in BulletPrefabRef prefabRef)
     {
-        float angleStep = 360f / portal.BulletsPerShot;
-
-        for (int i = 0; i < portal.BulletsPerShot; i++)
+        for (int arm = 0; arm < 3; arm++)
         {
-            float angle = portal.CurrentAngle + angleStep * i;
-            SpawnBullet(chunkIndex, portal, origin, prefabRef, AngleToDir(angle));
+            float armOffset = 120f * arm;
+            for (int i = 0; i < 3; i++)
+            {
+                
+                float angle = portal.CurrentAngle + armOffset + i * 8f;
+                float speed = portal.BulletSpeed - i * 1.5f; 
+                SpawnBulletSpeed(chunkIndex, portal, origin, prefabRef, AngleToDir(angle), speed);
+            }
+        }
+        portal.CurrentAngle += portal.RotationSpeed * (1f / portal.FireRate);
+    }
+    
+    void FireFlowerPetal(int chunkIndex, ref BossPortal portal, float3 origin, in BulletPrefabRef prefabRef)
+    {
+        int petals      = 5;
+        int bulletsPerPetal = 4;
+        float petalSpread = 12f; 
+
+        for (int p = 0; p < petals; p++)
+        {
+            float petalCenter = portal.CurrentAngle + (360f / petals) * p;
+
+            for (int b = 0; b < bulletsPerPetal; b++)
+            {
+                float t     = (float)b / (bulletsPerPetal - 1);
+                float angle = petalCenter + math.lerp(-petalSpread, petalSpread, t);
+                
+                float speedMod = 1f - math.abs(t - 0.5f) * 0.4f;
+                SpawnBulletSpeed(chunkIndex, portal, origin, prefabRef,
+                    AngleToDir(angle), portal.BulletSpeed * speedMod);
+            }
         }
 
         portal.CurrentAngle += portal.RotationSpeed * (1f / portal.FireRate);
     }
-
-    // 🎯 Aimed Burst – zielt auf Spieler + Fächerspread
-    void FireAimedBurst(int chunkIndex, ref BossPortal portal, float3 origin, in BulletPrefabRef prefabRef)
+    
+    
+    
+    void FireChaosStorm(int chunkIndex, ref BossPortal portal, float3 origin, in BulletPrefabRef prefabRef)
     {
-        float3 toPlayer = math.normalizesafe(PlayerPos - origin);
-        float baseAngle = math.degrees(math.atan2(toPlayer.x, toPlayer.z));
-        float spreadStep = portal.BulletsPerShot > 1 ? 30f / (portal.BulletsPerShot - 1) : 0f;
+        var rng = new Unity.Mathematics.Random(portal.RandomSeed + (uint)(portal.CurrentAngle * 100));
 
-        for (int i = 0; i < portal.BulletsPerShot; i++)
+        int total = portal.BulletsPerShot;
+
+        for (int i = 0; i < total; i++)
         {
-            float angle = baseAngle - 15f + spreadStep * i;
-            SpawnBullet(chunkIndex, portal, origin, prefabRef, AngleToDir(angle));
+            float baseAngle  = (360f / total) * i;
+            float jitter     = rng.NextFloat(-15f, 15f);
+            float finalAngle = baseAngle + portal.CurrentAngle + jitter;
+
+            
+            int skipIndex = (int)(portal.CurrentAngle / 10f) % 4;
+            if (i % 4 == skipIndex) continue;
+
+            float speedVar = rng.NextFloat(0.7f, 1.3f);
+            SpawnBulletSpeed(chunkIndex, portal, origin, prefabRef,
+                AngleToDir(finalAngle), portal.BulletSpeed * speedVar);
         }
-    }
 
-    // 🧱 Wall – Bulletwand, Lücke NICHT beim Spieler → muss ausweichen
-    void FireWall(int chunkIndex, ref BossPortal portal, float3 origin, in BulletPrefabRef prefabRef)
-    {
-        float3 toPlayer = math.normalizesafe(PlayerPos - origin);
-        float playerAngle = math.degrees(math.atan2(toPlayer.x, toPlayer.z));
-        float angleStep = 360f / portal.BulletsPerShot;
-
-        for (int i = 0; i < portal.BulletsPerShot; i++)
-        {
-            float angle = i * angleStep;
-
-            // Lücke von 30 Grad BEIM Spieler → invertierte Logik → schwer zu sehen
-            float diff = math.abs(DeltaAngle(angle, playerAngle));
-            if (diff < 15f) continue; // Lücke beim Spieler → Portal beschützt sich selbst
-
-            SpawnBullet(chunkIndex, portal, origin, prefabRef, AngleToDir(angle));
-        }
-    }
-
-    // ✝️ Cross – 4 Bullets, rotiert langsam
-    void FireCross(int chunkIndex, ref BossPortal portal, float3 origin, in BulletPrefabRef prefabRef)
-    {
-        for (int i = 0; i < 4; i++)
-        {
-            float angle = portal.CurrentAngle + 90f * i;
-            SpawnBullet(chunkIndex, portal, origin, prefabRef, AngleToDir(angle));
-        }
         portal.CurrentAngle += portal.RotationSpeed * (1f / portal.FireRate);
+        portal.RandomSeed   += 1337;
+    }
+    
+    void FireConcentricRings(int chunkIndex, ref BossPortal portal, float3 origin, in BulletPrefabRef prefabRef)
+    {
+        int ringsPerShot = 2;
+        int bulletsPerRing = portal.BulletsPerShot / ringsPerShot;
+
+        for (int ring = 0; ring < ringsPerShot; ring++)
+        {
+            
+            float ringAngle = portal.CurrentAngle * (ring % 2 == 0 ? 1f : -1.3f);
+            float speedMod  = 1f + ring * 0.3f; 
+
+            for (int i = 0; i < bulletsPerRing; i++)
+            {
+                float angle = ringAngle + (360f / bulletsPerRing) * i;
+                SpawnBulletSpeed(chunkIndex, portal, origin, prefabRef,
+                    AngleToDir(angle), portal.BulletSpeed * speedMod);
+            }
+        }
+
+        portal.CurrentAngle += portal.RotationSpeed * (1f / portal.FireRate);
+        portal.RingIndex++;
     }
 
-    // ── Helpers ──────────────────────────────────────────────
-
+    
+    
     void SpawnBullet(int chunkIndex, in BossPortal portal, float3 origin,
         in BulletPrefabRef prefabRef, float3 dir)
-    {
-        quaternion rot = quaternion.LookRotationSafe(dir, math.up());
-        var bullet = ECB.Instantiate(chunkIndex, prefabRef.Value);
+        => SpawnBulletSpeed(chunkIndex, portal, origin, prefabRef, dir, portal.BulletSpeed);
 
-        ECB.SetComponent(chunkIndex, bullet, LocalTransform.FromPositionRotation(origin, rot));
-        ECB.SetComponent(chunkIndex, bullet, new Speed  { Value = dir * portal.BulletSpeed });
+    void SpawnBulletSpeed(int chunkIndex, in BossPortal portal, float3 origin,
+        in BulletPrefabRef prefabRef, float3 dir, float speed)
+    {
+        var bullet = ECB.Instantiate(chunkIndex, prefabRef.Value);
+        ECB.SetComponent(chunkIndex, bullet,
+            LocalTransform.FromPositionRotation(origin,
+                quaternion.LookRotationSafe(dir, math.up())));
+        ECB.SetComponent(chunkIndex, bullet, new Speed  { Value = dir * speed });
         ECB.SetComponent(chunkIndex, bullet, new Damage { Value = portal.Damage });
     }
 
@@ -137,11 +170,5 @@ public partial struct BossPortalJob : IJobEntity
     {
         float rad = math.radians(degrees);
         return new float3(math.sin(rad), 0f, math.cos(rad));
-    }
-
-    float DeltaAngle(float a, float b)
-    {
-        float diff = (b - a + 360f) % 360f;
-        return diff > 180f ? diff - 360f : diff;
     }
 }
