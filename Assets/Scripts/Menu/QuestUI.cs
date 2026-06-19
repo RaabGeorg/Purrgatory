@@ -62,6 +62,10 @@ public class QuestUI : MonoBehaviour
         {
             dialogText.text = $"You haven't completed the quest yet!\n{QuestManager.Instance.GetProgressText()}";
             closeButton.gameObject.SetActive(true);
+        } else if (QuestManager.Instance.QuestCompleted == 2)
+        {
+            dialogText.text = $"I dont have anymore Quest for you!";
+            closeButton.gameObject.SetActive(true);
         }
         else
         {
