@@ -14,10 +14,21 @@ public partial struct WeaponSystem : ISystem
         var ecbSingleton = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>();
         var ecb = ecbSingleton.CreateCommandBuffer(state.WorldUnmanaged);
 
+        string currentSelection = GameData.Weapon;
+        
+        WeaponType currentWeapon = WeaponType.Normal;
+        
+        if (currentSelection == "Shotgun")
+        {
+            currentWeapon = WeaponType.Shotgun;
+        }
+
         new WeaponJob
         {
             DeltaTime = SystemAPI.Time.DeltaTime,
-            ECB       = ecb.AsParallelWriter()
+            ECB       = ecb.AsParallelWriter(),
+            currentWeapon = currentWeapon
+
         }.ScheduleParallel();
     }
 }
@@ -28,11 +39,13 @@ public partial struct WeaponJob : IJobEntity
     public float DeltaTime;
     public EntityCommandBuffer.ParallelWriter ECB;
 
+    public WeaponType currentWeapon;
     void Execute([ChunkIndexInQuery] int chunkIndex,
         ref Weapon weapon, ref LocalTransform transform,
         in WeaponTarget target, in BulletPrefabRef prefabRef,
         ref VortexMod vortexMod)
     {
+        weapon.Type = currentWeapon;
         weapon.FireCooldown -= DeltaTime;
         if (!weapon.IsFiring || weapon.FireCooldown > 0f) return;
 
@@ -46,6 +59,7 @@ public partial struct WeaponJob : IJobEntity
 
         float3 rotatedOffset = math.mul(rotation, weapon.SpawnOffset);
         float3 spawnPos = transform.Position + rotatedOffset;
+
 
         if (weapon.Type == WeaponType.Shotgun)
         {
