@@ -251,7 +251,7 @@ MonoBehaviour:
   health: 50
   moveSpeed: 5
   soulsReward: 5
-  condensedSoulsReward: 1
+  condensedSoulsReward: 0
   xpReward: 10
   isRanged: 0
   attackRange: 10
