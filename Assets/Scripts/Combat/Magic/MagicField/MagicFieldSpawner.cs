@@ -43,6 +43,9 @@ public class MagicFieldSpawner : MonoBehaviour
 
             _prefab = query.GetSingleton<MagicFieldPrefabRef>().Value;
         }
+        
+        if (SceneSwitchManager.Instance != null &&
+            SceneSwitchManager.Instance.CurrentLevel == SceneSwitchManager.Instance.HeavenScene) return;
        
         
         cooldownTimer -= Time.deltaTime;

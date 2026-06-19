@@ -4,6 +4,8 @@ using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Physics;
 using Unity.Transforms;
+using Unity.VisualScripting;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 [UpdateInGroup(typeof(SimulationSystemGroup))]
@@ -15,20 +17,28 @@ public partial struct WeaponSystem : ISystem
         var ecb = ecbSingleton.CreateCommandBuffer(state.WorldUnmanaged);
         
         string currentSelection = GameData.Weapon;
-        
-        WeaponType currentWeapon = WeaponType.Normal;
-        
-        if (currentSelection == "Shotgun")
+
+        if (currentSelection == "Shotgun" && GameData.Yallah == 1)
         {
-            currentWeapon = WeaponType.Shotgun;
+            Debug.Log("IM IF");
+
+            foreach (var (weapon, _, entity) in
+                 SystemAPI.Query<RefRW<Weapon>, RefRO<WeaponFromPlayerTag>>().WithEntityAccess().WithNone<MarkedForExecution, Executed>())
+            {
+                Debug.Log("AIEUJHRBTPIOUABHETR");
+                weapon.ValueRW.Type = WeaponType.Shotgun;
+                weapon.ValueRW.BulletSpeed = 15;
+                weapon.ValueRW.FireRate = 1;
+                weapon.ValueRW.Damage = 25;
+                weapon.ValueRW.BulletScale = 0.7f;
+                GameData.Yallah = 0;
+            }
         }
 
         new WeaponJob
         {
             DeltaTime = SystemAPI.Time.DeltaTime,
             ECB       = ecb.AsParallelWriter(),
-            currentWeapon = currentWeapon
-
         }.ScheduleParallel();
     }
 }
@@ -40,12 +50,12 @@ public partial struct WeaponJob : IJobEntity
     public EntityCommandBuffer.ParallelWriter ECB;
 
     public WeaponType currentWeapon;
+    public int yallah;
     void Execute([ChunkIndexInQuery] int chunkIndex,
         ref Weapon weapon, ref LocalTransform transform,
         in WeaponTarget target, in BulletPrefabRef prefabRef,
         ref VortexMod vortexMod)
     {
-        weapon.Type = currentWeapon;
         weapon.FireCooldown -= DeltaTime;
         if (!weapon.IsFiring || weapon.FireCooldown > 0f) return;
 
@@ -62,11 +72,7 @@ public partial struct WeaponJob : IJobEntity
 
 
         if (weapon.Type == WeaponType.Shotgun)
-        {
-            weapon.BulletSpeed = 15;
-            weapon.FireRate = 1;
-            weapon.Damage = 25;
-            weapon.BulletScale = 0.7f;
+        {    
             FireShotgun(chunkIndex, ref weapon, ref vortexMod, prefabRef, spawnPos, rotation);
         }
         else

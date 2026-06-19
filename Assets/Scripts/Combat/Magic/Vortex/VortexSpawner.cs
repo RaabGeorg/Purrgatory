@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Components;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 public class VortexSpawner : MonoBehaviour
 {
@@ -42,6 +43,8 @@ public class VortexSpawner : MonoBehaviour
             _prefab = query.GetSingleton<VortexPrefabRef>().Value;
         }
         
+        if (SceneSwitchManager.Instance != null &&
+            SceneSwitchManager.Instance.CurrentLevel == SceneSwitchManager.Instance.HeavenScene) return;
         
         cooldownTimer -= Time.deltaTime;
         if (!_controls.Player.Spell2.WasPressedThisFrame()) return;

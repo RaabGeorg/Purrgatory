@@ -17,6 +17,10 @@ public class PlayerMovement : MonoBehaviour
     
     [Header("Audio")]
     [SerializeField] private AudioSource footstepSource;
+    
+    private float _rechargeProgress = 0f;
+    public float RechargeProgress => _rechargeProgress;
+    public bool IsRecharging => isRecharging;
 
     private PlayerControls playerControls;
     
@@ -118,12 +122,17 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator DashRecharge(float dashRecharge)
     {
-        yield return new WaitForSeconds(dashRecharge);
+        float elapsed = 0f;
+        while (elapsed < dashRecharge)
+        {
+            elapsed += Time.deltaTime;
+            _rechargeProgress = elapsed / dashRecharge;
+            yield return null;
+        }
+        _rechargeProgress = 0f;
         isRecharging = false;
         if (dashCount < 2)
-        {
             dashCount += 1;
-        }
     }
     
     private IEnumerator DashCooldown(float dashCooldown)

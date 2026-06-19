@@ -144,6 +144,9 @@ namespace Components
         public float CurrentTime;
         public float MaxTime;
     }
+
+    public struct KillCounted : IComponentData {}
+   
     
     public enum WeaponType : byte
     {

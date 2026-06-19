@@ -1,40 +1,42 @@
-using System;
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
 public class DashCooldownDisplay : MonoBehaviour
 {
     public PlayerMovement player;
-    public TextMeshProUGUI dashText;
-
+    [SerializeField] private Image[] dashFillImages;
+    [SerializeField] private Color readyColor = Color.darkOliveGreen;
+    [SerializeField] private Color rechargeColor = new Color(0.3f, 0.3f, 0.3f, 1f);
 
     private void Update()
     {
-        if (player == null || dashText == null) return;
+        if (player == null) return;
 
-        float count = player.dashCount;
-        
-        if (count == 0f){
-            dashText.text = $"Dash: {count}";
-            dashText.color = Color.white;
-        }
-        else
-        {
-            dashText.text = $"Dash: {count}";
-            dashText.color = Color.green;
-        }
-        /*
-        float timer = player.GetDashTimer();
+        int count = (int)player.dashCount;
 
-        if (timer > 0f){
-            dashText.text = $"Dash: {timer:F1}";
-            dashText.color = Color.white;
-        }
-        else
+        for (int i = 0; i < dashFillImages.Length; i++)
         {
-            dashText.text = "Dash: READY";
-            dashText.color = Color.green;
+            float fill;
+            Color color;
+
+            if (i < count)
+            {
+                fill = 1f;
+                color = readyColor;
+            }
+            else if (i == count && player.IsRecharging)
+            {
+                fill = player.RechargeProgress;
+                color = rechargeColor;
+            }
+            else
+            {
+                fill = 0f;
+                color = rechargeColor;
+            }
+
+            dashFillImages[i].fillAmount = fill;
+            dashFillImages[i].color = color;
         }
-        */
     }
 }

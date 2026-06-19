@@ -8,4 +8,7 @@ public static class GameEvents
     public static Action OnStatsChanged;
     public static Action OnUpgradeShow;
     public static Action OnUpgradeHide;
+    public static Action OnQuestProgressChanged;
+    public static Action OnQuestCompleted;
+    public static Action OnBossUnlocked;
 }
