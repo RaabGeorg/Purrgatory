@@ -63,6 +63,10 @@ public partial struct WeaponJob : IJobEntity
 
         if (weapon.Type == WeaponType.Shotgun)
         {
+            weapon.BulletSpeed = 15;
+            weapon.FireRate = 1;
+            weapon.Damage = 25;
+            weapon.BulletScale = 0.7f;
             FireShotgun(chunkIndex, ref weapon, ref vortexMod, prefabRef, spawnPos, rotation);
         }
         else
@@ -91,7 +95,7 @@ public partial struct WeaponJob : IJobEntity
         }
 
         ECB.SetComponent(chunkIndex, bullet, LocalTransform.FromPositionRotationScale(
-            spawnPos, rotation, vortexMod.Scale));
+            spawnPos, rotation, weapon.BulletScale));
         ECB.SetComponent(chunkIndex, bullet, new Speed  { Value = dir * weapon.BulletSpeed });
         ECB.SetComponent(chunkIndex, bullet, new Damage { Value = weapon.Damage });
     }
@@ -127,7 +131,7 @@ public partial struct WeaponJob : IJobEntity
             }
 
             ECB.SetComponent(chunkIndex, bullet, LocalTransform.FromPositionRotationScale(
-                spawnPos, spreadRotation, vortexMod.Scale));
+                spawnPos, spreadRotation, weapon.BulletScale));
             ECB.SetComponent(chunkIndex, bullet, new Speed  { Value = pelletDir * weapon.BulletSpeed });
             ECB.SetComponent(chunkIndex, bullet, new Damage { Value = damagePerPellet });
             ECB.SetComponent(chunkIndex, bullet, new Lifetime{ Value = 1.5f});

@@ -59,6 +59,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "FireHold",
+                    "type": "Button",
+                    "id": "b9cc6803-c45e-4207-82da-898c587596a3",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -158,6 +167,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Spell2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "76090fcc-440f-401a-bd41-61996f6b573b",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FireHold",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

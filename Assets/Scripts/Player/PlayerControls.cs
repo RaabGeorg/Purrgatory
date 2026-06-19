@@ -145,6 +145,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""FireHold"",
+                    ""type"": ""Button"",
+                    ""id"": ""b9cc6803-c45e-4207-82da-898c587596a3"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -257,6 +266,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""76090fcc-440f-401a-bd41-61996f6b573b"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": ""Hold"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FireHold"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -271,6 +291,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player_Spell = m_Player.FindAction("Spell", throwIfNotFound: true);
         m_Player_Spell2 = m_Player.FindAction("Spell2", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+        m_Player_FireHold = m_Player.FindAction("FireHold", throwIfNotFound: true);
     }
 
     ~@PlayerControls()
@@ -356,6 +377,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_Spell;
     private readonly InputAction m_Player_Spell2;
+    private readonly InputAction m_Player_FireHold;
     private readonly InputAction m_Player_Interact;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
@@ -388,6 +410,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/Spell2".
         /// </summary>
         public InputAction @Spell2 => m_Wrapper.m_Player_Spell2;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/FireHold".
+        /// </summary>
+        public InputAction @FireHold => m_Wrapper.m_Player_FireHold;
         /// <summary>
         /// Provides access to the underlying input action "Player/Interact".
         /// </summary>
@@ -433,6 +459,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Spell2.started += instance.OnSpell2;
             @Spell2.performed += instance.OnSpell2;
             @Spell2.canceled += instance.OnSpell2;
+            @FireHold.started += instance.OnFireHold;
+            @FireHold.performed += instance.OnFireHold;
+            @FireHold.canceled += instance.OnFireHold;
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
@@ -462,6 +491,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Spell2.started -= instance.OnSpell2;
             @Spell2.performed -= instance.OnSpell2;
             @Spell2.canceled -= instance.OnSpell2;
+            @FireHold.started -= instance.OnFireHold;
+            @FireHold.performed -= instance.OnFireHold;
+            @FireHold.canceled -= instance.OnFireHold;
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
@@ -540,6 +572,13 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSpell2(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "FireHold" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnFireHold(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "Interact" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

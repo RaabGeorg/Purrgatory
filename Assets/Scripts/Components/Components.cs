@@ -34,6 +34,7 @@ namespace Components
         public float FireCooldown;
         public float3 SpawnOffset;
         public bool IsFiring;
+        public float BulletScale;
 
         public int PelletCount;       
         public float SpreadAngle;     
