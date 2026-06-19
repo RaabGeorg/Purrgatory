@@ -20,8 +20,12 @@ public class SceneSwitchManager : MonoBehaviour
     [SerializeField] private InputAction toggleLevelAction;
 
     private string currentLevel = "";
-     bool isTransitioning = false;
+    bool isTransitioning = false;
     private bool gameStarted = false;
+    
+    //public getter setter
+    public string CurrentLevel => currentLevel;
+    public string HeavenScene => heavenScene;
 
     private void Awake()
     {
