@@ -847,8 +847,54 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6589756554111141151, guid: 347045ba3e929694e85b51ed3b9ec50b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 769480286}
+    - targetCorrespondingSourceObject: {fileID: 6589756554111141151, guid: 347045ba3e929694e85b51ed3b9ec50b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 769480287}
   m_SourcePrefab: {fileID: 100100000, guid: 347045ba3e929694e85b51ed3b9ec50b, type: 3}
+--- !u!1 &769480285 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6589756554111141151, guid: 347045ba3e929694e85b51ed3b9ec50b, type: 3}
+  m_PrefabInstance: {fileID: 769480284}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &769480286
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 769480285}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 7
+  m_Center: {x: -0.00000667572, y: -0.6608147, z: 0}
+--- !u!114 &769480287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 769480285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2b2e675c00712544bdfa2df7c3a09cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::QuestGuy
+  weaponQuest: {fileID: 11400000, guid: 4ed96758c352e8d46b7a82ed39e3cf29, type: 2}
+  bossQuest: {fileID: 11400000, guid: 52db46cf0a9180e4bbc05a5b1e79f7b2, type: 2}
 --- !u!1001 &833917273
 PrefabInstance:
   m_ObjectHideFlags: 0
