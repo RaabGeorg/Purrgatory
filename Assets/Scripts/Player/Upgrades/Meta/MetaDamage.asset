@@ -19,8 +19,7 @@ MonoBehaviour:
   statType: 2
   modifierType: 0
   value: 5
-  category: 0
+  category: 1
   weaponUpgradeType: 0
   cost: 300
   maxLevel: 5
-  level: 0

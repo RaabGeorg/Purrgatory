@@ -14,21 +14,15 @@ public class SlimeMovement : MonoBehaviour
     [Tooltip("Stops moving once within this distance from the player.")]
     public float stopDistance = 2f;
 
-    [Header("Idle Hop")]
-    [Tooltip("Set to 0 to disable the hop.")]
-    public float hopAmplitude = 0.6f;
-    public float hopSpeed = 5f;
-
     [Tooltip("How many seconds after spawn before we consider the boss settled on the ground.")]
     public float settleDuration = 0.5f;
 
-    [Tooltip("Set to false to freeze movement (used by SlimeJumpAttack during its leap).")]
     [HideInInspector] public bool CanMove = true;
 
     private Rigidbody rb;
-    private float groundY;
     private bool settled = false;
     private float settleTimer = 0f;
+    private float groundY;
 
     void Start()
     {
@@ -60,26 +54,14 @@ public class SlimeMovement : MonoBehaviour
         if (player == null || !CanMove) return;
 
         float dist = Vector3.Distance(transform.position, player.position);
-        float hop = Mathf.Abs(Mathf.Sin(Time.time * hopSpeed)) * hopAmplitude;
+        if (dist <= stopDistance) return;
 
-        if (dist > stopDistance)
-        {
-            Vector3 dir = (player.position - transform.position).normalized;
-            dir.y = 0f;
+        Vector3 dir = (player.position - transform.position).normalized;
+        dir.y = 0f;
 
-            float hopPeak = Mathf.Abs(Mathf.Sin(Time.time * hopSpeed));
-            float speedBoost = 1f + hopPeak * 0.6f;
-            Vector3 target = transform.position + dir * moveSpeed * speedBoost * Time.deltaTime;
-            target.y = groundY + hop;
-
-            transform.position = Vector3.Lerp(transform.position, target, Time.deltaTime * 5f);
-        }
-        else
-        {
-            Vector3 idle = transform.position;
-            idle.y = groundY + hop;
-            transform.position = idle;
-        }
+        Vector3 pos = transform.position + dir * moveSpeed * Time.deltaTime;
+        pos.y = groundY;
+        transform.position = pos;
     }
 
     public void RefreshGroundY()

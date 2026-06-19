@@ -18,8 +18,8 @@ MonoBehaviour:
   rarity: 0
   statType: 1
   modifierType: 1
-  value: 2
-  category: 0
-  weaponUpgradeType: 0
+  value: 0.2
+  category: 1
+  weaponUpgradeType: 1
   cost: 500
   maxLevel: 3

@@ -20,7 +20,6 @@ namespace Components
     public struct Executed : IComponentData {}
     
     public struct BulletPrefabRef : IComponentData
-    
     {
         public Entity Value;
         
@@ -28,12 +27,16 @@ namespace Components
 
     public struct Weapon : IComponentData
     {
+        public WeaponType Type;      
         public float BulletSpeed;
         public float Damage;
         public float FireRate;
         public float FireCooldown;
-        public bool IsFiring;
         public float3 SpawnOffset;
+        public bool IsFiring;
+
+        public int PelletCount;       
+        public float SpreadAngle;     
     }
 
     public struct VortexMod : IComponentData
@@ -48,7 +51,6 @@ namespace Components
     {
         public float3 Value;
     }
-
     
     public struct VortexMovement : IComponentData
     {
@@ -88,7 +90,6 @@ namespace Components
         public int Xp;
     }
     
-    
     public struct EnemyMovementData : IComponentData
     {
         public float Speed;
@@ -112,7 +113,6 @@ namespace Components
         public float NextSpawnTime;
         public Unity.Mathematics.Random Random;
     }
-
     
     public struct ChunkTag : IComponentData { public int2 Coordinate; } // ← Manuel neuer
     public struct ChunkConfigData : IComponentData // ← Manuel neuer
@@ -124,8 +124,7 @@ namespace Components
     {
         public Entity Prefab;
     }
-
-
+    
     public struct Damage : IComponentData
     {
         public float Value;
@@ -147,4 +146,11 @@ namespace Components
 
     public struct KillCounted : IComponentData {}
    
+    
+    public enum WeaponType : byte
+    {
+        Normal,
+        Shotgun
+    }
+    
 }
