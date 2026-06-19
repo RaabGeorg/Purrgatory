@@ -36,6 +36,9 @@ public class RaycastWeapon : MonoBehaviour
 
     void Update()
     {
+        
+        Debug.Log($"Railgun fireRate: {fireRate}, damage: {damage}");
+        
         if (!GameData.Weapon.Equals("Railgun")) return;
         
         if (!overchargeUnlocked)
