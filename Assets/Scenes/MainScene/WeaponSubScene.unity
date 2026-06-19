@@ -156,10 +156,10 @@ MonoBehaviour:
   bulletPrefab: {fileID: 32527178692952100, guid: 98a71444cb5c35641a50db5decdec6c0, type: 3}
   bulletSpeed: 20
   damage: 15
-  fireRate: 1
+  fireRate: 1.5
   spawnPoint: {fileID: 1717824111}
   isPlayer: 0
-  weaponType: 1
+  weaponType: 0
   pelletCount: 8
   spreadAngle: 25
   vortexMode: 0

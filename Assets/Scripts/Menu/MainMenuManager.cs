@@ -12,6 +12,7 @@ public class MainMenuManager : MonoBehaviour
     public void OnStartButtonClicked()
     {
         GameData.Weapon = dropdown.options[dropdown.value].text;
+        GameData.Yallah = 1;
         Time.timeScale = 1;
         PauseLogic.isPaused = false;
         if (SceneSwitchManager.Instance != null)
