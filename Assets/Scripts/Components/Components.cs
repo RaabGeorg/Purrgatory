@@ -154,4 +154,24 @@ namespace Components
         Shotgun
     }
     
+    public enum AttackPattern : byte
+    {
+        Spiral,      
+        AimedBurst,  
+        Wall,         
+        CrossRotate  
+    }
+
+    public struct BossPortal : IComponentData
+    {
+        public AttackPattern Pattern;
+        public float FireCooldown;
+        public float FireRate;
+        public float BulletSpeed;
+        public float Damage;
+        public float CurrentAngle;   
+        public float RotationSpeed;  
+        public int   BulletsPerShot;
+        public float3 PlayerPos;     
+    }
 }
