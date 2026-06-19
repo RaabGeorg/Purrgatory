@@ -28,6 +28,12 @@ public static class GameData
         set => PlayerPrefs.SetInt("healthSeal", value);
     }
 
+    public static int Yallah
+    {
+        get => PlayerPrefs.GetInt("yallah", 0);
+        set => PlayerPrefs.SetInt("yallah", value);
+    }
+
     [System.Serializable]
     private class Wrapper { public List<string> items; }
 

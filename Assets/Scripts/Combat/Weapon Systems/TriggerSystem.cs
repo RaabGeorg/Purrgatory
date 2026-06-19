@@ -79,7 +79,7 @@ struct TriggerJob : ITriggerEventsJob
 
         health.Value -= isMagicField ? damage * dt : damage;
         HealthLookup[healthEntity] = health;
-        Debug.Log($"{damageEntity}: {damage} - {healthEntity}: {health.Value}");
+        //Debug.Log($"{damageEntity}: {damage} - {healthEntity}: {health.Value}");
         if (!isMagicField)
         {
             if (hasIframes)

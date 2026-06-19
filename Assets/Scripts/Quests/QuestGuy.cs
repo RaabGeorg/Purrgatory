@@ -42,8 +42,7 @@ public class QuestGuy : MonoBehaviour
         if (!_controls.Player.Interact.WasPressedThisFrame()) return;
         
         QuestData giving = QuestManager.Instance.LastCompletedQuest == weaponQuest
-            ? weaponQuest
-            : QuestManager.Instance.QuestCompleted >= 1 ? bossQuest : weaponQuest;
+            ? weaponQuest : QuestManager.Instance.QuestCompleted >= 1 ? bossQuest : weaponQuest;
         QuestUI.Instance.ShowDialog(giving);
     }
 }

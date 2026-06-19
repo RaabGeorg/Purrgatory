@@ -62,9 +62,9 @@ public class UpgradePickerUI : MonoBehaviour
         else if (upgrade.category == UpgradeCategory.Weapon)
         {
             if (upgrade.weaponUpgradeType == WeaponUpgradeType.Damage)
-                WeaponUpgradeSystem.Instance.UpgradeDamage(upgrade.value);
+                WeaponUpgradeSystem.Instance.UpgradeDamage(new StatModifier(upgrade.value, upgrade.modifierType));
             else
-                WeaponUpgradeSystem.Instance.UpgradeFireRate(upgrade.value);
+                WeaponUpgradeSystem.Instance.UpgradeFireRate(new StatModifier(upgrade.value, upgrade.modifierType));
         }
 
         xpBarContainer.SetActive(true);
