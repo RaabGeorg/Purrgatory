@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class QuestGuy : MonoBehaviour
 {
-    [SerializeField] private QuestData quest;
+    [SerializeField] private QuestData weaponQuest;
+    [SerializeField] private QuestData bossQuest;
     private bool _playerInRange;
     private PlayerControls _controls;
 
@@ -38,10 +39,11 @@ public class QuestGuy : MonoBehaviour
     private void Update()
     {
         if (!_playerInRange) return;
-
-        if (_controls.Player.Interact.WasPressedThisFrame())
-        {
-            QuestUI.Instance.ShowDialog(quest);
-        }
+        if (!_controls.Player.Interact.WasPressedThisFrame()) return;
+        
+        QuestData giving = QuestManager.Instance.LastCompletedQuest == weaponQuest
+            ? weaponQuest
+            : QuestManager.Instance.QuestCompleted >= 1 ? bossQuest : weaponQuest;
+        QuestUI.Instance.ShowDialog(giving);
     }
 }

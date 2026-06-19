@@ -53,7 +53,7 @@ public class QuestUI : MonoBehaviour
         declineButton.gameObject.SetActive(false);
         closeButton.gameObject.SetActive(false);
 
-        if (QuestManager.Instance.IsQuestComplete)
+        if (QuestManager.Instance.LastCompletedQuest == quest)
         {
             dialogText.text = $"{quest.questName} complete!";
             closeButton.gameObject.SetActive(true);
@@ -85,7 +85,8 @@ public class QuestUI : MonoBehaviour
         _pendingQuest = null;
         acceptButton.gameObject.SetActive(false);
         declineButton.gameObject.SetActive(false);
-        progressPanel.SetActive(true);
+        if (progressText != null)
+            progressText.gameObject.SetActive(true);
         UpdateProgressText();
         HideDialog();
     }
@@ -97,6 +98,17 @@ public class QuestUI : MonoBehaviour
 
     private void OnClose()
     {
+        if (QuestManager.Instance.LastCompletedQuest != null)
+        {
+            if (progressText != null)
+                progressText.gameObject.SetActive(false);
+            if (QuestManager.Instance.LastCompletedQuest.requiredModType == WeaponModReward.BossUnlock)
+            {
+                QuestManager.Instance.BossUnlocked = true;
+            }
+        }
+        
+        QuestManager.Instance.YesQuestIsComplete();
         HideDialog();
     }
 
@@ -108,13 +120,16 @@ public class QuestUI : MonoBehaviour
 
     private void HandleQuestCompleted()
     {
-        if (progressPanel != null)
-            progressPanel.SetActive(false);
+        if (progressText != null)
+            progressText.text = $"{QuestManager.Instance.ActiveQuest.questName}: Completed";
         OnQuestRewardGranted(QuestManager.Instance.ActiveQuest);
     }
     
     private void OnQuestRewardGranted(QuestData quest)
     {
-        // TODO: weapon mod reward
+        if (quest.requiredModType == WeaponModReward.WeaponModUnlock)
+        {
+            // TODO : Mod Unlock
+        }
     }
 }

@@ -9,5 +9,7 @@ public class QuestData : ScriptableObject
     [TextArea] public string description;
     public EnemyKillType requiredType;
     public int requiredCount;
-    
+    public WeaponModReward requiredModType;
 }
+
+public enum WeaponModReward { None, WeaponModUnlock, BossUnlock }

@@ -893,7 +893,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2b2e675c00712544bdfa2df7c3a09cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::QuestGuy
-  quest: {fileID: 11400000, guid: 4ed96758c352e8d46b7a82ed39e3cf29, type: 2}
+  weaponQuest: {fileID: 11400000, guid: 4ed96758c352e8d46b7a82ed39e3cf29, type: 2}
+  bossQuest: {fileID: 11400000, guid: 52db46cf0a9180e4bbc05a5b1e79f7b2, type: 2}
 --- !u!1001 &833917273
 PrefabInstance:
   m_ObjectHideFlags: 0

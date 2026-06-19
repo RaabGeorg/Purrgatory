@@ -6,6 +6,10 @@ public class QuestManager : MonoBehaviour
 
     public bool IsQuestActive { get; private set; }
     public bool IsQuestComplete { get; private set; }
+    public int QuestCompleted { get; private set; }
+    public bool BossUnlocked { get; set; }
+    
+    public QuestData LastCompletedQuest { get; private set; }
 
     private QuestData _activeQuest;
     private int _meleeKills;
@@ -44,6 +48,8 @@ public class QuestManager : MonoBehaviour
         {
             IsQuestActive = false;
             IsQuestComplete = true;
+            LastCompletedQuest = _activeQuest;
+            QuestCompleted++;
             GameEvents.OnQuestCompleted?.Invoke();
         }
     }
@@ -56,8 +62,13 @@ public class QuestManager : MonoBehaviour
             ? _meleeKills + _rangedKills
             : (_activeQuest.requiredType == EnemyKillType.Melee ? _meleeKills : _rangedKills);
 
-        return $"{_activeQuest.questName}: {relevantKills}/{_activeQuest.requiredCount}";
+        return $"Kill {_activeQuest.requiredType} Enemies: {relevantKills}/{_activeQuest.requiredCount}";
     }
 
+    public void YesQuestIsComplete()
+    {
+        LastCompletedQuest = null;
+    }
+    
     public QuestData ActiveQuest => _activeQuest;
 }
