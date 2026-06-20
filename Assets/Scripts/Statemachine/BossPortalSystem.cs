@@ -55,7 +55,8 @@ public partial struct BossPortalJob : IJobEntity
             case AttackPattern.ConcentricRings:
                 FireConcentricRings(chunkIndex, ref portal, origin, prefabRef);
                 break;
-           
+            case AttackPattern.None:
+                break;
         }
     }
     

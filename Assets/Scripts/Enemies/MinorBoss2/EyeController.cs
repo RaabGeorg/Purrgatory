@@ -10,10 +10,10 @@ public class EyeController : MonoBehaviour
     public float fogDensity = 0.04f;
 
     [Header("Fade")]
-    public float fadeInDuration  = 2f;
-    public float fadeOutDuration = 3f;
+    public float fadeInDuration  = 1f;
+    public float fadeOutDuration = 1f;
     
-    private bool isDying = false;
+    public bool isDying = false;
 
   
     void OnEnable()
@@ -74,7 +74,7 @@ public class EyeController : MonoBehaviour
     {
         float startDensity = RenderSettings.fogDensity;
         float elapsed = 0f;
-
+        Vector3 startScale = transform.localScale;
         while (elapsed < fadeOutDuration)
         {
             elapsed += Time.deltaTime;
@@ -82,6 +82,7 @@ public class EyeController : MonoBehaviour
             RenderSettings.fogDensity = Mathf.Lerp(startDensity, 0f, t);
             RenderSettings.fogColor   = Color.Lerp(fogColor,
                 new Color(fogColor.r, fogColor.g, fogColor.b, 0f), t);
+            transform.localScale = Vector3.Lerp(startScale, Vector3.zero, t);
             yield return null;
         }
 
