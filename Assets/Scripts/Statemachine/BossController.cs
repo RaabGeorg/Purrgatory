@@ -1,10 +1,13 @@
 using Components;
+using Unity.Entities;
 using UnityEngine;
 using static UnityEngine.UI.Image;
 
 public class BossController : MonoBehaviour
 {
     private StateMachine _stateMachine;
+
+    public TiggerInBossArena triggerArena;
 
     //for movement
     public float width = 3f;
@@ -16,6 +19,8 @@ public class BossController : MonoBehaviour
     public Transform player;
 
     public GameObject laserPrefab;
+
+    public EntityManager em;
     private void Awake()
     {
         _stateMachine = new StateMachine();
@@ -24,13 +29,24 @@ public class BossController : MonoBehaviour
     private void Start()
     {
         player = GameObject.FindWithTag("Player").transform;
-        // u set initialstate here u know the start state Ig
-        // _stateMachine.SetState(new initialStateTypeShit(this));
+
         _stateMachine.SetState(new IdleState(this));
+
+
+        var em = World.DefaultGameObjectInjectionWorld.EntityManager;
+        if (em == null) return;
+
+        var query = em.CreateEntityQuery(typeof(BossPortalPhaseActive));
+        if (!query.IsEmpty)
+        {
+            em.DestroyEntity(query);
+        }
     }
 
     private void FixedUpdate()
     {
+        if (!triggerArena.playerInside) return;
+
         LookPlayer();
         EllipsisMovement();
         _stateMachine.Tick();
