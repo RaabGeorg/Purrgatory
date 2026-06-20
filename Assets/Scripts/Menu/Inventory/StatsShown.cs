@@ -7,6 +7,7 @@ public class StatsShown : MonoBehaviour
 {
     public TextMeshProUGUI statsField;
     private EntityManager _em;
+    public RaycastWeapon raycastWeapon;
 
     float maxHealth = 0;
     float moveSpeed = 0;
@@ -42,7 +43,8 @@ public class StatsShown : MonoBehaviour
 
         if (GameData.Weapon.Equals("Railgun"))
         {
-
+            fireRate = 1 / raycastWeapon.fireRate;
+            damage = raycastWeapon.damage;
         } else 
         {
             fireRate = weapon.FireRate;
