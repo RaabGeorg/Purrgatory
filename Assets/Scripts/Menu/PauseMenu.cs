@@ -36,6 +36,7 @@ public class PauseMenu : MonoBehaviour
 
     public void MainMenuButton()
     {
+        SaveSouls();
         Time.timeScale = 1f;
         
         PauseLogic.PauseGame("PauseMenu");
@@ -45,5 +46,12 @@ public class PauseMenu : MonoBehaviour
         {
             SceneSwitchManager.Instance.LoadMainMenu("Main Menu");
         }
+    }
+
+    private void SaveSouls()
+    {
+        GameData.Souls += PlayerWallet.Instance.Souls;
+        GameData.CondensedSouls += PlayerWallet.Instance.CondensedSouls;
+        GameData.Save();
     }
 }
