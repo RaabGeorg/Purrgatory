@@ -49,6 +49,13 @@ public class MainBossBridge : MonoBehaviour
         {
             _hitboxEntity = query.GetSingletonEntity();
             _entityFound = true;
+
+            if (GameData.HealthSeal == 1)
+            {
+                var hp = _em.GetComponentData<Health>(_hitboxEntity);
+                hp.Value = 500f; 
+                _em.SetComponentData(_hitboxEntity, hp);
+            }
         }
 
         query.Dispose();
