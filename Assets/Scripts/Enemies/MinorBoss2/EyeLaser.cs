@@ -53,7 +53,9 @@ public class EyeLaser : MonoBehaviour
     private float shootTimer;
     private bool isShooting;
     private EyeMovement eyeMovement;
-
+    
+    private EyeController eyeController;
+    
     public bool IsShooting => isShooting;
     
 
@@ -83,7 +85,13 @@ public class EyeLaser : MonoBehaviour
     void Update()
     {
         if (player == null || isShooting) return;
-        
+        if (eyeController != null)
+        {
+            if (eyeController.isDying == true)
+            {
+                StopCoroutine(LaserSequence()); 
+            }
+        }
         bool inRange = Vector3.Distance(transform.position, player.position) <= shootRange;
         if (!inRange) return;
         

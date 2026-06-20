@@ -23,8 +23,8 @@ public class BossPortalAttackState : IState
         _phaseEntity = _em.CreateEntity();
         _em.AddComponent<BossPortalPhaseActive>(_phaseEntity);
         _timer = 0f;
-        
-        
+        foreach (var portal in PortalVisual.All)
+            portal.Show();
         
         Debug.Log("Boss Portal Attack – START");
     }
@@ -46,6 +46,9 @@ public class BossPortalAttackState : IState
 
     public void Exit()
     {
+        foreach (var portal in PortalVisual.All)
+            portal.Hide();
+        
         if (_em.Exists(_phaseEntity))
             _em.DestroyEntity(_phaseEntity);
 
