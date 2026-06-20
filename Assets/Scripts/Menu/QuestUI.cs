@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public class QuestUI : MonoBehaviour
 {
@@ -20,10 +21,11 @@ public class QuestUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI progressText;
     
     private QuestData _pendingQuest;
-    
+    public Modthing thingToDoTheModThingWithItsUglyButHonestlyICouldntCareLessAnymore;
     
 
     private void Awake()
+
     {
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
@@ -109,6 +111,10 @@ public class QuestUI : MonoBehaviour
             if (QuestManager.Instance.LastCompletedQuest.requiredModType == WeaponModReward.BossUnlock)
             {
                 QuestManager.Instance.BossUnlocked = true;
+            }
+            if (QuestManager.Instance.LastCompletedQuest.requiredModType == WeaponModReward.WeaponModUnlock) 
+            {
+                thingToDoTheModThingWithItsUglyButHonestlyICouldntCareLessAnymore.addModToInventory();
             }
         }
         
