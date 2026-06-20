@@ -14,8 +14,14 @@ public class PlayerMovement : MonoBehaviour
     public float dashCooldown = 0.5f;
     public float dashCount = 2f;
     private bool isDashing;
-    public bool isRecharging { get; set; }
+   public bool isRecharging;
+   public float _rechargeProgress;
+    
     private float rechargeStartTime;
+    [SerializeField] private AudioSource footstepSource;
+    
+    
+    
     
     /*
     public CharacterStats stats;
@@ -61,6 +67,7 @@ public class PlayerMovement : MonoBehaviour
         
         Vector2 move = playerControls.Player.Move.ReadValue<Vector2>();
         Vector3 moveDirection = new Vector3(move.x, 0, move.y);
+        SoundState(moveDirection);
         
         controller.Move(moveDirection * (speed * Time.deltaTime));
         
@@ -76,6 +83,7 @@ public class PlayerMovement : MonoBehaviour
         {
             StartCoroutine(DashCooldown(dashCooldown));
             StartCoroutine(DashRoutine(moveDirection));
+            SFXManager.Instance.PlayDash();
         }
 
         
@@ -96,16 +104,17 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator DashRecharge(float dashRecharge)
     {
-        isRecharging = true;
-        rechargeStartTime = Time.time;
-        
-        yield return new WaitForSeconds(dashRecharge) ;
-        
+        float elapsed = 0f;
+        while (elapsed < dashRecharge)
+        {
+            elapsed += Time.deltaTime;
+            _rechargeProgress = elapsed / dashRecharge;
+            yield return null;
+        }
+        _rechargeProgress = 0f;
         isRecharging = false;
         if (dashCount < 2)
-        {
             dashCount += 1;
-        }
     }
     
     private IEnumerator DashCooldown(float dashCooldown)
@@ -114,17 +123,22 @@ public class PlayerMovement : MonoBehaviour
         isDashing = false;
     }
 
-    public float GetRechargeProgress()
-    {
-        if (!isRecharging) return 0f;
-        
-        float elapsedTime = Time.time - rechargeStartTime;
-        
-        return Mathf.Clamp01(elapsedTime / dashCount);
-    }
-
     public void UpdateStats()
     {
         speed = PlayerStatsManager.Instance.stats.baseMoveSpeed.Value;
+    }
+    
+    public void SoundState(Vector3 moveDirection)
+    {
+        bool isMoving = moveDirection.sqrMagnitude > 0.01f;
+
+        if (isMoving && !footstepSource.isPlaying)
+        {
+            footstepSource.Play();
+        }
+        else if (!isMoving && footstepSource.isPlaying)
+        {
+            footstepSource.Stop();
+        }
     }
 }

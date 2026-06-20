@@ -211,12 +211,21 @@ public class EyeLaser : MonoBehaviour
         Vector3 dir = (targetPos - laserOrigin.position).normalized;
         
         var world = World.DefaultGameObjectInjectionWorld;
+        if (world == null) return;
         var entityManager = world.EntityManager;
 
-        var physicsWorldSingleton = entityManager.CreateEntityQuery(
-                typeof(PhysicsWorldSingleton))
-            .GetSingleton<PhysicsWorldSingleton>();
+        // 1. Create the query
+        var query = entityManager.CreateEntityQuery(typeof(PhysicsWorldSingleton));
 
+        // 2. Safety check: Ensure the physics world is fully initialized
+        if (!query.HasSingleton<PhysicsWorldSingleton>()) return;
+
+        // 3. CRITICAL FIX: Force the main thread to wait for ECS background jobs 
+        // to finish rebuilding the physics world. This guarantees the BlobAsset is valid.
+        query.CompleteDependency();
+
+        // 4. Safely read the synced CollisionWorld
+        var physicsWorldSingleton = query.GetSingleton<PhysicsWorldSingleton>();
         var collisionWorld = physicsWorldSingleton.CollisionWorld;
         
         var rayInput = new RaycastInput
@@ -227,14 +236,13 @@ public class EyeLaser : MonoBehaviour
                 BelongsTo = 1 << 2,
                 CollidesWith = 1 << 1,
                 GroupIndex = 0
-                
             }
         };
-        if (collisionWorld.CastRay(rayInput,out Unity.Physics.RaycastHit hit))
+
+        if (collisionWorld.CastRay(rayInput, out Unity.Physics.RaycastHit hit))
         {
             if (entityManager.HasComponent<Health>(hit.Entity))
             {
-                
                 var health = entityManager.GetComponentData<Health>(hit.Entity);
                 if (health.Value < 0) return;
                 
