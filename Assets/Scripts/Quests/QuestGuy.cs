@@ -17,7 +17,7 @@ public class QuestGuy : MonoBehaviour
     private void OnDisable()
     {
         _controls.Disable();
-        if (_playerInRange) QuestUI.Instance.HideDialog();
+        if (_playerInRange && QuestUI.Instance != null) QuestUI.Instance.HideDialog();
     }
 
     private void OnDestroy() => _controls.Dispose();
@@ -32,7 +32,7 @@ public class QuestGuy : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             _playerInRange = false;
-            QuestUI.Instance.HideDialog();
+            if (QuestUI.Instance != null) QuestUI.Instance.HideDialog();
         }
     }
 
