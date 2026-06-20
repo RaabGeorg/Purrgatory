@@ -29,7 +29,7 @@ public class PlayerHUD : MonoBehaviour
     private void UpdateHealth(float hp)
     {
         if (playerHealthText != null)
-            playerHealthText.text = $"{hp}";
+            playerHealthText.text = $"{Mathf.Max(0f, Mathf.RoundToInt(hp))}";
     }
 
     private void Update()

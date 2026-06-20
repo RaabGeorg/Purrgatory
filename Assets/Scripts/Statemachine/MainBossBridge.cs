@@ -33,6 +33,8 @@ public class MainBossBridge : MonoBehaviour
         lt.Position = targetPos;
         lt.Rotation = transform.rotation;
         _em.SetComponentData(_hitboxEntity, lt);
+        //var hp = _em.GetComponentData<Health>(_hitboxEntity);
+        //Debug.Log($"bob hp: {hp.Value}");
     }
 
     private void TryFindEntity()
