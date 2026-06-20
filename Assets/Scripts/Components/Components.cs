@@ -13,6 +13,7 @@ namespace Components
     public struct BulletTag : IComponentData { }
     public struct EyeBossTag : IComponentData { }
     public struct SlimeBossTag : IComponentData { }
+    public struct MainBossTag :  IComponentData { }
     public struct BossPortalPhaseActive : IComponentData { }
     public struct WeaponFromPlayerTag : IComponentData { }
 
