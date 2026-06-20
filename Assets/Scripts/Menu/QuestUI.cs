@@ -78,7 +78,8 @@ public class QuestUI : MonoBehaviour
 
     public void HideDialog()
     {
-        dialogPanel.SetActive(false);
+        if (dialogPanel != null)
+            dialogPanel.SetActive(false);
         _pendingQuest = null;
     }
 
