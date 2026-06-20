@@ -11,7 +11,7 @@ public class BossPortalAttackState : IState
     private float _timer;
     private bool first = true;
 
-    public BossPortalAttackState(BossController boss, float duration = 5f)
+    public BossPortalAttackState(BossController boss, float duration = 10f)
     {
         _boss     = boss;
         _duration = duration;
@@ -37,11 +37,11 @@ public class BossPortalAttackState : IState
              if (first)
              {
                  // didi mach alle zu FLowerPetal Pattern, is not playable
-                 SetPattern(AttackPattern.FlowerPetal, 2);
+                 SetPattern(AttackPattern.FlowerPetal, 4);
                  first = false;
              }
-         }
-         //_boss.SwitchState(_boss.IdleState);
+            _boss.SwitchState(new IdleState(_boss));
+        }
     }
 
     public void Exit()

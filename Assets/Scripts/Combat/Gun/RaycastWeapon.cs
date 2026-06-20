@@ -15,7 +15,7 @@ public class RaycastWeapon : MonoBehaviour
     [SerializeField] public float damage = 20f;
     
     [Header("Overcharge")]
-    [SerializeField] private bool overchargeUnlocked = false;
+    [SerializeField] public bool overchargeUnlocked = false;
     [SerializeField] private float maxChargeTime = 1.5f;
     [SerializeField] private float overchargeCooldown = 3f;
     [SerializeField] private Gradient chargeColorGradient;
@@ -36,7 +36,7 @@ public class RaycastWeapon : MonoBehaviour
 
     void Update()
     {
-        if (!GameData.Weapon.Equals("Railgun")) return;
+        if (!GameData.Weapon.Equals("Railgun"))return;
         
         if (!overchargeUnlocked)
         {

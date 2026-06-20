@@ -12,6 +12,7 @@ public class PlayerBridge : MonoBehaviour
     private EntityQuery _playerQuery;
     private bool _initialized = false;
     private float _lastHealth;
+    [SerializeField] private HitIndicator _hitIndicator;
 
     private void Awake()
     {
@@ -49,9 +50,11 @@ public class PlayerBridge : MonoBehaviour
         // Health Sync
         var hp = _em.GetComponentData<Health>(_playerEntity);
         
-        if (hp.Value < _lastHealth)
+        if (!Mathf.Approximately(hp.Value, _lastHealth))
         {
+            _lastHealth = hp.Value;
             SFXManager.Instance.PlayHurt();
+            _hitIndicator.Show();
         }
         _lastHealth = hp.Value;
         
@@ -92,4 +95,6 @@ public class PlayerBridge : MonoBehaviour
     }
     public Entity GetPlayerEntity() => _playerEntity;
     public EntityManager GetEntityManager() => _em;
+    
+    
 }
