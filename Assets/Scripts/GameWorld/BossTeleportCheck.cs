@@ -13,7 +13,7 @@ public class BossTeleportCheck : MonoBehaviour
 
     // private void OnTriggerEnter(UnityEngine.Collider other)
     // {
-    //     Debug.Log(QuestManager.Instance.BossUnlocked);
+    //     //Debug.Log(QuestManager.Instance.BossUnlocked);
     //     // 1. Resolve to the root player Rigidbody
     //     if (other.attachedRigidbody == null || !other.attachedRigidbody.CompareTag("Player"))
     //     {
@@ -35,7 +35,7 @@ public class BossTeleportCheck : MonoBehaviour
     
     private void OnTriggerEnter(UnityEngine.Collider other)
     {
-        Debug.Log(QuestManager.Instance.BossUnlocked);
+        //Debug.Log(QuestManager.Instance.BossUnlocked);
         // 1. Resolve to the root player Rigidbody
         if (other.attachedRigidbody == null || !other.attachedRigidbody.CompareTag("Player"))
         {
