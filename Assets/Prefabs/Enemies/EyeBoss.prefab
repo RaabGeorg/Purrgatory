@@ -141,7 +141,7 @@ GameObject:
   - component: {fileID: 7024896758711831199}
   - component: {fileID: -6589591421344741167}
   m_Layer: 0
-  m_Name: MinorBoss2
+  m_Name: EyeBoss
   m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

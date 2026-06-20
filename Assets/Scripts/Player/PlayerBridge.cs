@@ -44,8 +44,7 @@ public class PlayerBridge : MonoBehaviour
 
         var eTransform = _em.GetComponentData<LocalTransform>(_playerEntity);
         
-        // 2. Apply it TO the GameObject (The visual shell follows the physics body)
-        transform.position = eTransform.Position;
+        _em.SetComponentData(_playerEntity, LocalTransform.FromPosition(transform.position));
 
         // Health Sync
         var hp = _em.GetComponentData<Health>(_playerEntity);

@@ -11,77 +11,37 @@ public class BossTeleportCheck : MonoBehaviour
     
     [SerializeField] private Transform destinationTarget;
 
-    // private void OnTriggerEnter(UnityEngine.Collider other)
-    // {
-    //     //Debug.Log(QuestManager.Instance.BossUnlocked);
-    //     // 1. Resolve to the root player Rigidbody
-    //     if (other.attachedRigidbody == null || !other.attachedRigidbody.CompareTag("Player"))
-    //     {
-    //         return; 
-    //     }
-    //
-    //     Transform playerRoot = other.attachedRigidbody.transform;
-    //
-    //     // 2. Validate Economy
-    //     var wallet = PlayerWallet.Instance;
-    //     if (wallet == null) return;
-    //     
-    //     // 3. Execute
-    //     if (QuestManager.Instance.BossUnlocked)
-    //     {
-    //         Teleport(playerRoot);
-    //     }
-    // }
-    
+
     private void OnTriggerEnter(UnityEngine.Collider other)
     {
-        //Debug.Log(QuestManager.Instance.BossUnlocked);
-        // 1. Resolve to the root player Rigidbody
-        if (other.attachedRigidbody == null || !other.attachedRigidbody.CompareTag("Player"))
+        if (QuestManager.Instance.BossUnlocked)
         {
-            return; 
+            if (!other.CompareTag("Player")) return;
+
+            var wallet = PlayerWallet.Instance;
+            if (wallet == null) return;
+
+            Teleport(other.transform);
         }
-
-        Transform playerRoot = other.attachedRigidbody.transform;
-
-        // 2. Validate Economy
-        var wallet = PlayerWallet.Instance;
-        if (wallet == null) return;
-    
-        // 3. Execute
-        Teleport(playerRoot);
     }
 
     private void Teleport(Transform playerTransform)
     {
         if (destinationTarget == null) return;
 
-        Vector3 targetPos = destinationTarget.position;
-        Quaternion targetRot = destinationTarget.rotation;
+        CharacterController controller = playerTransform.GetComponent<CharacterController>();
 
-        // 1. Move the Hybrid GameObject visual shell
-        playerTransform.position = targetPos;
-        playerTransform.rotation = targetRot;
-
-        // 2. Force ECS Synchronization
-        var em = World.DefaultGameObjectInjectionWorld.EntityManager;
-        var query = em.CreateEntityQuery(typeof(PlayerTag), typeof(LocalTransform));
-
-        if (query.HasSingleton<PlayerTag>())
+        if (controller != null)
         {
-            Entity playerEntity = query.GetSingletonEntity();
-            
-            // Overwrite ECS positional data
-            var localTransform = em.GetComponentData<LocalTransform>(playerEntity);
-            localTransform.Position = targetPos;
-            localTransform.Rotation = targetRot;
-            em.SetComponentData(playerEntity, localTransform);
+            controller.enabled = false;
+        }
 
-            // 3. Clear Momentum
-            if (em.HasComponent<PhysicsVelocity>(playerEntity))
-            {
-                em.SetComponentData(playerEntity, new PhysicsVelocity());
-            }
+        playerTransform.position = destinationTarget.position;
+        playerTransform.rotation = destinationTarget.rotation;
+
+        if (controller != null)
+        {
+            controller.enabled = true;
         }
     }
 }

@@ -1,8 +1,9 @@
 using System.Collections;
-using Unity.Mathematics;
-using Unity.Physics;
+using System.Collections.Generic;
+using System.Net;
 using UnityEngine;
 
+[RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
     private float speed;
@@ -13,19 +14,18 @@ public class PlayerMovement : MonoBehaviour
     public float dashCooldown = 0.5f;
     public float dashCount = 2f;
     private bool isDashing;
-    private bool isRecharging;
+    public bool isRecharging { get; set; }
+    private float rechargeStartTime;
     
-    [Header("Audio")]
-    [SerializeField] private AudioSource footstepSource;
-    
-    private float _rechargeProgress = 0f;
-    public float RechargeProgress => _rechargeProgress;
-    public bool IsRecharging => isRecharging;
-
+    /*
+    public CharacterStats stats;
+    public WeaponStats Weapon;
+    */
     private PlayerControls playerControls;
-    
-    // Tracks the active dash velocity to combine with standard movement
-    private Vector3 dashVelocity = Vector3.zero; 
+
+    private CharacterController controller;
+    private Vector3 velocity;
+
 
     private void Awake()
     {
@@ -44,28 +44,27 @@ public class PlayerMovement : MonoBehaviour
         GameEvents.OnStatsChanged -= UpdateStats;
     }
 
-    private void OnDestroy()
-    {
-        playerControls?.Dispose();
-    }
-
     void Start()
     {
         startTime = -dashCooldown;
+        controller = GetComponent<CharacterController>();
         speed = PlayerStatsManager.Instance.stats.baseMoveSpeed.Value;
         dashSpeed = speed * 5;
     }
 
     void Update()
     {
+        if (controller.isGrounded && velocity.y < 0)
+        {
+            velocity.y = -2f;
+        }
+        
         Vector2 move = playerControls.Player.Move.ReadValue<Vector2>();
         Vector3 moveDirection = new Vector3(move.x, 0, move.y);
         
-        SoundState(moveDirection);
+        controller.Move(moveDirection * (speed * Time.deltaTime));
         
-        Vector3 standardVelocity = moveDirection * speed;
-
-        ApplyVelocityToECS(standardVelocity + dashVelocity);
+        controller.Move(velocity * Time.deltaTime);
 
         if (dashCount < 2 && !isRecharging)
         {
@@ -77,25 +76,10 @@ public class PlayerMovement : MonoBehaviour
         {
             StartCoroutine(DashCooldown(dashCooldown));
             StartCoroutine(DashRoutine(moveDirection));
-            SFXManager.Instance.PlayDash();
         }
-    }
 
-    private void ApplyVelocityToECS(Vector3 targetVelocity)
-    {
-        if (PlayerBridge.Instance == null) return;
         
-        var em = PlayerBridge.Instance.GetEntityManager();
-        var playerEnt = PlayerBridge.Instance.GetPlayerEntity();
 
-        if (em.Exists(playerEnt) && em.HasComponent<PhysicsVelocity>(playerEnt))
-        {
-            var physVel = em.GetComponentData<PhysicsVelocity>(playerEnt);
-            
-            physVel.Linear = new float3(targetVelocity.x, targetVelocity.y, targetVelocity.z);
-            
-            em.SetComponentData(playerEnt, physVel);
-        }
     }
 
     private IEnumerator DashRoutine(Vector3 dashDirection)
@@ -103,68 +87,44 @@ public class PlayerMovement : MonoBehaviour
         isDashing = true;
         startTime = Time.time;
         dashCount -= 1;
-        
-        if (dashDirection == Vector3.zero) dashDirection = transform.forward;
-        
-        dashDirection.y = 0f;
-        
-        dashDirection = dashDirection.normalized;
-
-        while (Time.time < startTime + _dashTime)
+        while (Time.time < startTime + _dashTime )
         {
-            
-            dashVelocity = dashDirection * dashSpeed;
+            controller.Move(dashDirection * (dashSpeed * Time.deltaTime));
             yield return null;
         }
-    
-        dashVelocity = Vector3.zero;
     }
 
     private IEnumerator DashRecharge(float dashRecharge)
     {
-        float elapsed = 0f;
-        while (elapsed < dashRecharge)
-        {
-            elapsed += Time.deltaTime;
-            _rechargeProgress = elapsed / dashRecharge;
-            yield return null;
-        }
-        _rechargeProgress = 0f;
+        isRecharging = true;
+        rechargeStartTime = Time.time;
+        
+        yield return new WaitForSeconds(dashRecharge) ;
+        
         isRecharging = false;
         if (dashCount < 2)
+        {
             dashCount += 1;
+        }
     }
     
     private IEnumerator DashCooldown(float dashCooldown)
     {
-        yield return new WaitForSeconds(dashCooldown);
+        yield return new WaitForSeconds(dashCooldown) ;
         isDashing = false;
     }
 
-    public float GetDashTimer()
+    public float GetRechargeProgress()
     {
-        float elapsedTime = Time.time - startTime;
-        float remainingTime = dashCooldown - elapsedTime;
-        return Mathf.Max(0, remainingTime);
+        if (!isRecharging) return 0f;
+        
+        float elapsedTime = Time.time - rechargeStartTime;
+        
+        return Mathf.Clamp01(elapsedTime / dashCount);
     }
 
     public void UpdateStats()
     {
         speed = PlayerStatsManager.Instance.stats.baseMoveSpeed.Value;
-        dashSpeed = speed * 5; // Ensure dash speed scales if base speed is upgraded
-    }
-
-    public void SoundState(Vector3 moveDirection)
-    {
-        bool isMoving = moveDirection.sqrMagnitude > 0.01f;
-
-        if (isMoving && !footstepSource.isPlaying)
-        {
-            footstepSource.Play();
-        }
-        else if (!isMoving && footstepSource.isPlaying)
-        {
-            footstepSource.Stop();
-        }
     }
 }

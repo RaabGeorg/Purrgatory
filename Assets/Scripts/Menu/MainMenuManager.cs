@@ -13,6 +13,8 @@ public class MainMenuManager : MonoBehaviour
     {
         GameData.Weapon = dropdown.options[dropdown.value].text;
         GameData.Yallah = 1;
+        GameData.HasSpawnedSlimeBoss  = false;
+        GameData.HasSpawnedEyeBoss = false;
         Time.timeScale = 1;
         PauseLogic.isPaused = false;
         if (SceneSwitchManager.Instance != null)

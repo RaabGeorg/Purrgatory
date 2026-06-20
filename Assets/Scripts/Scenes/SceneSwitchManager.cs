@@ -1,8 +1,4 @@
 using System.Collections;
-using Components;
-using Unity.Entities;
-using Unity.Physics;
-using Unity.Transforms;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
@@ -134,7 +130,7 @@ public class SceneSwitchManager : MonoBehaviour
         yield return StartCoroutine(RelocatePlayerRoutine(spawnPointName));
     }
 
-  private IEnumerator RelocatePlayerRoutine(string spawnPointName)
+    private IEnumerator RelocatePlayerRoutine(string spawnPointName)
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         GameObject spawnPoint = GameObject.Find(spawnPointName);
@@ -144,41 +140,21 @@ public class SceneSwitchManager : MonoBehaviour
             yield break;
         }
 
-        Vector3 targetPos = spawnPoint.transform.position;
-
         if (player != null)
         {
-            // 1. Move the visual shell immediately
-            player.transform.position = targetPos;
-            player.transform.rotation = spawnPoint.transform.rotation;
-
-            var em = Unity.Entities.World.DefaultGameObjectInjectionWorld.EntityManager;
-            var query = em.CreateEntityQuery(typeof(Components.PlayerTag), typeof(Unity.Transforms.LocalTransform));
-
+            CharacterController controller = player.GetComponent<CharacterController>();
             
-            float timeout = 2.0f;
-            float timer = 0f;
-            
-            while (!query.HasSingleton<Components.PlayerTag>())
+            if (controller != null)
             {
-                timer += Time.deltaTime;
-                if (timer > timeout)
-                {
-                    yield break;
-                }
-                yield return null;
+                controller.enabled = false;
             }
             
-            Unity.Entities.Entity playerEntity = query.GetSingletonEntity();
-            var playerTransform = em.GetComponentData<Unity.Transforms.LocalTransform>(playerEntity);
-            playerTransform.Position = targetPos;
-            playerTransform.Rotation = spawnPoint.transform.rotation;
-            em.SetComponentData(playerEntity, playerTransform);
-
-            // 3. Clear Momentum
-            if (em.HasComponent<Unity.Physics.PhysicsVelocity>(playerEntity))
+            player.transform.position = spawnPoint.transform.position;
+            player.transform.rotation = spawnPoint.transform.rotation;
+            
+            if (controller != null)
             {
-                em.SetComponentData(playerEntity, new Unity.Physics.PhysicsVelocity());
+                controller.enabled = true;
             }
         }
     }

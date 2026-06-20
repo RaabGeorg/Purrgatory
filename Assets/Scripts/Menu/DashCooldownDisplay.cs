@@ -24,9 +24,9 @@ public class DashCooldownDisplay : MonoBehaviour
                 fill = 1f;
                 color = readyColor;
             }
-            else if (i == count && player.IsRecharging)
+            else if (i == count && player.isRecharging)
             {
-                fill = player.RechargeProgress;
+                fill = player.GetRechargeProgress();
                 color = rechargeColor;
             }
             else

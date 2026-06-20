@@ -46,6 +46,18 @@ public static class GameData
         set => PlayerPrefs.SetInt("yallah", value);
     }
 
+    public static bool HasSpawnedSlimeBoss
+    {
+        get => PlayerPrefs.GetInt("hasSpawnedSlimeBoss", 0) == 1;
+        set => PlayerPrefs.SetInt("hasSpawnedSlimeBoss", value ? 1 : 0);
+    }
+    
+    public static bool HasSpawnedEyeBoss
+    {
+        get => PlayerPrefs.GetInt("hasSpawnedEyeBoss", 0) == 1;
+        set => PlayerPrefs.SetInt("hasSpawnedEyeBoss", value ? 1 : 0);
+    }
+
     [System.Serializable]
     private class Wrapper { public List<string> items; }
 

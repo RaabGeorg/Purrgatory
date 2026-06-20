@@ -14,6 +14,12 @@ public class chunkManager : MonoBehaviour
     [SerializeField] private int chunkSize = 80;
     [SerializeField] private int viewDistance = 1;
 
+
+    void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
+
     void Update()
     {
         int currentX = Mathf.RoundToInt(player.transform.position.x / chunkSize);

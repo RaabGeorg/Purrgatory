@@ -46,9 +46,14 @@ public class SlimeBossSpawner : MonoBehaviour
     IEnumerator SpawnLoop()
     {
         yield return new WaitForSeconds(initialDelay);
-        
-        currentBoss = SpawnBoss();
-        
+
+        if (!GameData.HasSpawnedSlimeBoss)
+        {
+            currentBoss = SpawnBoss();
+            GameData.HasSpawnedSlimeBoss =  true;
+            GameData.Save();
+        }
+
     }
     
     GameObject SpawnBoss()

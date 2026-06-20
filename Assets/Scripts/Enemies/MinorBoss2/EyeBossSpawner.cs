@@ -47,9 +47,14 @@ public class EyeBossSpawner : MonoBehaviour
     {
         // Wait before first spawn
         yield return new WaitForSeconds(initialDelay);
-        
-        currentBoss = SpawnBoss();
-        
+
+        if (!GameData.HasSpawnedEyeBoss)
+        {
+            currentBoss = SpawnBoss();
+            Debug.Log("[EyeBossSpawner] Spawned " + currentBoss);
+            GameData.HasSpawnedEyeBoss =  true;
+            GameData.Save();
+        }
     }
     
     GameObject SpawnBoss()

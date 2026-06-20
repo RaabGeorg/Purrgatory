@@ -150,7 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ChunkAuthoring
   chunkPrefab: {fileID: 8496309185725429602, guid: 6bc791688b6871b419e9032be4afa66b, type: 3}
   chunkSize: 40
-  viewDistance: 2
+  viewDistance: 3
 --- !u!4 &949064094
 Transform:
   m_ObjectHideFlags: 0
