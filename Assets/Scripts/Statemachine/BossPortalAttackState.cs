@@ -34,7 +34,7 @@ public class BossPortalAttackState : IState
          _timer += Time.deltaTime;
          if (_timer >= _duration)
          {
-             if (first)
+             if (GameData.PortalSeal == 0)
              {
                  // didi mach alle zu FLowerPetal Pattern, is not playable
                  SetPattern(AttackPattern.FlowerPetal, 4);
