@@ -28,6 +28,18 @@ public static class GameData
         set => PlayerPrefs.SetInt("healthSeal", value);
     }
 
+    public static int PortalSeal
+    {
+        get => PlayerPrefs.GetInt("portalSeal", 0);
+        set => PlayerPrefs.SetInt("portalSeal", value);
+    }
+
+    public static int LaserSeal
+    {
+        get => PlayerPrefs.GetInt("laserSeal", 0);
+        set => PlayerPrefs.SetInt("laserSeal", value);
+    }
+
     public static int Yallah
     {
         get => PlayerPrefs.GetInt("yallah", 0);

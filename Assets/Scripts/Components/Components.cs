@@ -160,7 +160,8 @@ namespace Components
         TripleSpiral,    
         FlowerPetal,    
         ChaosStorm,      
-        ConcentricRings, 
+        ConcentricRings,
+        None,
          
     }
 

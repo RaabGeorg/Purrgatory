@@ -13,10 +13,12 @@ public class SealUIElement : MonoBehaviour
 
     private void Start()
     {
-        if (GameData.HealthSeal == 1) 
-        {
+        if (upgradeText.text.Equals("HealthSeal") && GameData.HealthSeal == 1)
             bought = true;
-        }
+        else if (upgradeText.text.Equals("PortalSeal") && GameData.PortalSeal == 1)
+            bought = true;
+        else if (upgradeText.text.Equals("LaserSeal") && GameData.LaserSeal == 1)
+            bought = true;
 
         if (!bought) cost.text = $"Con. Souls: " + price.ToString();
         buyButton.onClick.AddListener(BuyUpgrade);
@@ -25,7 +27,6 @@ public class SealUIElement : MonoBehaviour
 
     public void BuyUpgrade()
     {
-        if (bought) return;
 
         if (GameData.CondensedSouls < price) return;
 
@@ -37,12 +38,15 @@ public class SealUIElement : MonoBehaviour
             GameData.HealthSeal = 1;
             bought = true;
         }
-        else if (false)
+        else if (upgradeText.text.Equals("PortalSeal"))
         {
-            return;
-        } else 
+            GameData.PortalSeal = 1;
+            bought = true;
+        } 
+        else if (upgradeText.text.Equals("LaserSeal"))
         {
-            return;
+            GameData.LaserSeal = 1;
+            bought = true;
         }
 
 

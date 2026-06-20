@@ -32,7 +32,7 @@ public class LaserCircleState : IState
         _boss.speed = 15f;
         nextFire = 0f;
 
-        if (true)
+        if (GameData.LaserSeal == 0)
         {
             shotsLeft = 66;
             cooldown = 0.05f;
