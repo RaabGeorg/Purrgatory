@@ -6,7 +6,7 @@ public class Ability1UI : MonoBehaviour
     public Image icon;
 
     private PlayerControls _controls;
-
+    
     public float cooldown = 2f;
     private float timer;
 
@@ -27,7 +27,7 @@ public class Ability1UI : MonoBehaviour
 
     void Update()
     {
-        if (_controls.Player.Spell.WasPressedThisFrame() && timer <= 0)
+        if (_controls.Player.Spell.WasPressedThisFrame() && timer <= 0 && SceneSwitchManager.Instance.CurrentLevel == "Level_Hell")
         {
             timer = cooldown;
         }

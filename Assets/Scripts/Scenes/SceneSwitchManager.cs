@@ -15,11 +15,13 @@ public class SceneSwitchManager : MonoBehaviour
     [Header("Input Configuration")]
     [SerializeField] private InputAction toggleLevelAction;
 
-    private string currentLevel = "";
+    private string currentLevel = ""; 
     bool isTransitioning = false;
     private bool gameStarted = false;
     public static bool inBossRoom = false;
     
+    private float nextHeavenSwitchTime = 0f;
+    private const float HeavenCooldownDuration = 30f;
     
     //public getter setter
     public string CurrentLevel => currentLevel;
@@ -67,6 +69,19 @@ public class SceneSwitchManager : MonoBehaviour
                 StartCoroutine(BossMsg());
                 return;
             }
+
+            string levelToLoad = (currentLevel == hellScene) ? heavenScene : hellScene;
+            
+            if (levelToLoad == heavenScene && Time.time < nextHeavenSwitchTime)
+            {
+                return;
+            }
+
+            if (currentLevel == heavenScene && levelToLoad == hellScene)
+            {
+                nextHeavenSwitchTime = Time.time + HeavenCooldownDuration;
+            }
+
             StartCoroutine(ToggleLevelRoutine());
         }
     }
