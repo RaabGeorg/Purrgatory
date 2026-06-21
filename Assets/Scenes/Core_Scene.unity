@@ -954,6 +954,7 @@ MonoBehaviour:
   fireSound: {fileID: 8300000, guid: 2cf33f0e52da2b44891564f4bfb2de0b, type: 3}
   fireWooshSound: {fileID: 8300000, guid: 76c18a7859a8c2b41bb0178ae1eef76b, type: 3}
   sfxGroup: {fileID: -3444661319311129732, guid: c3113d473302bd04aac6f491b787d0a1, type: 2}
+  MagicFieldVFXPrefab: {fileID: 5214450496142741206, guid: 1c521a83e4d9bbf4b8a112d5ec653024, type: 3}
 --- !u!65 &171852645
 BoxCollider:
   m_ObjectHideFlags: 0

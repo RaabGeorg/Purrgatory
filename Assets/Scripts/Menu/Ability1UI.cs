@@ -7,6 +7,7 @@ public class Ability1UI : MonoBehaviour
 
     private PlayerControls _controls;
     
+    
     public float cooldown = 2f;
     private float timer;
 
@@ -27,14 +28,16 @@ public class Ability1UI : MonoBehaviour
 
     void Update()
     {
-        if (_controls.Player.Spell.WasPressedThisFrame() && timer <= 0 && SceneSwitchManager.Instance.CurrentLevel == "Level_Hell")
+        if (MagicFieldSpawner.instance ==null)
         {
-            timer = cooldown;
+            return;
         }
 
+        timer = MagicFieldSpawner.instance.cooldownTimer;
+        
         if (timer > 0)
         {
-            timer -= Time.deltaTime;
+            
             icon.fillAmount = 1 - (timer / cooldown);
         }
     }
