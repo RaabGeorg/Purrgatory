@@ -27,14 +27,15 @@ public class Ability2UI : MonoBehaviour
 
     void Update()
     {
-        if (_controls.Player.Spell2.WasPressedThisFrame() && timer <= 0 && SceneSwitchManager.Instance.CurrentLevel == "Level_Hell")
+        if (VortexSpawner.instance ==null)
         {
-            timer = cooldown;
+            return;
         }
+        
+        timer = VortexSpawner.instance.cooldownTimer;
 
         if (timer > 0)
         {
-            timer -= Time.deltaTime;
             icon.fillAmount = 1 - (timer / cooldown);
         }
     }
