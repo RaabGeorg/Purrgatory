@@ -26,8 +26,9 @@ public partial struct WeaponSystem : ISystem
                 weapon.ValueRW.Type = WeaponType.Shotgun;
                 weapon.ValueRW.BulletSpeed = 15;
                 weapon.ValueRW.FireRate = 1;
-                weapon.ValueRW.Damage = 25;
+                weapon.ValueRW.Damage = 20;
                 weapon.ValueRW.BulletScale = 0.7f;
+                
                 GameData.Yallah = 0;
             }
         }
@@ -124,7 +125,7 @@ public partial struct WeaponJob : IJobEntity
                 ECB.AddComponent(chunkIndex, bullet, new Explosion
                 {
                     Radius = vortexMod.Radius,
-                    Damage = vortexMod.Damage,
+                    Damage = vortexMod.Damage - 7,
                 });
                 ECB.AddComponent(chunkIndex, bullet, new PullEffect
                 {
