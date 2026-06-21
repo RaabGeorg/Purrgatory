@@ -63,11 +63,11 @@ public class WeaponUpgradeSystem : MonoBehaviour
             {
                 if (statModifier.Type == StatModType.Flat)
                 {
-                    _railgun.fireRate -= statModifier.Value;
+                    _railgun.fireRate = Mathf.Max(0.2f, _railgun.fireRate - statModifier.Value);
                 }
                 else
                 {
-                    _railgun.fireRate *= 1 - statModifier.Value;
+                    _railgun.fireRate = Mathf.Max(0.2f, _railgun.fireRate * (1 - statModifier.Value));
                 }
             }
         }
