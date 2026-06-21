@@ -26,7 +26,7 @@ public class MinorBoss2HitBoxAuthoring : MonoBehaviour
             
             AddComponent(entity, new CurrencyRewardComponent
             {
-                CondensedSouls = 1,
+                CondensedSouls = 5,
                 Souls = 100,
                 Xp = 100,
             });

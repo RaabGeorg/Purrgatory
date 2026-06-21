@@ -23,7 +23,7 @@ public partial struct EnemySpawnSystem : ISystem
 
         float3 playerPos = SystemAPI.GetComponent<LocalTransform>(playerEntity).Position;
         float currentTime = (float)SystemAPI.Time.ElapsedTime;
-        float maxTeleportDistanceSq = 40f * 40f; 
+        float maxTeleportDistanceSq = 60f * 60f; 
 
         var teleportRandom = Unity.Mathematics.Random.CreateFromIndex((uint)(currentTime * 1000f) + 1);
 
@@ -32,7 +32,7 @@ public partial struct EnemySpawnSystem : ISystem
             if (math.distancesq(transform.ValueRO.Position, playerPos) > maxTeleportDistanceSq)
             {
                 float angle = teleportRandom.NextFloat(0f, math.PI * 2f);
-                float distance = teleportRandom.NextFloat(20f, 40f);
+                float distance = teleportRandom.NextFloat(40f, 60f);
                 
                 float3 newPos = playerPos + new float3(math.cos(angle) * distance, 0f, math.sin(angle) * distance);
                 newPos.y = 1f;

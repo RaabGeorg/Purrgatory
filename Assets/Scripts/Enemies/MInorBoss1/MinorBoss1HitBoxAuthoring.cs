@@ -23,10 +23,15 @@ public class MinorBoss1HitBoxAuthoring : MonoBehaviour
             AddComponent(entity, new SlimeBossTag());
 
             AddComponent(entity, new Enemy());
+            
+            AddComponent(entity, new Damage
+            {
+                Value = 15
+            });
 
             AddComponent(entity, new CurrencyRewardComponent
             {
-                CondensedSouls = 1,
+                CondensedSouls = 5,
                 Souls = 100,
                 Xp = 100,
             });

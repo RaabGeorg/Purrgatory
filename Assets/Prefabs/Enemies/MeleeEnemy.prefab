@@ -248,11 +248,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4891897768abfbd40b3a55ccf013d218, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAuthoring
-  health: 50
-  moveSpeed: 5
+  health: 80
+  moveSpeed: 7
   soulsReward: 5
   condensedSoulsReward: 0
-  xpReward: 50
+  xpReward: 10
   isRanged: 0
   attackRange: 10
   fireRate: 1

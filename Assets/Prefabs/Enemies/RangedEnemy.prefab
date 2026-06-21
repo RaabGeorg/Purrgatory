@@ -341,13 +341,13 @@ MonoBehaviour:
   health: 50
   moveSpeed: 5
   soulsReward: 5
-  condensedSoulsReward: 1
-  xpReward: 10
+  condensedSoulsReward: 0
+  xpReward: 15
   isRanged: 1
-  attackRange: 10
-  fireRate: 1
+  attackRange: 20
+  fireRate: 1.5
   bulletSpeed: 10
-  damage: 10
+  damage: 20
   bulletPrefab: {fileID: 776656289791465420, guid: 442c0ba52a24e994a81bf712ffabaafc, type: 3}
 --- !u!114 &83700862675257267
 MonoBehaviour:
