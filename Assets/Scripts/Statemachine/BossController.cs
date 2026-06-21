@@ -1,5 +1,6 @@
 using Components;
 using Unity.Entities;
+using Unity.Transforms;
 using UnityEngine;
 using static UnityEngine.UI.Image;
 
@@ -28,6 +29,7 @@ public class BossController : MonoBehaviour
 
     private void Start()
     {
+        
         player = GameObject.FindWithTag("Player").transform;
 
         _stateMachine.SetState(new IdleState(this));
@@ -36,11 +38,13 @@ public class BossController : MonoBehaviour
         var em = World.DefaultGameObjectInjectionWorld.EntityManager;
         if (em == null) return;
 
+        
         var query = em.CreateEntityQuery(typeof(BossPortalPhaseActive));
         if (!query.IsEmpty)
         {
             em.DestroyEntity(query);
         }
+        
     }
 
     private void FixedUpdate()

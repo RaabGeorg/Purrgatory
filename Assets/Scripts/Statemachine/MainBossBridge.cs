@@ -22,11 +22,13 @@ public class MainBossBridge : MonoBehaviour
         if (!_entityFound) TryFindEntity();
         if (!_entityFound) return;
 
-        if (!_em.Exists(_hitboxEntity))
+        if (!_em.Exists(_hitboxEntity) || _em.HasComponent<MarkedForExecution>(_hitboxEntity))
         {
-            _entityFound = false;
+            Destroy(gameObject);
             return;
         }
+        
+        if (_em.HasChunkComponent<MarkedForExecution>(_hitboxEntity)) return;
 
         float3 targetPos = (float3)(transform.position + hitboxOffset);
         var lt = _em.GetComponentData<LocalTransform>(_hitboxEntity);

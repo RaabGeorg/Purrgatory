@@ -828,6 +828,7 @@ GameObject:
   - component: {fileID: 460075758}
   - component: {fileID: 460075759}
   - component: {fileID: 460075760}
+  - component: {fileID: 460075761}
   m_Layer: 0
   m_Name: BOSSDIDI
   m_TagString: Untagged
@@ -883,6 +884,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainBossBridge
   hitboxOffset: {x: 0, y: 0, z: 0}
+--- !u!114 &460075761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 460075757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24152ecd10a073c4694ff91c0bb82c22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MainBossHitBoxAuthoring
+  maxHealth: 5
 --- !u!1001 &483519340
 PrefabInstance:
   m_ObjectHideFlags: 0

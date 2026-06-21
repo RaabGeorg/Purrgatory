@@ -8026,7 +8026,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6222590082042728884, guid: 65efa41c9251e41468efd36f53837c45, type: 3}
       propertyPath: m_SlopeLimit
-      value: 1
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 6233392764419661549, guid: 65efa41c9251e41468efd36f53837c45, type: 3}
       propertyPath: mainCamera
