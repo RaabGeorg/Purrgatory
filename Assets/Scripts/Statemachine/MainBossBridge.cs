@@ -8,6 +8,8 @@ public class MainBossBridge : MonoBehaviour
 {
     public Vector3 hitboxOffset = Vector3.zero;
 
+    public static bool isBossDead = false;
+
     private EntityManager _em;
     private Entity _hitboxEntity;
     private bool _entityFound;
@@ -25,6 +27,7 @@ public class MainBossBridge : MonoBehaviour
         if (!_em.Exists(_hitboxEntity) || _em.HasComponent<MarkedForExecution>(_hitboxEntity))
         {
             Destroy(gameObject);
+            isBossDead = true;
             return;
         }
         
