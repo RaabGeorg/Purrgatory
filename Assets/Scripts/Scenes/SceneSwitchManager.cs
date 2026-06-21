@@ -18,6 +18,8 @@ public class SceneSwitchManager : MonoBehaviour
     private string currentLevel = "";
     bool isTransitioning = false;
     private bool gameStarted = false;
+    public static bool inBossRoom = false;
+    
     
     //public getter setter
     public string CurrentLevel => currentLevel;
@@ -58,7 +60,7 @@ public class SceneSwitchManager : MonoBehaviour
 
     private void OnToggleLevel(InputAction.CallbackContext context)
     {
-        if (gameStarted && !isTransitioning)
+        if (gameStarted && !isTransitioning && !inBossRoom)
         {
             if (GameObject.FindGameObjectWithTag("Boss") != null)
             {

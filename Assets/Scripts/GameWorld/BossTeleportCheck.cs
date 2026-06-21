@@ -3,6 +3,7 @@ using Unity.Entities;
 using Unity.Transforms;
 using Unity.Physics;
 using Components;
+using Unity.VectorGraphics;
 
 public class BossTeleportCheck : MonoBehaviour
 {
@@ -43,5 +44,6 @@ public class BossTeleportCheck : MonoBehaviour
         {
             controller.enabled = true;
         }
+        SceneSwitchManager.inBossRoom = true;
     }
 }
