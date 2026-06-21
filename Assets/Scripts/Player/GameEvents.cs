@@ -11,4 +11,6 @@ public static class GameEvents
     public static Action OnQuestProgressChanged;
     public static Action OnQuestCompleted;
     public static Action OnBossUnlocked;
+    public static Action<float, float> OnBossHealthChanged;
+    public static Action OnBossArenaEntered;
 }

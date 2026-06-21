@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MainBossHitBoxAuthoring : MonoBehaviour
 {
-    public float maxHealth = 1000f;
+    public float maxHealth = 5000f;
 
     class Baker : Baker<MainBossHitBoxAuthoring>
     {

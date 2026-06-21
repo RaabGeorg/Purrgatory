@@ -6,7 +6,11 @@ public class TiggerInBossArena : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        
-        if (other.CompareTag("Player")) playerInside = true; Debug.Log("ENTER");
+
+        if (other.CompareTag("Player"))
+        {
+            playerInside = true; Debug.Log("ENTER");
+            GameEvents.OnBossArenaEntered?.Invoke();
+        }
     }
 }
