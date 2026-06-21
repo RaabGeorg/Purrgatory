@@ -62,7 +62,7 @@ public class SceneSwitchManager : MonoBehaviour
         {
             if (GameObject.FindGameObjectWithTag("Boss") != null)
             {
-                Debug.Log("Diggi kannst nicht switchen boss is da");
+                StartCoroutine(BossMsg());
                 return;
             }
             StartCoroutine(ToggleLevelRoutine());
@@ -176,5 +176,23 @@ public class SceneSwitchManager : MonoBehaviour
         
         gameStarted = false;
         isTransitioning = false;
+    }
+
+    private IEnumerator BossMsg() 
+    {
+        GameObject bossMsg = GameObject.FindGameObjectWithTag("BossMsg");
+
+        if (bossMsg != null)
+        {
+
+            var TMProText = bossMsg.GetComponent<TMPro.TextMeshProUGUI>();
+
+            TMProText.enabled = true;
+
+            yield return new WaitForSeconds(2f);
+
+            TMProText.enabled = false;
+
+        }
     }
 }
