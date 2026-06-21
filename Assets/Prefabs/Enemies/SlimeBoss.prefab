@@ -100,7 +100,7 @@ MonoBehaviour:
   player: {fileID: 0}
   playerTag: Player
   targetingCirclePrefab: {fileID: 4194420958803454450, guid: 410ec646f91b9dd4ba9ea448d99cb611, type: 3}
-  jumpRange: 30
+  jumpRange: 55
   windupDuration: 0.4
   ascendDuration: 0.6
   hangDuration: 1

@@ -4,7 +4,7 @@ using Components;
 
 public class MagicFieldAuthoring : MonoBehaviour
 {
-    public float damage = 5f;
+    public float damage = 4f;
     public float lifetime = 5f;
 
     class Baker : Baker<MagicFieldAuthoring>

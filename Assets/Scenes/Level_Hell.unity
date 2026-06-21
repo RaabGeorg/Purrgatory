@@ -299,10 +299,10 @@ MonoBehaviour:
   eyeBossPrefab: {fileID: 5008192887833793545, guid: ecb43797e552a7446929d1b0a98b6e9f, type: 3}
   player: {fileID: 0}
   playerTag: Player
-  initialDelay: 20
+  initialDelay: 120
   spawnRadius: 50
   minSpawnDistance: 20
-  spawnHeight: 2
+  spawnHeight: 1
   maxSpawnAttempts: 10
 --- !u!4 &1437475015
 Transform:
@@ -450,9 +450,9 @@ MonoBehaviour:
   slimeBossPrefab: {fileID: 126246671201266149, guid: a3bed2fe70cb9b1488092c3306b1edf0, type: 3}
   player: {fileID: 0}
   playerTag: Player
-  initialDelay: 10
-  spawnRadius: 24
-  minSpawnDistance: 12
+  initialDelay: 60
+  spawnRadius: 20
+  minSpawnDistance: 10
   spawnHeight: 2
   maxSpawnAttempts: 10
 --- !u!1660057539 &9223372036854775807
