@@ -26,8 +26,9 @@ public class MainBossBridge : MonoBehaviour
 
         if (!_em.Exists(_hitboxEntity) || _em.HasComponent<MarkedForExecution>(_hitboxEntity))
         {
+            Debug.Log("wieso");
+            GameData.IsVictory = 1;
             Destroy(gameObject);
-            isBossDead = true;
             return;
         }
         

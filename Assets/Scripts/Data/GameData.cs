@@ -9,7 +9,12 @@ public static class GameData
         get => PlayerPrefs.GetInt("souls", 0);
         set => PlayerPrefs.SetInt("souls", value);
     }
-
+    
+    public static int IsVictory
+    {
+        get => PlayerPrefs.GetInt("Victory", 0);
+        set => PlayerPrefs.SetInt("Victory", value);
+    }
     public static int CondensedSouls
     {
         get => PlayerPrefs.GetInt("condensedSouls", 0);

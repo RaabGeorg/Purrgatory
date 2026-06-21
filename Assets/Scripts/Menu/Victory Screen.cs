@@ -14,8 +14,10 @@ public class VictoryScreen : MonoBehaviour
 
     private void Update()
     {
-        if (MainBossBridge.isBossDead && !IsVictory)
+        
+        if (GameData.IsVictory == 1)
         {
+            Debug.Log(GameData.IsVictory);
             TriggerVictory();
         }
     }

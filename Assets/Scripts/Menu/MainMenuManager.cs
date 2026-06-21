@@ -21,6 +21,7 @@ public class MainMenuManager : MonoBehaviour
         {
             SceneSwitchManager.Instance.StartGame();
         }
+        GameData.IsVictory = 0;
     }
     
     public void PanelSwap()

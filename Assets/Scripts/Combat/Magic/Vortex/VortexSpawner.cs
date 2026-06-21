@@ -21,6 +21,9 @@ public class VortexSpawner : MonoBehaviour
     [SerializeField] private AudioClip vortexClip;
     [SerializeField] private AudioMixerGroup sfxGroup;
 
+    [Header("Visual")]
+    [SerializeField] private GameObject vortexVFXPrefab;
+
     void Start()
     {
         _em = World.DefaultGameObjectInjectionWorld.EntityManager;
@@ -50,15 +53,29 @@ public class VortexSpawner : MonoBehaviour
         if (!_controls.Player.Spell2.WasPressedThisFrame()) return;
         if (cooldownTimer > 0f) return;
         
-        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+        var cam = Camera.main;
+        if (cam == null || Mouse.current == null) return;
+
+        Ray ray = cam.ScreenPointToRay(Mouse.current.position.ReadValue());
         Plane ground = new Plane(Vector3.up, Vector3.zero);
 
         if (!ground.Raycast(ray, out float dist)) return;
 
         float3 spawnPos = ray.GetPoint(dist);
-        var Vortex = _em.Instantiate(_prefab);
-        _em.SetComponentData(Vortex, LocalTransform.FromPosition(spawnPos)); 
-        _em.SetComponentData(Vortex, new VortexMovement
+        
+        var pull = _em.HasComponent<PullEffect>(_prefab)
+            ? _em.GetComponentData<PullEffect>(_prefab) : default;
+        var explosion = _em.HasComponent<Explosion>(_prefab)
+            ? _em.GetComponentData<Explosion>(_prefab) : default;
+        float lifetime = _em.HasComponent<Lifetime>(_prefab)
+            ? _em.GetComponentData<Lifetime>(_prefab).Value : 5f;
+
+        var vortex = _em.CreateEntity();
+        _em.AddComponentData(vortex, LocalTransform.FromPosition(spawnPos));
+        _em.AddComponentData(vortex, pull);
+        _em.AddComponentData(vortex, explosion);
+        _em.AddComponentData(vortex, new Lifetime { Value = lifetime });
+        _em.AddComponentData(vortex, new VortexMovement
         {
             Center = spawnPos,
             RadiusX = UnityEngine.Random.Range(2f, 10f),
@@ -67,7 +84,13 @@ public class VortexSpawner : MonoBehaviour
             Time = UnityEngine.Random.Range(0f, 100f)
         });
         
-        float lifetime = _em.GetComponentData<Lifetime>(Vortex).Value;
+        if (vortexVFXPrefab != null)
+        {
+            var vfx = Instantiate(vortexVFXPrefab, (Vector3)spawnPos, Quaternion.identity);
+            vfx.AddComponent<VortexVisualFollow>().Bind(_em, vortex);
+            Destroy(vfx, lifetime + 0.5f);
+        }
+
         var go = new GameObject("VortexAudio");
         go.transform.position = new Vector3(spawnPos.x, spawnPos.y, spawnPos.z);
         var src = go.AddComponent<AudioSource>();
@@ -76,7 +99,7 @@ public class VortexSpawner : MonoBehaviour
         src.loop = true;
         src.volume = 0.3f;
         src.Play();
-        SFXManager.Instance.RegisterSource(src);
+        if (SFXManager.Instance != null) SFXManager.Instance.RegisterSource(src);
         Destroy(go, lifetime);
         
         cooldownTimer = cooldown;

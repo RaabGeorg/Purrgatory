@@ -1047,6 +1047,7 @@ MonoBehaviour:
   cooldown: 10
   vortexClip: {fileID: 8300000, guid: 275ce46b165b0874c88c58c33c216cd6, type: 3}
   sfxGroup: {fileID: -3444661319311129732, guid: c3113d473302bd04aac6f491b787d0a1, type: 2}
+  vortexVFXPrefab: {fileID: 1888503204867349636, guid: 9d09beed27e60de43a4e0001f16c35fd, type: 3}
 --- !u!1 &178019481
 GameObject:
   m_ObjectHideFlags: 0
@@ -4485,7 +4486,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 725241609}
-  - component: {fileID: 725241611}
   - component: {fileID: 725241610}
   m_Layer: 5
   m_Name: Victory Screen
@@ -4526,19 +4526,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 947df09b10517b44bbc11e1e065b8c58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VictoryScreen
-  container: {fileID: 1270378339}
---- !u!114 &725241611
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 725241608}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b399da2368fb464e97c1f71c99689c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DeathScreen
   container: {fileID: 1270378339}
 --- !u!1 &737824389
 GameObject:
@@ -5475,7 +5462,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   icon: {fileID: 1045590048}
-  cooldown: 2
+  cooldown: 10
 --- !u!1 &1001979670
 GameObject:
   m_ObjectHideFlags: 0
