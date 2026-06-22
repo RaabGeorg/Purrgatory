@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SFXManager
   sfxGroup: {fileID: -3444661319311129732, guid: c3113d473302bd04aac6f491b787d0a1, type: 2}
-  explosionClip: {fileID: 8300000, guid: 6276a6d92667bbe44986d0e3128eb4a9, type: 3}
+  explosionClip: {fileID: 8300000, guid: 6125e30c9d8b6dc4e9a3d0090c9d7c4f, type: 3}
   bulletClip: {fileID: 8300000, guid: 027862cef52d8564da44c7e9d3204f37, type: 3}
   laserClip: {fileID: 8300000, guid: c6b76bedb81b157448578b9404f2e25f, type: 3}
   dashClip: {fileID: 8300000, guid: e51d53e02c9f1364197af47b26e40f14, type: 3}
