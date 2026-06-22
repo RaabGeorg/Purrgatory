@@ -204,17 +204,14 @@ public class EyeLaser : MonoBehaviour
         if (world == null) return;
         var entityManager = world.EntityManager;
 
-        // 1. Create the query
+       
         var query = entityManager.CreateEntityQuery(typeof(PhysicsWorldSingleton));
 
-        // 2. Safety check: Ensure the physics world is fully initialized
+    
         if (!query.HasSingleton<PhysicsWorldSingleton>()) return;
-
-        // 3. CRITICAL FIX: Force the main thread to wait for ECS background jobs 
-        // to finish rebuilding the physics world. This guarantees the BlobAsset is valid.
+        
         query.CompleteDependency();
-
-        // 4. Safely read the synced CollisionWorld
+        
         var physicsWorldSingleton = query.GetSingleton<PhysicsWorldSingleton>();
         var collisionWorld = physicsWorldSingleton.CollisionWorld;
         

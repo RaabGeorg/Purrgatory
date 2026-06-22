@@ -152,9 +152,9 @@ public partial struct BossPortalJob : IJobEntity
 
     
     
-    void SpawnBullet(int chunkIndex, in BossPortal portal, float3 origin,
-        in BulletPrefabRef prefabRef, float3 dir)
-        => SpawnBulletSpeed(chunkIndex, portal, origin, prefabRef, dir, portal.BulletSpeed);
+    // void SpawnBullet(int chunkIndex, in BossPortal portal, float3 origin,
+    //     in BulletPrefabRef prefabRef, float3 dir)
+    //     => SpawnBulletSpeed(chunkIndex, portal, origin, prefabRef, dir, portal.BulletSpeed);
 
     void SpawnBulletSpeed(int chunkIndex, in BossPortal portal, float3 origin,
         in BulletPrefabRef prefabRef, float3 dir, float speed)
