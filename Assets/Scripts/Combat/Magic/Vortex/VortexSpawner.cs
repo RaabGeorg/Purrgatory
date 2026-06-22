@@ -9,13 +9,14 @@ using UnityEngine.SceneManagement;
 
 public class VortexSpawner : MonoBehaviour
 {
+    public static VortexSpawner instance;
     private EntityManager _em;
     private PlayerControls _controls;
     private Entity _prefab;
     
     [SerializeField]
     private float cooldown = 2f;
-    private float cooldownTimer = 0f;
+    public float cooldownTimer = 0f;
     
     [Header("Audio")]
     [SerializeField] private AudioClip vortexClip;
@@ -24,6 +25,11 @@ public class VortexSpawner : MonoBehaviour
     [Header("Visual")]
     [SerializeField] private GameObject vortexVFXPrefab;
 
+    void Awake()
+    {
+        instance = this;
+    }
+    
     void Start()
     {
         _em = World.DefaultGameObjectInjectionWorld.EntityManager;

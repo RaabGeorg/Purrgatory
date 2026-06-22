@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: WeaponQuest
   m_EditorClassIdentifier: Assembly-CSharp::QuestData
   questName: Weapon Quest
-  description: Kill 1 Melee Enemy
-  requiredType: 0
-  requiredCount: 1
+  description: 'To Unlock Weapon Mods
+
+
+    Kill 100 Enemies'
+  requiredType: 2
+  requiredCount: 100
   requiredModType: 1

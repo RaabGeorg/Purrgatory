@@ -13,6 +13,9 @@ public class MainBossBridge : MonoBehaviour
     private EntityManager _em;
     private Entity _hitboxEntity;
     private bool _entityFound;
+    
+    private float _maxHealth;
+    private float _lastHealth;
 
     private void Start()
     {
@@ -39,6 +42,15 @@ public class MainBossBridge : MonoBehaviour
         lt.Position = targetPos;
         lt.Rotation = transform.rotation;
         _em.SetComponentData(_hitboxEntity, lt);
+        
+        var hp = _em.GetComponentData<Health>(_hitboxEntity);
+        if (!Mathf.Approximately(hp.Value, _lastHealth))
+        {
+            _lastHealth = hp.Value;
+            GameEvents.OnBossHealthChanged?.Invoke(hp.Value, _maxHealth);
+        }
+        
+        
         //var hp = _em.GetComponentData<Health>(_hitboxEntity);
         //Debug.Log($"bob hp: {hp.Value}");
     }
@@ -56,12 +68,16 @@ public class MainBossBridge : MonoBehaviour
             _hitboxEntity = query.GetSingletonEntity();
             _entityFound = true;
 
+            var hp = _em.GetComponentData<Health>(_hitboxEntity);
+        
             if (GameData.HealthSeal == 1)
             {
-                var hp = _em.GetComponentData<Health>(_hitboxEntity);
-                hp.Value = 500f; 
+                hp.Value = 2500f;
                 _em.SetComponentData(_hitboxEntity, hp);
             }
+
+            _maxHealth = hp.Value;
+            _lastHealth = hp.Value;
         }
 
         query.Dispose();

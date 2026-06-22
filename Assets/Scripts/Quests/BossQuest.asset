@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BossQuest
   m_EditorClassIdentifier: Assembly-CSharp::QuestData
   questName: Boss Unlock Quest
-  description: Kill 2 Enemies
+  description: "To unlock the Boss Arena \n\nKill 200 Enemies"
   requiredType: 2
-  requiredCount: 2
+  requiredCount: 200
   requiredModType: 2

@@ -8,6 +8,8 @@ using UnityEngine.Audio;
 
 public class MagicFieldSpawner : MonoBehaviour
 {
+    public static MagicFieldSpawner instance;
+        
     private EntityManager _em;
     private PlayerControls _controls;
     private Entity _prefab;
@@ -15,13 +17,21 @@ public class MagicFieldSpawner : MonoBehaviour
     private Entity _prefab2;
     [SerializeField]
     private float cooldown = 2f;
-    private float cooldownTimer = 0f;
+    public float cooldownTimer = 0f;
+    
     
     [Header("Audio")]
     [SerializeField] private AudioClip fireSound;
     [SerializeField] private AudioClip fireWooshSound;
     [SerializeField] private AudioMixerGroup sfxGroup;
 
+
+    void Awake()
+    {
+        instance = this;
+    }
+    
+    
     void Start()
     {
         _em = World.DefaultGameObjectInjectionWorld.EntityManager;
