@@ -3,19 +3,14 @@ using UnityEngine;
 public class EyeLookAt : MonoBehaviour
 {
     [Header("References")]
-    [Tooltip("Leave empty to auto-find by tag.")]
     public Transform player;
     public string playerTag = "Player";
-
-    [Tooltip("The object to rotate. Assign a child pupil/iris transform, " +
-             "or leave empty to rotate this GameObject.")]
+    
     public Transform eyeRotator;
 
     [Header("Settings")]
-    [Tooltip("How fast the eye tracks the player.")]
     public float rotationSpeed = 8f;
-
-    [Tooltip("True = 3D top-down (Y-axis rotation). False = 2D top-down (Z-axis rotation).")]
+    
     public bool is3D = false;
 
     private EyeLaser eyeLaser;

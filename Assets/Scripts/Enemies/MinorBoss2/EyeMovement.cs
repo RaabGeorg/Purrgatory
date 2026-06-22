@@ -3,19 +3,16 @@ using UnityEngine;
 public class EyeMovement : MonoBehaviour
 {
     [Header("References")]
-    [Tooltip("Leave empty to auto-find by tag.")]
     public Transform player;
     public string playerTag = "Player";
  
     [Header("Movement")]
     public float moveSpeed = 4f;
- 
-    [Tooltip("Stops moving once within this distance from the player.")]
+    
     public float stopDistance = 8f;
     
  
     [Header("Hover Bob")]
-    [Tooltip("Set to 0 to disable bobbing.")]
     public float hoverAmplitude = 0.3f;
     public float hoverSpeed = 2f;
     

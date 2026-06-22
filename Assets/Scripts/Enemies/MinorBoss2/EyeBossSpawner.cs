@@ -4,7 +4,6 @@ using UnityEngine;
 public class EyeBossSpawner : MonoBehaviour
 {
     [Header("References")]
-    [Tooltip("The Eye Boss prefab (with EyeBossHitboxLinker, EyeFogController etc.)")]
     public GameObject eyeBossPrefab;
 
     [Tooltip("Leave empty to auto-find by tag.")]
@@ -12,20 +11,16 @@ public class EyeBossSpawner : MonoBehaviour
     public string playerTag = "Player";
 
     [Header("Timing")]
-    [Tooltip("How long after scene load before the first spawn.")]
     public float initialDelay = 20f;
 
     [Header("Spawn Position")]
-    [Tooltip("How far from the player the boss can spawn (max).")]
     public float spawnRadius = 24f;
 
-    [Tooltip("Minimum distance from player so it doesn't spawn directly on them.")]
+    
     public float minSpawnDistance = 12f;
-
-    [Tooltip("Height offset above the ground (for 3D top-down).")]
+    
     public float spawnHeight = 2f;
-
-    [Tooltip("How many attempts to find a valid spawn position before giving up.")]
+    
     public int maxSpawnAttempts = 10;
     
     private GameObject currentBoss;

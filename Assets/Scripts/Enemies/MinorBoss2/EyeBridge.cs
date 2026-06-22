@@ -6,15 +6,14 @@ using Components;
 
 public class EyeBossHitboxLinker : MonoBehaviour
 {
-    [Tooltip("Optional offset if the hitbox center doesn't match the pivot.")]
+    
     public Vector3 hitboxOffset = Vector3.zero;
-
-    // ── Private ──────────────────────────────────────────────────
+    
     private EntityManager em;
     private Entity hitboxEntity;
     private EyeController EyeController;
 
-    // ─────────────────────────────────────────────────────────────
+   
     void Start()
     {
         EyeController = GetComponent<EyeController>();

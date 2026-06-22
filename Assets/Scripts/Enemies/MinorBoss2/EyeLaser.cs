@@ -8,31 +8,23 @@ using RaycastHit = UnityEngine.RaycastHit;
 public class EyeLaser : MonoBehaviour
 {
     [Header("References")]
-    [Tooltip("Leave empty to auto-find by tag.")]
     public Transform player;
     public string playerTag = "Player";
-
-    [Tooltip("Transform at the pupil — where the laser fires from.")]
+    
     public Transform laserOrigin;
-
-    [Tooltip("LineRenderer for the beam. Auto-fetched if empty.")]
+    
     public LineRenderer laserLine;
 
     [Header("Range")]
-    [Tooltip("Player must be within this distance for the attack to start AND during tracking.")]
     public float shootRange = 12f;
 
     [Header("Timing")]
-    [Tooltip("How long the beam tracks the player before locking on.")]
     public float trackingTime = 2.0f;
-
-    [Tooltip("Brief flash when lock-on is confirmed.")]
+    
     public float lockTime = 0.3f;
-
-    [Tooltip("How long the real damage beam fires.")]
+    
     public float fireDuration = 1.2f;
-
-    [Tooltip("Cooldown between attacks.")]
+    
     public float shootCooldown = 4f;
 
     [Header("Laser")]
@@ -41,13 +33,11 @@ public class EyeLaser : MonoBehaviour
     public LayerMask laserHitMask;
 
     [Header("Colors")]
-    [Tooltip("Tracking beam — thin, dim, follows player.")]
     public Color trackingColor = new Color(1f, 0.8f, 0.2f, 0.45f);
 
-    [Tooltip("Lock-on flash — warns the player the beam is about to fire.")]
+    
     public Color lockColor = new Color(1f, 1f, 1f, 1f);
-
-    [Tooltip("Full damage beam.")]
+    
     public Color fireColor = new Color(1f, 0.05f, 0.05f, 0.5f);
 
     private float shootTimer;
