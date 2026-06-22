@@ -75,7 +75,7 @@ public class SFXManager : MonoBehaviour
 
     public void PlayExplosion()
     {
-        sfxSource.PlayOneShot(explosionClip, 0.5f);
+        sfxSource.PlayOneShot(explosionClip, 0.2f);
     }
 
     public void PlayDash()

@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29c1b97dfd9045d43bdb3b8257c5569a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MagicFieldAuthoring
-  damage: 50
+  damage: 15
   lifetime: 5
 --- !u!114 &-8977143719950866764
 MonoBehaviour:
