@@ -8,7 +8,6 @@ public class MainMenuManager : MonoBehaviour
     public Canvas menu;
     public Canvas meta;
     public TMP_Dropdown dropdown;
-
     public void OnStartButtonClicked()
     {
         GameData.Weapon = dropdown.options[dropdown.value].text;
@@ -19,9 +18,11 @@ public class MainMenuManager : MonoBehaviour
         PauseLogic.isPaused = false;
         if (SceneSwitchManager.Instance != null)
         {
+            SceneSwitchManager.Instance.nextHeavenSwitchTime = 0f;
             SceneSwitchManager.Instance.StartGame();
         }
         GameData.IsVictory = 0;
+
     }
     
     public void PanelSwap()

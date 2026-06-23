@@ -20,12 +20,13 @@ public class SceneSwitchManager : MonoBehaviour
     private bool gameStarted = false;
     public static bool inBossRoom = false;
     
-    private float nextHeavenSwitchTime = 0f;
+    public float nextHeavenSwitchTime = 0f;
     private const float HeavenCooldownDuration = 30f;
     
     //public getter setter
     public string CurrentLevel => currentLevel;
     public string HeavenScene => heavenScene;
+    
 
     private void Awake()
     {
